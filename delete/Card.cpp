@@ -18,10 +18,10 @@ int Card::getValue() {
     return value;
 }
 
-string print(Card card) {
+string to_string(Card card) {
     string tmp = "";
 
-    tmp += to_string(card.value);
+//    tmp += to_string(2);
 
     return tmp;
 }

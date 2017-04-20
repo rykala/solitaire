@@ -2,6 +2,9 @@
 #define CARD_H
 
 #include "Globals.h"
+#include <string>
+
+using std::string;
 
 class Card
 {
@@ -11,13 +14,12 @@ class Card
             CardColor color;
 
     public:
+            Card();
             Card(int value, CardType type); //constructor
-
             int getValue();
             CardType getType();
             CardColor getColor();
-
-            string print();
+            string getName();
 };
 
 #endif // CARD_H
