@@ -10,10 +10,16 @@
 
 class GameFacade
 {
+private:
+    Deck deck;
+    vector<TargetPack> targetPacks;
+    vector<WorkPack> workPacks;
+
+
 public:
     GameFacade();
     static void NewGame(Deck &deck, vector<TargetPack> &targetPacks, vector<WorkPack> &workPacks, StartPack &startPack);
-    void SaveGame();
+    static void SaveGame();
     static bool isWin(vector<TargetPack> &targetPacks);
     static void moveCard(StartPack &startPack, TargetPack &targetPack);
 };
