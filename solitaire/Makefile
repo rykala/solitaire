@@ -17,10 +17,15 @@ cli:
 zip: clean
 	zip -r xrykal00-xpolak33.zip ./
 
-clean:
-	cd src/gui && qmake -makefile && make clean && rm Makefile
-	cd src/cli && qmake -makefile && make clean && rm Makefile
-	rm -fd src/target/
+clean: clean-gui clean-cli
 	rm -f hra2017
 	rm -f hra2017-cli
+	rm -fr src/target/
 	rm -f xrykal00-xpolak33.zip
+
+
+clean-gui:
+	cd src/gui && qmake -makefile && make clean && rm Makefile
+
+clean-cli:
+	cd src/cli && qmake -makefile && make clean && rm Makefile
