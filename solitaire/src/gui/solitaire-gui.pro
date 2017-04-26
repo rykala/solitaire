@@ -6,7 +6,8 @@
 
 BASEDIR = $$PWD/../../
 
-QT       += core gui
+QT += core gui
+QT += svg
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -25,10 +26,13 @@ INCLUDEPATH += $${BASEDIR}/src/core
 
 SOURCES += ../core/*.cpp\
            main.cpp\
-           mainwindow.cpp\
+           GraphicCard.cpp \
+    GraphicDeck.cpp
+
 
 HEADERS  += ../core/*.h\
-            mainwindow.h\
+    GraphicCard.h \
+    GraphicDeck.h
 
 
-FORMS    += mainwindow.ui
+RESOURCES = resources.qrc \

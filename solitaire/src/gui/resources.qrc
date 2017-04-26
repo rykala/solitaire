@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/cards">
+        <file alias="club_10">img/club/club_10.svg</file>
+    </qresource>
+</RCC>
