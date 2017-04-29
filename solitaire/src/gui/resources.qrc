@@ -1,5 +1,62 @@
 <RCC>
-    <qresource prefix="/cards">
-        <file alias="club_10">img/club/club_10.svg</file>
+    <qresource prefix="/heart">
+        <file alias="1">img/cards/png/heart/1.png</file>
+        <file alias="2">img/cards/png/heart/2.png</file>
+        <file alias="3">img/cards/png/heart/3.png</file>
+        <file alias="4">img/cards/png/heart/4.png</file>
+        <file alias="5">img/cards/png/heart/5.png</file>
+        <file alias="6">img/cards/png/heart/6.png</file>
+        <file alias="7">img/cards/png/heart/7.png</file>
+        <file alias="8">img/cards/png/heart/8.png</file>
+        <file alias="9">img/cards/png/heart/9.png</file>
+        <file alias="10">img/cards/png/heart/10.png</file>
+        <file alias="11">img/cards/png/heart/11.png</file>
+        <file alias="12">img/cards/png/heart/12.png</file>
+        <file alias="13">img/cards/png/heart/13.png</file>
+    </qresource>
+    <qresource prefix="/club">
+        <file alias="1">img/cards/png/club/1.png</file>
+        <file alias="2">img/cards/png/club/2.png</file>
+        <file alias="3">img/cards/png/club/3.png</file>
+        <file alias="4">img/cards/png/club/4.png</file>
+        <file alias="5">img/cards/png/club/5.png</file>
+        <file alias="6">img/cards/png/club/6.png</file>
+        <file alias="7">img/cards/png/club/7.png</file>
+        <file alias="8">img/cards/png/club/8.png</file>
+        <file alias="9">img/cards/png/club/9.png</file>
+        <file alias="10">img/cards/png/club/10.png</file>
+        <file alias="11">img/cards/png/club/11.png</file>
+        <file alias="12">img/cards/png/club/12.png</file>
+        <file alias="13">img/cards/png/club/13.png</file>
+    </qresource>
+    <qresource prefix="/spade">
+        <file alias="1">img/cards/png/spade/1.png</file>
+        <file alias="2">img/cards/png/spade/2.png</file>
+        <file alias="3">img/cards/png/spade/3.png</file>
+        <file alias="4">img/cards/png/spade/4.png</file>
+        <file alias="5">img/cards/png/spade/5.png</file>
+        <file alias="6">img/cards/png/spade/6.png</file>
+        <file alias="7">img/cards/png/spade/7.png</file>
+        <file alias="8">img/cards/png/spade/8.png</file>
+        <file alias="9">img/cards/png/spade/9.png</file>
+        <file alias="10">img/cards/png/spade/10.png</file>
+        <file alias="11">img/cards/png/spade/11.png</file>
+        <file alias="12">img/cards/png/spade/12.png</file>
+        <file alias="13">img/cards/png/spade/13.png</file>
+    </qresource>
+    <qresource prefix="/diamond">
+        <file alias="1">img/cards/png/diamond/1.png</file>
+        <file alias="2">img/cards/png/diamond/2.png</file>
+        <file alias="3">img/cards/png/diamond/3.png</file>
+        <file alias="4">img/cards/png/diamond/4.png</file>
+        <file alias="5">img/cards/png/diamond/5.png</file>
+        <file alias="6">img/cards/png/diamond/6.png</file>
+        <file alias="7">img/cards/png/diamond/7.png</file>
+        <file alias="8">img/cards/png/diamond/8.png</file>
+        <file alias="9">img/cards/png/diamond/9.png</file>
+        <file alias="10">img/cards/png/diamond/10.png</file>
+        <file alias="11">img/cards/png/diamond/11.png</file>
+        <file alias="12">img/cards/png/diamond/12.png</file>
+        <file alias="13">img/cards/png/diamond/13.png</file>
     </qresource>
 </RCC>
