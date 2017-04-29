@@ -23,10 +23,10 @@ public:
 
 private slots:
     void on_actionNew_Instance_triggered();
+    void on_actionNew_game_triggered();
 
 private:
     Ui::MainWindow *ui;
-    void on_actionNew_game_triggered();
 };
 
 #endif // MAINWINDOW_H

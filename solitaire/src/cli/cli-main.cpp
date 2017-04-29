@@ -29,60 +29,56 @@ string generateGameBoard(StartPack startPack, vector<TargetPack> targetPacks, ve
         }
     }
 
-    board += "____________________________________________________\n\n";
-    board += " S:    T:             a:       b:       c:       d:\n";
-
-    board += "[";
-    board += startPack.cards.size() ? "  ": "__";
-    board += "]";
-    board += "  [";
-    board += startPack.getTopCard(topCard) ? topCard.getName() : "__";
-    board += "]           [";
+    board += "_______________________________________\n\n";
+    board += " S:    T:          a:    b:    c:    d:\n";
+    board += startPack.cards.size() ? " 🂠     ": " ◻     ";
+    board += startPack.getTopCard(topCard) ? topCard.getName() : "◻";
+    board += "           ";
 
     for (int i = 0; i < 4; ++i) {
-        board += targetPacks.at(i).cards.size() ? targetPacks.at(i).getCard(targetPacks.at(i).cards.size() - 1).getName() : "__";
+        board += targetPacks.at(i).cards.size() ? targetPacks.at(i).getCard(targetPacks.at(i).cards.size() - 1).getName() : "◻";
 
         if(i == 3) {
-            board += "]\n\n";
+            board += "\n\n";
         } else {
-            board += "]     [";
+            board += "     ";
         }
     }
 
-    board += " 1:      2:      3:      4:      5:      6:      7:\n";
+    board += " 1:    2:    3:    4:    5:    6:    7:\n";
 
     for (float row = -1; row < numOfRows; ++row) {
         for (int column = 0; column < 7; ++column) {
             if (row == -1) {
-                board += "[ ";
-                board += workPacks.at(column).numOfHiddenCards();
+//                board += ;
+                board += (workPacks.at(column).numOfHiddenCards() > 0 ? " 🂠 " : "   ");
 
                 if (column == 6) {
-                    board += "]\n";
+                    board += "\n";
                 } else {
-                    board += "]    ";
+                    board += "   ";
                 }
             } else {
                 if(workPacks.at(column).numOfCards() > 0) {
-                    board += "[";
+                    board += " ";
                     board += workPacks.at(column).getCard(row).getName();
                     if (column == 6) {
-                        board += ("] :" + to_string((int)row) + "\n");
+                        board += ("  :" + to_string((int)row) + "\n");
                     } else {
-                        board += "]    ";
+                        board += "    ";
                     }
                 } else {
                     if (column == 6) {
-                        board += "        :" + to_string((int)row) + "\n";
+                        board += "    :" + to_string((int)row) + "\n";
                     } else {
-                        board += "        ";
+                        board += "      ";
                     }
                 }
             }
         }
     }
 
-    board += "\n_____________________________________________________\n";
+    board += "\n_______________________________________\n";
 
 
     return board;

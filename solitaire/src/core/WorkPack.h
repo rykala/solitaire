@@ -10,7 +10,7 @@ public:
     void flipCard();
     vector<Card> putCard();
     vector<Card> takeCards(int index);
-    string numOfHiddenCards();
+    int numOfHiddenCards();
 
 private:
     vector<Card> hidden;

@@ -18,10 +18,14 @@ GraphicCard::~GraphicCard(){}
 void GraphicCard::drawCard()
 {
     stringstream ss;
-    //    ss << ":/" << ranknames.at(this->card->rank) << "_" << suitnames.at(this->card->suit);
+
+    ss << ":/" << this->getType() << "/" << this->getValue();
+    setPixmap(QPixmap(ss.str().data()).scaled(100, 100, Qt::KeepAspectRatio));
+    this->show();
 }
 
 void GraphicCard::drawBackCard()
 {
-    setPixmap(QPixmap(":back").scaled(100, 100, Qt::KeepAspectRatio));
+    setPixmap(QPixmap(":/back/2").scaled(100, 100, Qt::KeepAspectRatio));
+    this->show();
 }

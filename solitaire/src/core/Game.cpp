@@ -32,3 +32,23 @@ void Game::NewGame()
     StartPack helpPack(startCards);
     startPack = helpPack;
 }
+
+bool Game::isWin()
+{
+//    if(targetPacks.at(0). == 13 && targetPacks.at(1).size() == 13 &&
+//            targetPacks.at(2).length() == 13 && targetPacks.at(3).length() == 13) {
+//        return true;
+//    }
+
+    return false;
+}
+
+bool Game::isStartPackEmpty()
+{
+//    Card *card = new Card();
+//    if(startPack.getTopCard(card)) {
+//        return true;
+//    }
+
+    return false;
+}

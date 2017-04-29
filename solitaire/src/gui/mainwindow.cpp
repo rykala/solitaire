@@ -7,6 +7,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "GraphicGameBoard.h"
+#include "GraphicCard.h"
+#include "Card.h"
+#include "Globals.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -14,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     statusBar()->hide();
+
     this->setStyleSheet("background-color: #4DBD33;");
     ui->mainToolBar->setStyleSheet("QToolButton:!hover {background-color:30, 30,30; color:white}"
                                    "QToolButton:hover {text-decoration: underline; border: 0px; background: none;}"
@@ -23,18 +27,17 @@ MainWindow::MainWindow(QWidget *parent) :
     game1 = new GraphicGameBoard(ui->centralWidget);
     game1->setObjectName(QStringLiteral("game1"));
     game1->setGeometry(QRect(0, 0, this->width(), this->height()));
-    game1->setStyleSheet("border: 0px solid green;");
+    game1->setStyleSheet("border: 0;");
     game1->show();
+
+    Card *card = new Card(13, CardType::Club);
+    GraphicCard *test = new GraphicCard(card, game1);
+    test->drawCard();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
-}
-
-
-void MainWindow::on_actionNew_game_triggered() {
-    QWidget::update();
 }
 
 
@@ -62,5 +65,10 @@ void MainWindow::on_actionNew_Instance_triggered()
     game4->setStyleSheet("border-left: 1px solid green; border-top: 0; border-right: 0;");
     game4->show();
 
+
+}
+
+void MainWindow::on_actionNew_game_triggered()
+{
 
 }

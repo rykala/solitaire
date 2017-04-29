@@ -1,9 +1,6 @@
 #include <QGraphicsSceneMouseEvent>
-#include <QtSvg>
-#include <QGraphicsSvgItem>
 #include <QList>
 #include <QPainter>
-#include <QSvgRenderer>
 
 #include "GraphicDeck.h"
 

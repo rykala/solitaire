@@ -14,8 +14,12 @@ public:
     Game();
     void NewGame();
     void SaveGame();
-    bool isWin(vector<TargetPack> &targetPacks);
+    bool isWin();
     void moveCard(StartPack &startPack, TargetPack &targetPack);
+    void History();
+    void Undo();
+    bool isStartPackEmpty();
+    vector<Card> stackBufferCards();
 
 private:
     Deck deck;

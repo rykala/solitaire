@@ -3,18 +3,14 @@
 
 #include <QLabel>
 #include <QGraphicsItem>
-#include "Card.h"
 
-class Card;
+#include "Card.h"
 
 class GraphicCard : public QLabel, Card
 {
 public:
     GraphicCard(Card *card, QWidget *parent = 0);
     ~GraphicCard();
-
-private:
-//    Card *card;
     void drawCard();
     void drawBackCard();
 };

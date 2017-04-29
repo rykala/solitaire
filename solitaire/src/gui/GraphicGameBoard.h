@@ -15,6 +15,8 @@ public:
 
 private:
     Game *game;
+    void updateGameBoard();
+    void startPack();
 
 protected:
     void dragEnterEvent(QDragEnterEvent *event);

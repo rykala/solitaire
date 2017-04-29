@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/heart">
+    <qresource prefix="/3">
         <file alias="1">img/cards/png/heart/1.png</file>
         <file alias="2">img/cards/png/heart/2.png</file>
         <file alias="3">img/cards/png/heart/3.png</file>
@@ -14,7 +14,7 @@
         <file alias="12">img/cards/png/heart/12.png</file>
         <file alias="13">img/cards/png/heart/13.png</file>
     </qresource>
-    <qresource prefix="/club">
+    <qresource prefix="/1">
         <file alias="1">img/cards/png/club/1.png</file>
         <file alias="2">img/cards/png/club/2.png</file>
         <file alias="3">img/cards/png/club/3.png</file>
@@ -29,7 +29,7 @@
         <file alias="12">img/cards/png/club/12.png</file>
         <file alias="13">img/cards/png/club/13.png</file>
     </qresource>
-    <qresource prefix="/spade">
+    <qresource prefix="/4">
         <file alias="1">img/cards/png/spade/1.png</file>
         <file alias="2">img/cards/png/spade/2.png</file>
         <file alias="3">img/cards/png/spade/3.png</file>
@@ -44,7 +44,7 @@
         <file alias="12">img/cards/png/spade/12.png</file>
         <file alias="13">img/cards/png/spade/13.png</file>
     </qresource>
-    <qresource prefix="/diamond">
+    <qresource prefix="/2">
         <file alias="1">img/cards/png/diamond/1.png</file>
         <file alias="2">img/cards/png/diamond/2.png</file>
         <file alias="3">img/cards/png/diamond/3.png</file>

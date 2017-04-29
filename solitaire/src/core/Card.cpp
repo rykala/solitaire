@@ -30,26 +30,120 @@ int Card::getValue() {
 string Card::getName() {
     string tmp = "";
 
-    if (value == 1) {
-        tmp += "A";
-    } else if (value == 11) {
-        tmp += "J";
-    } else if (value == 12) {
-        tmp += "Q";
-    } else if (value == 13) {
-        tmp += "K";
-    } else {
-        tmp += to_string(value);
-    }
+
 
     if (type == Spade) {
-        tmp += "♠";
+        if (value == 1) {
+            tmp += "🃎"; }
+        else if (value == 2) {
+            tmp += "🃒";
+        } else if (value == 3) {
+            tmp += "🃓";
+        } else if (value == 4) {
+            tmp += "🃔";
+        } else if (value == 5) {
+            tmp += "🃕";
+        } else if (value == 6) {
+            tmp += "🃖";
+        } else if (value == 7) {
+            tmp += "🃗";
+        } else if (value == 8) {
+            tmp += "🃘";
+        } else if (value == 9) {
+            tmp += "🃙";
+        } else if (value == 10) {
+            tmp += "🃚";
+        } else if (value == 11) {
+            tmp += "🃛";
+        } else if (value == 12) {
+            tmp += "🃝";
+        } else if (value == 13) {
+            tmp += "🃞";
+        }
     } else if (type == Diamond) {
-        tmp += "♦";
+        if (value == 1) {
+            tmp += "🃁"; }
+        else if (value == 2) {
+            tmp += "🃂";
+        } else if (value == 3) {
+            tmp += "🃃";
+        } else if (value == 4) {
+            tmp += "🃄";
+        } else if (value == 5) {
+            tmp += "🃅";
+        } else if (value == 6) {
+            tmp += "🃆";
+        } else if (value == 7) {
+            tmp += "🃇";
+        } else if (value == 8) {
+            tmp += "🃈";
+        } else if (value == 9) {
+            tmp += "🃉";
+        } else if (value == 10) {
+            tmp += "🃊";
+        } else if (value == 11) {
+            tmp += "🃋";
+        } else if (value == 12) {
+            tmp += "🃍";
+        } else if (value == 13) {
+            tmp += "🃎";
+        }
     } else if (type == Club) {
-        tmp += "♣";
+        if (value == 1) {
+            tmp += "🂡"; }
+        else if (value == 2) {
+            tmp += "🂢";
+        } else if (value == 3) {
+            tmp += "🂣";
+        } else if (value == 4) {
+            tmp += "🂤";
+        } else if (value == 5) {
+            tmp += "🂥";
+        } else if (value == 6) {
+            tmp += "🂦";
+        } else if (value == 7) {
+            tmp += "🂧";
+        } else if (value == 8) {
+            tmp += "🂨";
+        } else if (value == 9) {
+            tmp += "🂩";
+        } else if (value == 10) {
+            tmp += "🂪";
+        } else if (value == 11) {
+            tmp += "🂫";
+        } else if (value == 12) {
+            tmp += "🂭";
+        } else if (value == 13) {
+            tmp += "🂮";
+        }
     } else if (type == Heart) {
-        tmp += "♥";
+        if (value == 1) {
+            tmp += "🂱"; }
+        else if (value == 2) {
+            tmp += "🂲";
+        } else if (value == 3) {
+            tmp += "🂳";
+        } else if (value == 4) {
+            tmp += "🂴";
+        } else if (value == 5) {
+            tmp += "🂥";
+        } else if (value == 6) {
+            tmp += "🂶";
+        } else if (value == 7) {
+            tmp += "🂷";
+        } else if (value == 8) {
+            tmp += "🂸";
+        } else if (value == 9) {
+            tmp += "🂹";
+        } else if (value == 10) {
+            tmp += "🂺";
+        } else if (value == 11) {
+            tmp += "🂻";
+        } else if (value == 12) {
+            tmp += "🂽";
+        } else if (value == 13) {
+            tmp += "🂾";
+        }
     }
 
     return tmp;

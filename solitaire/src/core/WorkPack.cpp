@@ -13,8 +13,8 @@ WorkPack::WorkPack(vector<Card> cards)
     this->hidden.insert(this->hidden.end(), cards.begin(), cards.end());
 }
 
-string WorkPack::numOfHiddenCards() {
-    return to_string(hidden.size());
+int WorkPack::numOfHiddenCards() {
+    return hidden.size();
 }
 
 void WorkPack::flipCard() {
