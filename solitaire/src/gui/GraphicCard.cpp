@@ -1,43 +1,27 @@
 #include "GraphicCard.h"
+#include "Card.h"
 
-GraphicCard::GraphicCard(const QString &fileName, QGraphicsItem *parent) : QGraphicsSvgItem(fileName,parent)
+#include <sstream>
+#include <QLabel>
+#include <QWidget>
+#include <QDebug>
+
+using std::stringstream;
+
+GraphicCard::GraphicCard(Card *card, QWidget *parent) : QLabel(parent), Card(card->getValue(), card->getType())
 {
-    Pressed = false;
-    qDebug() << "Created card";
-    setFlag(ItemIsMovable);
+
 }
 
+GraphicCard::~GraphicCard(){}
 
-QRectF GraphicCard::boundingRect() const
+void GraphicCard::drawCard()
 {
-    return QRectF(0,0,75,110);
+    stringstream ss;
+    //    ss << ":/" << ranknames.at(this->card->rank) << "_" << suitnames.at(this->card->suit);
 }
 
-//void GraphicCard::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-//{
-//    QRectF rec = boundingRect();
-//    QBrush brush(Qt::blue);
-
-//    if(Pressed){
-//        brush.setColor(Qt::red);
-//    } else {
-//        brush.setColor(Qt::blue);
-//    }
-
-//    painter->fillRect(rec, brush);
-//    painter->drawRect(rec);
-//}
-
-//void GraphicCard::mousePressEvent(QGraphicsSceneMouseEvent *event)
-//{
-//    Pressed = true;
-//    update();
-//    QGraphicsItem::mousePressEvent(event);
-//}
-
-//void GraphicCard::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
-//{
-//    Pressed = true;
-//    update();
-//    QGraphicsItem::mouseReleaseEvent(event);
-//}
+void GraphicCard::drawBackCard()
+{
+    setPixmap(QPixmap(":back").scaled(100, 100, Qt::KeepAspectRatio));
+}

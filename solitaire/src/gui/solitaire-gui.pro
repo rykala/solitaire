@@ -24,15 +24,22 @@ TEMPLATE = app
 QMAKE_CXXFLAGS += -std=c++0x
 INCLUDEPATH += $${BASEDIR}/src/core
 
-SOURCES += ../core/*.cpp\
-           main.cpp\
-           GraphicCard.cpp \
-    GraphicDeck.cpp
+SOURCES +=  ../core/*.cpp\
+            main.cpp\
+            GraphicCard.cpp \
+            GraphicDeck.cpp \
+            mainwindow.cpp \
+            GraphicGameBoard.cpp
 
 
 HEADERS  += ../core/*.h\
-    GraphicCard.h \
-    GraphicDeck.h
+            GraphicCard.h \
+            GraphicDeck.h \
+            mainwindow.h \
+            GraphicGameBoard.h
 
 
 RESOURCES = resources.qrc \
+
+FORMS += \
+    mainwindow.ui

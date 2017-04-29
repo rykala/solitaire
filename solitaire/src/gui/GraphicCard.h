@@ -1,24 +1,22 @@
 #ifndef GRAPHICCARD_H
 #define GRAPHICCARD_H
 
-#include <QGraphicsSvgItem>
-#include <QPainter>
-#include <QDebug>
+#include <QLabel>
+#include <QGraphicsItem>
+#include "Card.h"
 
+class Card;
 
-class GraphicCard : public QGraphicsSvgItem
+class GraphicCard : public QLabel, Card
 {
 public:
-    GraphicCard(const QString &fileName, QGraphicsItem *parent = 0);
+    GraphicCard(Card *card, QWidget *parent = 0);
+    ~GraphicCard();
 
-    QRectF boundingRect() const;
-//    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-    bool Pressed;
-
-protected:
-//    void mousePressEvent(QGraphicsSceneMouseEvent *event);
-//    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
-//        void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+private:
+//    Card *card;
+    void drawCard();
+    void drawBackCard();
 };
 
 #endif // GRAPHICCARD_H
