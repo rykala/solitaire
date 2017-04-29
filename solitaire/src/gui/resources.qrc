@@ -59,4 +59,8 @@
         <file alias="12">img/cards/png/diamond/12.png</file>
         <file alias="13">img/cards/png/diamond/13.png</file>
     </qresource>
+    <qresource prefix="/back">
+        <file alias="1">img/cards/png/back1.png</file>
+        <file alias="2">img/cards/png/back2.png</file>
+    </qresource>
 </RCC>
