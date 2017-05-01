@@ -23,16 +23,12 @@ MainWindow::MainWindow(QWidget *parent) :
                                    "QToolButton:hover {text-decoration: underline; border: 0px; background: none;}"
                                    "QToolBar {background: rgb(30, 30, 30)}"
                                    );
-
+    this->setFixedSize(650,350);
     game1 = new GraphicGameBoard(ui->centralWidget);
     game1->setObjectName(QStringLiteral("game1"));
     game1->setGeometry(QRect(0, 0, this->width(), this->height()));
     game1->setStyleSheet("border: 0;");
-    game1->show();
-
-    Card *card = new Card(13, CardType::Club);
-    GraphicCard *test = new GraphicCard(card, game1);
-    test->drawCard();
+    game1->drawGameBoard();
 }
 
 MainWindow::~MainWindow()
@@ -46,24 +42,25 @@ void MainWindow::on_actionNew_Instance_triggered()
     this->setFixedSize(1300,700);
     game1->setGeometry(QRect(0, 0, this->width()*0.5, this->height()*0.5));
     game1->setStyleSheet("border: 1px solid green; border-top: 0; border-left: 0; border-right: 0");
+    game1->drawGameBoard();
 
     game2 = new GraphicGameBoard(ui->centralWidget);
     game2->setObjectName(QStringLiteral("game2"));
     game2->setGeometry(QRect(this->width()*0.5, 0, this->width()*0.5, this->height()*0.5));
     game2->setStyleSheet("border: 1px solid green; border-top: 0; border-right: 0;");
-    game2->show();
+    game2->drawGameBoard();
 
     game3 = new GraphicGameBoard(ui->centralWidget);
     game3->setObjectName(QStringLiteral("game3"));
     game3->setGeometry(QRect(0, this->height()*0.5, this->width()*0.5, this->height()*0.5));
     game3->setStyleSheet("border: 0px solid green; border-top: 0; border-right: 0;");
-    game3->show();
+    game3->drawGameBoard();
 
     game4 = new GraphicGameBoard(ui->centralWidget);
     game4->setObjectName(QStringLiteral("game4"));
     game4->setGeometry(QRect(this->width()*0.5, this->height()*0.5, this->width()*0.5, this->height()*0.5));
     game4->setStyleSheet("border-left: 1px solid green; border-top: 0; border-right: 0;");
-    game4->show();
+    game4->drawGameBoard();
 
 
 }

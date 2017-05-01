@@ -6,13 +6,18 @@
 
 #include "Card.h"
 
-class GraphicCard : public QLabel, Card
+class GraphicCard : public QLabel, public Card
 {
 public:
-    GraphicCard(Card *card, QWidget *parent = 0);
+    GraphicCard(QWidget *parent);
+    GraphicCard(Card *card, QWidget *parent);
     ~GraphicCard();
-    void drawCard();
-    void drawBackCard();
+    void drawCard(int x, int y);
+    void drawBackCard(int x, int y);
+protected:
+    void dragEnterEvent(QDragEnterEvent *event) override;
+    void dragMoveEvent(QDragMoveEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override;
 };
 
 #endif // GRAPHICCARD_H

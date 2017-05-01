@@ -28,14 +28,16 @@ SOURCES +=  ../core/*.cpp\
             GraphicCard.cpp \
             GraphicDeck.cpp \
             mainwindow.cpp \
-            GraphicGameBoard.cpp
+            GraphicGameBoard.cpp \
+    GraphicStartPack.cpp
 
 
 HEADERS  += ../core/*.h\
             GraphicCard.h \
             GraphicDeck.h \
             mainwindow.h \
-            GraphicGameBoard.h
+            GraphicGameBoard.h \
+    GraphicStartPack.h
 
 
 RESOURCES = resources.qrc \

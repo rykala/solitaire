@@ -12,17 +12,13 @@ class GraphicGameBoard : public QFrame
 {
 public:
     GraphicGameBoard(QWidget *parent = 0);
+    void drawGameBoard();
 
 private:
     Game *game;
-    void updateGameBoard();
-    void startPack();
-
-protected:
-    void dragEnterEvent(QDragEnterEvent *event);
-    void dragMoveEvent(QDragMoveEvent *event);
-    void dropEvent(QDropEvent *event);
-    void mousePressEvent(QMouseEvent *event);
+    void drawWorkPacks();
+    void drawStartPack();
+    void drawTargetPacks();
 };
 
 #endif // GRAPHICGAMEBOARD_H
