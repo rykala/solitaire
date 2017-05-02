@@ -20,6 +20,9 @@ public:
     void Undo();
     bool isStartPackEmpty();
     vector<Card> stackBufferCards();
+    vector<Card> getStartPack();
+    vector<Card> getWorkPack(int index);
+    int num() {return workPacks.size();}
 
 private:
     Deck deck;

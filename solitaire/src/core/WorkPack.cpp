@@ -8,25 +8,26 @@ using std::string;
 using std::to_string;
 using std::next;
 
-WorkPack::WorkPack(vector<Card> cards)
+WorkPack::WorkPack(vector<Card> cards, int hiddenIndex)
 {
-    this->hidden.insert(this->hidden.end(), cards.begin(), cards.end());
+    this->cards.insert(this->cards.end(), cards.begin(), cards.end());
+    this->hiddenIndex = hiddenIndex;
 }
 
 int WorkPack::numOfHiddenCards() {
-    return hidden.size();
+    return hiddenIndex;
 }
 
 void WorkPack::flipCard() {
-    if (hidden.size() == 0 || cards.size() > 0) {
-        throw 1;
-    }
+//    if (hidden.size() == 0 || cards.size() > 0) {
+//        throw 1;
+//    }
 
-    Card card;
+//    Card card;
 
-    auto it = next(hidden.begin(), 1);
+//    auto it = next(hidden.begin(), 1);
 
-    move(hidden.begin(), it, back_inserter(cards));
+//    move(hidden.begin(), it, back_inserter(cards));
 
-    hidden.erase(hidden.begin(), it);
+//    hidden.erase(hidden.begin(), it);
 }

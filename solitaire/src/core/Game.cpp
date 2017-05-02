@@ -1,5 +1,6 @@
 #include "Game.h"
 
+
 Game::Game()
 {
     this->NewGame();
@@ -16,7 +17,7 @@ void Game::NewGame()
 
         deck.cards.erase(deck.cards.begin(), it);
 
-        WorkPack workPack(cards);
+        WorkPack workPack(cards, i);
         workPacks.push_back(workPack);
     }
 
@@ -51,4 +52,14 @@ bool Game::isStartPackEmpty()
 //    }
 
     return false;
+}
+
+vector<Card> Game::getStartPack()
+{
+    return startPack.cards;
+}
+
+vector<Card> Game::getWorkPack(int index)
+{
+    return workPacks.at(index).cards;
 }

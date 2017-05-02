@@ -23,7 +23,7 @@ public:
 
 private slots:
     void on_actionNew_Instance_triggered();
-    void on_actionNew_game_triggered();
+    void on_actionNew_Game_triggered();
 
 private:
     Ui::MainWindow *ui;

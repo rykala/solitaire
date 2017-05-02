@@ -10,14 +10,12 @@ class GraphicCard : public QLabel, public Card
 {
 public:
     GraphicCard(QWidget *parent);
-    GraphicCard(Card *card, QWidget *parent);
+    GraphicCard(Card *card, QWidget *parent, bool faceUp = true);
     ~GraphicCard();
     void drawCard(int x, int y);
     void drawBackCard(int x, int y);
-protected:
-    void dragEnterEvent(QDragEnterEvent *event) override;
-    void dragMoveEvent(QDragMoveEvent *event) override;
-    void mousePressEvent(QMouseEvent *event) override;
+    void updateCard();
+    bool faceUp;
 };
 
 #endif // GRAPHICCARD_H

@@ -6,14 +6,14 @@
 class WorkPack: public Pack
 {
 public:
-    WorkPack(vector<Card> cards);
+    WorkPack(vector<Card> cards, int hiddenIndex);
     void flipCard();
     vector<Card> putCard();
     vector<Card> takeCards(int index);
     int numOfHiddenCards();
 
-private:
-    vector<Card> hidden;
+protected:
+    int hiddenIndex;
 
 };
 

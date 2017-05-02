@@ -1,15 +1,29 @@
 #include "GraphicStartPack.h"
+#include "Card.h"
+#include "GraphicCard.h"
 
 #include <sstream>
 #include <QLabel>
 #include <QWidget>
 #include <QDebug>
 #include <QMouseEvent>
+#include <vector>
 
+using std::vector;
 
-GraphicStartPack::GraphicStartPack(QWidget *parent) : QLabel(parent)
+GraphicStartPack::GraphicStartPack(QWidget *parent, vector<Card> m_cards) : QLabel(parent), StartPack(m_cards)
 {
-    setPixmap(QPixmap(":/back/2").scaled(100, 100, Qt::KeepAspectRatio));
+    for (auto &card : m_cards) // access by reference to avoid copying
+     {
+         GraphicCard *m_card = new GraphicCard(&card, parent);
+         m_card->drawCard(20,5);
+
+         m_card->stackUnder(this);
+
+         cards.push_back(m_card);
+     }
+
+    setPixmap(QPixmap(":/back/2").scaled(70, 105, Qt::KeepAspectRatio));
     this->setStyleSheet("border: 0;");
     this->move(20, 5);
     this->show();
@@ -17,11 +31,24 @@ GraphicStartPack::GraphicStartPack(QWidget *parent) : QLabel(parent)
 
 void GraphicStartPack::mousePressEvent(QMouseEvent *event)
 {
-//    GraphicCard *child = dynamic_cast<GraphicCard*>(childAt(event->pos()));
-//    if (!child) {
-//        qDebug() << "error";
-//        return;
-//    }
-    event->accept();
-    qDebug() << "Klik na deck";
+    flipCard();
+}
+
+void GraphicStartPack::generateCards()
+{
+
+}
+
+void GraphicStartPack::flipCard()
+{
+    cards.at(this->top)->move(110,5);
+
+    if(this->top >= (cards.size() - 1)) {
+        for (auto &card : cards) {
+             card->move(20, 5);
+         }
+        this->top = 0;
+    }
+
+    this->top++;
 }

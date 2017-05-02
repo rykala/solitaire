@@ -10,10 +10,10 @@ public:
     StartPack();
     StartPack(vector<Card> cards);
     bool getTopCard(Card &topCard); // otoci kartu a vrati ji, zvyssi top
-    void flipCard();
+    int flipCard();
 
 public:
-    float top = -1; // Inicializace na null, kdyz zadna karta neni prevracena
+    int top = 0; // Inicializace na null, kdyz zadna karta neni prevracena
 };
 
 #endif // STARTPACK_H

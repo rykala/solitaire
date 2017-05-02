@@ -29,7 +29,9 @@ SOURCES +=  ../core/*.cpp\
             GraphicDeck.cpp \
             mainwindow.cpp \
             GraphicGameBoard.cpp \
-    GraphicStartPack.cpp
+    GraphicStartPack.cpp \
+    GraphicWorkPack.cpp \
+    GraphicTargetPack.cpp
 
 
 HEADERS  += ../core/*.h\
@@ -37,7 +39,9 @@ HEADERS  += ../core/*.h\
             GraphicDeck.h \
             mainwindow.h \
             GraphicGameBoard.h \
-    GraphicStartPack.h
+    GraphicStartPack.h \
+    GraphicWorkPack.h \
+    GraphicTargetPack.h
 
 
 RESOURCES = resources.qrc \

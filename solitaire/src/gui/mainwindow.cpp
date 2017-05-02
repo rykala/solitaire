@@ -24,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
                                    "QToolBar {background: rgb(30, 30, 30)}"
                                    );
     this->setFixedSize(650,350);
+
     game1 = new GraphicGameBoard(ui->centralWidget);
     game1->setObjectName(QStringLiteral("game1"));
     game1->setGeometry(QRect(0, 0, this->width(), this->height()));
@@ -42,7 +43,6 @@ void MainWindow::on_actionNew_Instance_triggered()
     this->setFixedSize(1300,700);
     game1->setGeometry(QRect(0, 0, this->width()*0.5, this->height()*0.5));
     game1->setStyleSheet("border: 1px solid green; border-top: 0; border-left: 0; border-right: 0");
-    game1->drawGameBoard();
 
     game2 = new GraphicGameBoard(ui->centralWidget);
     game2->setObjectName(QStringLiteral("game2"));
@@ -61,11 +61,17 @@ void MainWindow::on_actionNew_Instance_triggered()
     game4->setGeometry(QRect(this->width()*0.5, this->height()*0.5, this->width()*0.5, this->height()*0.5));
     game4->setStyleSheet("border-left: 1px solid green; border-top: 0; border-right: 0;");
     game4->drawGameBoard();
-
-
 }
 
-void MainWindow::on_actionNew_game_triggered()
+void MainWindow::on_actionNew_Game_triggered()
 {
+    game1 = new GraphicGameBoard(ui->centralWidget);
 
+    if(game2 || game3 || game4) {
+            game1->setGeometry(QRect(0, 0, this->width()*0.5, this->height()*0.5));
+    } else {
+            game1->setGeometry(QRect(0, 0, this->width(), this->height()));
+    }
+
+    game1->drawGameBoard();
 }

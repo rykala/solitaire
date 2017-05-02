@@ -29,7 +29,7 @@ void GameFacade::NewGame(Deck &deck, vector<TargetPack> &targetPacks, vector<Wor
 
         deck.cards.erase(deck.cards.begin(), it);
 
-        WorkPack workPack(cards);
+        WorkPack workPack(cards, i);
         workPacks.push_back(workPack);
     }
 
@@ -70,5 +70,5 @@ void GameFacade::moveCard(StartPack &startPack, TargetPack &targetPack) {
 
 //    startPack.cards.erase(startPack.cards.begin(), it);
 
-    startPack.flipCard();
+//    startPack.flipCard();
 }

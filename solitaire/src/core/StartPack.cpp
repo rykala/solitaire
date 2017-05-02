@@ -8,7 +8,6 @@ StartPack::StartPack() {
 StartPack::StartPack(vector<Card> cards)
 {
     this->cards = cards;
-//    top = nullptr; //cpp int null
 }
 
 bool StartPack::getTopCard(Card &topCard) {
@@ -21,11 +20,11 @@ bool StartPack::getTopCard(Card &topCard) {
     return true;
 }
 
-void StartPack::flipCard() {
-    top++;
+//int StartPack::flipCard() {
+//     if(top > (cards.size() - 1)) {
+//        top = 0;
+//    }
 
-    if(top > (cards.size() - 1)) {
-        top = -1;
-    }
+//    return top++;
 
-}
+//}
