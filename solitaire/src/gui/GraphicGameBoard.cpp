@@ -75,6 +75,9 @@ void GraphicGameBoard::popCards(GraphicCard *card)
 
     if(deckType == DeckType::Start){
         startPack->cards.erase(startPack->cards.begin() + startPack->getTopIndex());
+//        startPack->decrementTop();
+    } else if (deckType == DeckType::Work) {
+        workPacks.at(card->getDeckIndex())->gCards.pop_back();
     }
 }
 
@@ -91,6 +94,10 @@ void GraphicGameBoard::reloadCards()
 {
     QList<QLabel*> items = findChildren<QLabel*>();
 
+    for(auto &pack: workPacks) {
+        pack->flipHidden();
+    }
+
     for(auto &item : items) {
         GraphicCard *card = dynamic_cast<GraphicCard*>(item);
         if(card) {
@@ -101,6 +108,7 @@ void GraphicGameBoard::reloadCards()
 
 void GraphicGameBoard::dropEvent(QDropEvent *event)
 {
+    /* ---------------------------- CUSTOM ACTIONS ------------------------------------ */
     int x = 0;
     int y = 0;
     GraphicTargetPack *targetPack = dynamic_cast<GraphicTargetPack*>(childAt(event->pos()));
@@ -108,12 +116,11 @@ void GraphicGameBoard::dropEvent(QDropEvent *event)
     if(targetPack) {
         x = targetPack->getX();
         y = targetPack->getY();
-        if (!(targetPack->putCards(game->hand))){
-            return;
-        }
     } else {
         return;
     }
+
+    /*--------------------------------------------------------------------------------*/
 
     if (event->mimeData()->hasFormat("application/x-dnditemdata")) {
         QByteArray itemData = event->mimeData()->data("application/x-dnditemdata");
@@ -123,17 +130,18 @@ void GraphicGameBoard::dropEvent(QDropEvent *event)
         QPoint offset;
         dataStream >> pixmap >> offset;
 
-        GraphicCard *newIcon = new GraphicCard(&(game->hand.at(0)), this);
-        newIcon->setPixmap(pixmap);
-        newIcon->move(x, y);
-        newIcon->show();
-        newIcon->setAttribute(Qt::WA_DeleteOnClose);
-        if(targetPack) {
-            targetPack->putCard(newIcon);
-        }
+        GraphicCard *newCard = new GraphicCard(hand.at(0), this);
+        newCard->setPixmap(pixmap);
+        newCard->move(x, y);
+        newCard->show();
+        newCard->setAttribute(Qt::WA_DeleteOnClose);
 
-        hand.clear();
+        /* ---------------------------- CUSTOM ACTIONS ------------------------------------ */
+//        if(targetPack) {
+//            targetPack->putCard(newCard);
+//        }
 
+        /*--------------------------------------------------------------------------------*/
         if (event->source() == this) {
             event->setDropAction(Qt::MoveAction);
             event->accept();
@@ -148,10 +156,13 @@ void GraphicGameBoard::dropEvent(QDropEvent *event)
 
 void GraphicGameBoard::mousePressEvent(QMouseEvent *event)
 {
+    /* ---------------------------- CUSTOM ACTIONS ------------------------------------ */
     GraphicCard *child = dynamic_cast<GraphicCard*>(childAt(event->pos()));
 
     if(!child || !child->faceUp)
         return;
+
+    /*--------------------------------------------------------------------------------*/
 
     QPixmap pixmap = *child->pixmap();
 
@@ -169,12 +180,17 @@ void GraphicGameBoard::mousePressEvent(QMouseEvent *event)
 
     child->hide();
 
+    /* ---------------------------- CUSTOM ACTIONS ------------------------------------ */
+
     popCards(child);
+
+    /*--------------------------------------------------------------------------------*/
 
     if (drag->exec(Qt::CopyAction | Qt::MoveAction, Qt::CopyAction) == Qt::MoveAction) {
         child->close();
+        reloadCards();
     } else {
-        pushCards(child);
+        pushCards(child); // PUSH THE CARD BACK TO THE ORIGINAL PACK, IF IT'S NOT DROPPED ANYWHERE VALID
         child->show();
         child->setPixmap(pixmap);
     }

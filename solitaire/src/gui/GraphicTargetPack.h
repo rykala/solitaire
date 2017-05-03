@@ -14,14 +14,10 @@ public:
     int getY() {return y;}
     GraphicCard *getTopCard();
     void putCard(GraphicCard* card);
-    void makeGrabbable(bool flag = true);
-//    vector<GraphicCard*> popCard();
-
 protected:
     vector<GraphicCard*> graphicCards;
     int x;
     int y;
-//    void mousePressEvent(QMouseEvent *event);
 
 };
 

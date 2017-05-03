@@ -43,8 +43,17 @@ void GraphicCard::drawCard(int x, int y)
 
 void GraphicCard::updateCard()
 {
-    stringstream ss;
+    if(this->faceUp) {
+        stringstream ss;
+        ss << ":/" << this->getType() << "/" << this->getValue();
+        setPixmap(QPixmap(ss.str().data()).scaled(70, 105, Qt::KeepAspectRatio));
+    } else {
+        setPixmap(QPixmap(":/back/2").scaled(70, 105, Qt::KeepAspectRatio));
+    }
+}
 
-    ss << ":/" << this->getType() << "/" << this->getValue();
-    setPixmap(QPixmap(ss.str().data()).scaled(70, 105, Qt::KeepAspectRatio));
+void GraphicCard::flipCard()
+{
+    faceUp = true;
+    updateCard();
 }

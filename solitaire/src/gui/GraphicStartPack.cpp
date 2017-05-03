@@ -39,11 +39,11 @@ void GraphicStartPack::flipCard()
 {
     top++;
 
-    if(top < cards.size()) {
+    if(top < (int)cards.size()) {
         cards.at(top)->move(110,5);
     }
 
-    if(top >= (cards.size())) {
+    if(top >= (int)cards.size()) {
         for (auto &card : cards) {
              card->move(20, 5);
          }

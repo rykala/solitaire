@@ -16,6 +16,7 @@ public:
     void drawBackCard(int x, int y);
     void updateCard();
     bool faceUp;
+    void flipCard();
 };
 
 #endif // GRAPHICCARD_H

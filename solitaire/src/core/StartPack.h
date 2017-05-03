@@ -12,6 +12,7 @@ public:
     bool getTopCard(Card &topCard); // otoci kartu a vrati ji, zvyssi top
     int flipCard();
     int getTopIndex();
+    void decrementTop();
 
 protected:
     int top = -1; // Inicializace na null, kdyz zadna karta neni prevracena

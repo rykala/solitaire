@@ -27,22 +27,5 @@ GraphicTargetPack::GraphicTargetPack(QWidget *parent, int x, int y) : QLabel(par
 
 void GraphicTargetPack::putCard(GraphicCard *card)
 {
-    card->setAttribute(Qt::WA_TransparentForMouseEvents);
     graphicCards.push_back(card);
 }
-
-void GraphicTargetPack::makeGrabbable(bool flag)
-{
-    if(cards.size() != 0){
-        graphicCards.back()->setAttribute(Qt::WA_TransparentForMouseEvents, !flag);
-    }
-}
-
-//void GraphicTargetPack::mousePressEvent(QMouseEvent *event)
-//{
-//        this->makeGrabbable();
-//        this->popCard();
-//        GraphicGameBoard::mousePressEvent(event);
-//        targetPack->makeGrabbable(false);
-//}
-

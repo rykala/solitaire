@@ -25,6 +25,11 @@ int StartPack::getTopIndex()
     return top;
 }
 
+void StartPack::decrementTop()
+{
+    top--;
+}
+
 //int StartPack::flipCard() {
 //     if(top > (cards.size() - 1)) {
 //        top = 0;

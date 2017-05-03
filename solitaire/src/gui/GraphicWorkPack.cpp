@@ -16,17 +16,23 @@ GraphicWorkPack::GraphicWorkPack(QWidget *parent, vector<Card> m_cards, int hidd
 
     int tmp_y = this->y;
 
-    for (int i = 0; i < m_cards.size(); i++) {
+    for (int i = 0; i < (int)m_cards.size(); i++) {
         bool face = (i >= this->hiddenIndex);
 
 
         GraphicCard *m_card = new GraphicCard(&(m_cards.at(i)), parent, face);
         m_card->drawCard(x, tmp_y);
 
-//        cards.push_back(m_card);
+        gCards.push_back(m_card);
 
         tmp_y += (m_card->faceUp ? 15 : 5);
     }
 }
 
+void GraphicWorkPack::flipHidden() {
+    if (hiddenIndex == gCards.size()) {
+        hiddenIndex--;
+        gCards.at(hiddenIndex)->flipCard();
+    }
+}
 
