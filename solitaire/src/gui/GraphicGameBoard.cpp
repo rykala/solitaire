@@ -84,7 +84,6 @@ void GraphicGameBoard::pushCards(Card *bottomCard)
 
     if(deckType == DeckType::Start){
         startPack->cards.insert(startPack->cards.begin() + startPack->getTopIndex(), hand.at(0));
-        qDebug() << "Vracim kartu zpet!";
     }
 }
 
@@ -146,19 +145,6 @@ void GraphicGameBoard::dropEvent(QDropEvent *event)
     }
 }
 
-void GraphicGameBoard::dragEnterEvent(QDragEnterEvent *event)
-{
-    if (event->mimeData()->hasFormat("application/x-dnditemdata")) {
-        if (event->source() == this) {
-            event->setDropAction(Qt::MoveAction);
-            event->accept();
-        } else {
-            event->acceptProposedAction();
-        }
-    } else {
-        event->ignore();
-    }
-}
 
 void GraphicGameBoard::mousePressEvent(QMouseEvent *event)
 {
@@ -191,6 +177,20 @@ void GraphicGameBoard::mousePressEvent(QMouseEvent *event)
         pushCards(child);
         child->show();
         child->setPixmap(pixmap);
+    }
+}
+
+void GraphicGameBoard::dragEnterEvent(QDragEnterEvent *event)
+{
+    if (event->mimeData()->hasFormat("application/x-dnditemdata")) {
+        if (event->source() == this) {
+            event->setDropAction(Qt::MoveAction);
+            event->accept();
+        } else {
+            event->acceptProposedAction();
+        }
+    } else {
+        event->ignore();
     }
 }
 

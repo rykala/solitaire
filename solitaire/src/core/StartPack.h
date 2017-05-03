@@ -14,7 +14,7 @@ public:
     int getTopIndex();
 
 protected:
-    int top = 0; // Inicializace na null, kdyz zadna karta neni prevracena
+    int top = -1; // Inicializace na null, kdyz zadna karta neni prevracena
 };
 
 #endif // STARTPACK_H

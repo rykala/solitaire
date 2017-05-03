@@ -37,14 +37,16 @@ void GraphicStartPack::mousePressEvent(QMouseEvent *event)
 
 void GraphicStartPack::flipCard()
 {
-    cards.at(this->top)->move(110,5);
+    top++;
 
-    if(this->top >= (cards.size() - 1)) {
+    if(top < cards.size()) {
+        cards.at(top)->move(110,5);
+    }
+
+    if(top >= (cards.size())) {
         for (auto &card : cards) {
              card->move(20, 5);
          }
-        this->top = 0;
+        top = -1;
     }
-
-    this->top++;
 }

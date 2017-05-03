@@ -22,7 +22,7 @@ bool StartPack::getTopCard(Card &topCard) {
 
 int StartPack::getTopIndex()
 {
-    return top-1;
+    return top;
 }
 
 //int StartPack::flipCard() {
