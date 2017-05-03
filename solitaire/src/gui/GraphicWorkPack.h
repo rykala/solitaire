@@ -13,7 +13,7 @@ public:
     int getX() {return x;}
     int getY() {return y;}
 private:
-    vector <GraphicCard*> cards;
+//    vector <GraphicCard*> cards;
     int x;
     int y;
 };

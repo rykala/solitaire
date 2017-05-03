@@ -86,17 +86,11 @@ void GraphicGameBoard::dropEvent(QDropEvent *event)
         dataStream >> pixmap >> offset;
         //        reloadCards();
 
-        //        Card *newC = new Card(2, CardType::Heart);
-        //        GraphicCard *newCard = new GraphicCard(newC, this);
-        //        newCard->move(event->pos() - offset);
-        //        newCard->drawCard(0,0);
-
         GraphicCard *newIcon = new GraphicCard(hand, this);
         newIcon->setPixmap(pixmap);
         newIcon->move(x, y);
         newIcon->show();
         newIcon->setAttribute(Qt::WA_DeleteOnClose);
-
 
         if (event->source() == this) {
             event->setDropAction(Qt::MoveAction);
@@ -139,13 +133,13 @@ void GraphicGameBoard::mousePressEvent(QMouseEvent *event)
     QMimeData *mimeData = new QMimeData;
     mimeData->setData("application/x-dnditemdata", itemData);
 
-    QDrag *drag = new QDrag(child);
+    QDrag *drag = new QDrag(this);
     drag->setMimeData(mimeData);
     drag->setPixmap(pixmap);
     drag->setHotSpot(event->pos() - child->pos());
 
     child->hide();
-    //    child->setPixmap(pixmap);
+//    child->setPixmap(pixmap);
     this->hand = child;
 
     if (drag->exec(Qt::CopyAction | Qt::MoveAction, Qt::CopyAction) == Qt::MoveAction) {

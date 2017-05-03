@@ -23,7 +23,7 @@ GraphicWorkPack::GraphicWorkPack(QWidget *parent, vector<Card> m_cards, int hidd
         GraphicCard *m_card = new GraphicCard(&(m_cards.at(i)), parent, face);
         m_card->drawCard(x, tmp_y);
 
-        cards.push_back(m_card);
+//        cards.push_back(m_card);
 
         tmp_y += (m_card->faceUp ? 15 : 5);
     }

@@ -13,6 +13,8 @@ using std::vector;
 
 GraphicTargetPack::GraphicTargetPack(QWidget *parent, int x, int y) : QLabel(parent), TargetPack()
 {
+    setAttribute(Qt::WA_TransparentForMouseEvents);
+
     this->x = x;
     this->y = y;
 
