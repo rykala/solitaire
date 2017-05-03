@@ -21,6 +21,8 @@ GraphicCard::GraphicCard(QWidget *parent) : QLabel(parent) {}
 GraphicCard::GraphicCard(Card *card, QWidget *parent, bool face) : QLabel(parent), Card(card->getValue(), card->getType()) {
         this->setAttribute(Qt::WA_DeleteOnClose);
         this->faceUp = face;
+        this->setDeckType(card->getDeckType());
+        this->setDeckIndex(card->getDeckIndex());
 }
 
 GraphicCard::~GraphicCard(){}

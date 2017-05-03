@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>401</width>
+    <width>493</width>
     <height>265</height>
    </rect>
   </property>
@@ -22,7 +22,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>401</width>
+     <width>493</width>
      <height>20</height>
     </rect>
    </property>
@@ -47,23 +47,68 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actionNew_Game"/>
+   <addaction name="actionGame1"/>
+   <addaction name="actionGame2"/>
+   <addaction name="actionGame3"/>
+   <addaction name="actionGame4"/>
    <addaction name="separator"/>
-   <addaction name="actionNew_Instance"/>
+   <addaction name="actionClose1"/>
+   <addaction name="actionClose2"/>
+   <addaction name="actionClose3"/>
+   <addaction name="actionClose4"/>
   </widget>
   <widget class="QStatusBar" name="statusBar">
    <property name="enabled">
     <bool>false</bool>
    </property>
   </widget>
-  <action name="actionNew_Game">
+  <action name="actionGame1">
    <property name="text">
-    <string>New Game</string>
+    <string>Game1</string>
    </property>
   </action>
-  <action name="actionNew_Instance">
+  <action name="actionGame2">
    <property name="text">
-    <string>New Instance</string>
+    <string>Game2</string>
+   </property>
+  </action>
+  <action name="actionGame3">
+   <property name="text">
+    <string>Game3</string>
+   </property>
+  </action>
+  <action name="actionGame4">
+   <property name="text">
+    <string>Game4</string>
+   </property>
+   <property name="toolTip">
+    <string>Game4</string>
+   </property>
+  </action>
+  <action name="actionClose1">
+   <property name="text">
+    <string>Close1</string>
+   </property>
+  </action>
+  <action name="actionClose2">
+   <property name="text">
+    <string>Close2</string>
+   </property>
+  </action>
+  <action name="actionClose3">
+   <property name="text">
+    <string>Close3</string>
+   </property>
+   <property name="toolTip">
+    <string>Close3</string>
+   </property>
+  </action>
+  <action name="actionClose4">
+   <property name="text">
+    <string>Close4</string>
+   </property>
+   <property name="toolTip">
+    <string>Close4</string>
    </property>
   </action>
  </widget>

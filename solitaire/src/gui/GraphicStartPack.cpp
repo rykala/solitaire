@@ -31,12 +31,8 @@ GraphicStartPack::GraphicStartPack(QWidget *parent, vector<Card> m_cards) : QLab
 
 void GraphicStartPack::mousePressEvent(QMouseEvent *event)
 {
+    event->accept();
     flipCard();
-}
-
-void GraphicStartPack::generateCards()
-{
-
 }
 
 void GraphicStartPack::flipCard()

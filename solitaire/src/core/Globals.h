@@ -13,4 +13,10 @@ enum CardColor{
     Black
 };
 
+enum DeckType {
+    Start = 1,
+    Work,
+    Target
+};
+
 #endif // GLOBALS_H

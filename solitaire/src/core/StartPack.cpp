@@ -20,6 +20,11 @@ bool StartPack::getTopCard(Card &topCard) {
     return true;
 }
 
+int StartPack::getTopIndex()
+{
+    return top-1;
+}
+
 //int StartPack::flipCard() {
 //     if(top > (cards.size() - 1)) {
 //        top = 0;

@@ -8,18 +8,25 @@ using std::string;
 
 class Card
 {
-    private:
-            int value;
-            CardType type;
-            CardColor color;
+public:
+    Card();
+    Card(int value, CardType type); //constructor
+    int getValue();
+    CardType getType();
+    CardColor getColor();
+    string getName();
+    void setDeckType(DeckType deck) {this->deck = deck;}
+    DeckType getDeckType() {return this->deck;}
+    void setDeckIndex(int index) {this->deckIndex = index;}
+    int getDeckIndex() {return this->deckIndex;}
 
-    public:
-            Card();
-            Card(int value, CardType type); //constructor
-            int getValue();
-            CardType getType();
-            CardColor getColor();
-            string getName();
+private:
+    int value;
+    CardType type;
+    CardColor color;
+    DeckType deck;
+    int deckIndex;
+
 };
 
 #endif // CARD_H

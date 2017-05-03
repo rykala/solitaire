@@ -16,14 +16,23 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    GraphicGameBoard *game1;
-    GraphicGameBoard *game2;
-    GraphicGameBoard *game3;
-    GraphicGameBoard *game4;
+    GraphicGameBoard *game1 = NULL;
+    GraphicGameBoard *game2 = NULL;
+    GraphicGameBoard *game3 = NULL;
+    GraphicGameBoard *game4 = NULL;
 
+protected:
+    void anotherGame();
+    void closeCheck();
 private slots:
-    void on_actionNew_Instance_triggered();
-    void on_actionNew_Game_triggered();
+    void on_actionGame1_triggered();
+    void on_actionGame2_triggered();
+    void on_actionGame3_triggered();
+    void on_actionGame4_triggered();
+    void on_actionClose1_triggered();
+    void on_actionClose2_triggered();
+    void on_actionClose3_triggered();
+    void on_actionClose4_triggered();
 
 private:
     Ui::MainWindow *ui;

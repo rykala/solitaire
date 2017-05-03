@@ -12,6 +12,7 @@ public:
     vector<Card> cards;
     Card getCard(int index);
     int numOfCards();
+    vector<Card> getCards(int index = 0);
 };
 
 #endif // PACK_H

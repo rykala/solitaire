@@ -23,8 +23,11 @@ public:
     vector<Card> getStartPack();
     vector<Card> getWorkPack(int index);
     int num() {return workPacks.size();}
+    vector<Card> hand;
+    void popCards(Card card);
+    void pushCards(Card bottomCard);
 
-private:
+protected:
     Deck deck;
     vector<TargetPack> targetPacks;
     vector<WorkPack> workPacks;
