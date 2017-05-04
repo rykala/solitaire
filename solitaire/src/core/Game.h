@@ -12,27 +12,28 @@ class Game
 {
 public:
     Game();
-    void NewGame();
-    void SaveGame();
-    bool isWin();
-    void moveCard(StartPack &startPack, TargetPack &targetPack);
-    void History();
-    void Undo();
-    bool isStartPackEmpty();
-    vector<Card*> stackBufferCards();
-    vector<Card*> getStartPack();
-    vector<Card*> getWorkPack(int index);
-    int num() {return workPacks.size();}
-    vector<Card*> hand;
-//    void popCards(Card *card);
-//    void pushCards(Card *bottomCard);
+
+    /* METHODS */
+    void newGame();
 
     void flipCards();
+    void flipCard(Card *card);
+
+    void popCards(Card *card);
+    void pushCards(Card *bottomCard);
+
+    /* GETTERS */
+    StartPack *getStartPack() {return startPack;}
+    WorkPack *getWorkPack(int i) {return workPacks.at(i);}
+    TargetPack *getTargetPack(int i) {return targetPacks.at(i);}
+    vector<Card*> getHand() {return hand;}
+
 protected:
     Deck deck;
     vector<TargetPack*> targetPacks;
     vector<WorkPack*> workPacks;
     StartPack *startPack;
+    vector<Card*> hand;
 };
 
 #endif // GAME_H

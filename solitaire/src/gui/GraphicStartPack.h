@@ -1,24 +1,20 @@
 #ifndef GRAPHICSTARTPACK_H
 #define GRAPHICSTARTPACK_H
 
-#include "Card.h"
 #include "StartPack.h"
-#include "GraphicCard.h"
 
 #include <QLabel>
-#include <vector>
 
-using std::vector;
-
-class GraphicStartPack : public QLabel, public StartPack
+class GraphicStartPack : public QLabel
 {    
 public:
-    GraphicStartPack(QWidget *parent, vector<Card*> m_cards);
+    StartPack *startPack;
+
+    GraphicStartPack(QWidget *parent, StartPack *startPack);
+
     void flipCard();
-    vector <GraphicCard*> cards;
 
 protected:
-    void mousePressEvent(QMouseEvent *event);
     void generateCards();
 };
 

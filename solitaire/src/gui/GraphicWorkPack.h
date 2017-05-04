@@ -6,10 +6,13 @@
 
 #include <QLabel>
 
-class GraphicWorkPack : public QLabel, public WorkPack
+class GraphicWorkPack : public QLabel
 {
 public:
-    GraphicWorkPack(QWidget *parent, vector<Card*> m_cards, int hiddenIndex, int x, int y);
+    WorkPack *workPack;
+
+    GraphicWorkPack(QWidget *parent, WorkPack *workPack, int x, int y);
+
     int getX() {return x;}
     int getY() {return y;}
 protected:

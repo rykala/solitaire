@@ -2,11 +2,11 @@
 #include "WorkPack.h"
 #include "GraphicCard.h"
 
-#include <QDebug>
-
-GraphicWorkPack::GraphicWorkPack(QWidget *parent, vector<Card*> m_cards, int hiddenIndex, int x, int y)
-    : QLabel(parent), WorkPack(m_cards, hiddenIndex)
+GraphicWorkPack::GraphicWorkPack(QWidget *parent, WorkPack *workPack, int x, int y) : QLabel(parent)
 {
+    this->setAttribute(Qt::WA_DeleteOnClose);
+
+    this->workPack = workPack;
     this->x = x;
     this->y = y;
 
@@ -16,13 +16,10 @@ GraphicWorkPack::GraphicWorkPack(QWidget *parent, vector<Card*> m_cards, int hid
 
     int tmp_y = this->y;
 
-    for (int i = 0; i < (int)m_cards.size(); i++) {
-        bool face = (i >= this->hiddenIndex);
-
-
-        GraphicCard *m_card = new GraphicCard(m_cards.at(i), parent, face);
+    for (int i = 0; i < (int)this->workPack->cards.size(); i++) {
+        GraphicCard *m_card = new GraphicCard(parent, this->workPack->cards.at(i));
         m_card->drawCard(x, tmp_y);
 
-        tmp_y += (m_card->getFaceUp() ? 15 : 5);
+        tmp_y += (m_card->card->getFaceUp() ? 15 : 5);
     }
 }

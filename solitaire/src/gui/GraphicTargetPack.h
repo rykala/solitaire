@@ -6,14 +6,16 @@
 
 #include <QLabel>
 
-class GraphicTargetPack : public QLabel, public TargetPack
+class GraphicTargetPack : public QLabel
 {
 public:
-    GraphicTargetPack(QWidget *parent, int x, int y);
+    TargetPack *targetPack;
+
+    GraphicTargetPack(QWidget *parent, TargetPack *targetPack, int x, int y);
+
     int getX() {return x;}
     int getY() {return y;}
-//    GraphicCard *getTopCard();
-//    void putCard(GraphicCard* card);
+
 protected:
     int x;
     int y;

@@ -6,26 +6,28 @@
 
 Game::Game()
 {
-    this->NewGame();
+    this->newGame();
 }
 
-void Game::NewGame()
+void Game::newGame()
 {
     for (int i = 0; i < 7; ++i) {
         vector<Card*> cards;
 
         auto it = next(deck.cards.begin(), i+1);
-
         move(deck.cards.begin(), it, back_inserter(cards));
-
         deck.cards.erase(deck.cards.begin(), it);
 
         WorkPack *workPack = new WorkPack(cards, i);
 
-        for(auto &card: workPack->cards)
+        for(int j = 0; j < (int)workPack->cards.size(); j++)
         {
-            card->setDeckType(DeckType::Work);
-            card->setDeckIndex(i);
+            if (j < i) {
+                workPack->cards.at(j)->setFaceUp(false);
+            }
+
+            workPack->cards.at(j)->setDeckType(DeckType::Work);
+            workPack->cards.at(j)->setDeckIndex(j);
         }
 
         workPacks.push_back(workPack);
@@ -52,66 +54,57 @@ void Game::NewGame()
     {
         card->setDeckType(DeckType::Start);
         card->setDeckIndex(0);
+        card->setFaceUp(false);
     }
 
     startPack = new StartPack(startCards);
     //    startPack = helpPack;
 }
 
-bool Game::isWin()
+void Game::flipCard(Card *card)
 {
-    //    if(targetPacks.at(0). == 13 && targetPacks.at(1).size() == 13 &&
-    //            targetPacks.at(2).length() == 13 && targetPacks.at(3).length() == 13) {
-    //        return true;
-    //    }
-
-    return false;
+    card->setFaceUp(true);
 }
-
-bool Game::isStartPackEmpty()
-{
-    //    Card *card = new Card();
-    //    if(startPack.getTopCard(card)) {
-    //        return true;
-    //    }
-
-    return false;
-}
-
-vector<Card*> Game::getStartPack()
-{
-    return startPack->cards;
-}
-
-vector<Card*> Game::getWorkPack(int index)
-{
-    return workPacks.at(index)->getCards();
-}
-
-//void Game::popCards(Card *card)
-//{
-//    hand.clear();
-//    hand.push_back(card);
-
-//    DeckType deckType = card.getDeckType();
-
-//    if(deckType == DeckType::Start){
-//        startPack.cards.erase(startPack.cards.begin() + startPack.getTopIndex());
-//    }
-//}
-
-//void Game::pushCards(Card bottomCard)
-//{
-//    DeckType deckType = bottomCard.getDeckType();
-
-//    if(deckType == DeckType::Start){
-//        startPack.cards.insert(startPack.cards.begin() + startPack.getTopIndex(), hand.at(0));
-//        qDebug() << "Vracim kartu zpet!";
-//    }
-//}
 
 void Game::flipCards() {
     for(auto &pack: workPacks) {
         pack->flipHidden();
     }
 }
+
+void Game::popCards(Card *card)
+{
+    hand.clear();
+    hand.push_back(card);
+
+    DeckType deckType = card->getDeckType();
+
+    if(deckType == DeckType::Start){
+        startPack->cards.erase(startPack->cards.begin() + startPack->getTopIndex());
+        startPack->decrementTop();
+        qDebug() << "StartPack -> Ruka";
+    }/* else if (deckType == DeckType::Work) {
+         workPacks.at(card->getDeckIndex())->gCards.pop_back();
+    }*/
+}
+
+void Game::pushCards(Card *bottomCard)
+{
+    DeckType deckType = bottomCard->getDeckType();
+
+    if(deckType == DeckType::Start){
+        startPack->cards.insert(startPack->cards.begin() + startPack->getTopIndex(), hand.at(0));
+        qDebug() << "StartPack <- Ruka";
+    }
+
+//    DeckType deckType = bottomCard->getDeckType();
+
+//    if(deckType == DeckType::Start){
+//        startPack->cards.insert(startPack->cards.begin() + startPack->getTopIndex(), hand.at(0));
+//    } else if(deckType == DeckType::Target) {
+//        if (bottomCard->getValue() == (hand.at(0)->getValue() - 1) && bottomCard->getType() == hand.at(0)->getType())
+//            qDebug() << "SUCCES";
+//    }
+}
+
+

@@ -26,7 +26,6 @@ INCLUDEPATH += $${BASEDIR}/src/core
 SOURCES +=  ../core/*.cpp\
             main.cpp\
             GraphicCard.cpp \
-            GraphicDeck.cpp \
             mainwindow.cpp \
             GraphicGameBoard.cpp \
     GraphicStartPack.cpp \
@@ -36,7 +35,6 @@ SOURCES +=  ../core/*.cpp\
 
 HEADERS  += ../core/*.h\
             GraphicCard.h \
-            GraphicDeck.h \
             mainwindow.h \
             GraphicGameBoard.h \
     GraphicStartPack.h \

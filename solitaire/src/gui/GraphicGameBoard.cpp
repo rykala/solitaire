@@ -1,10 +1,3 @@
-#include <QtWidgets>
-#include <QMouseEvent>
-#include <QMimeData>
-#include <QDebug>
-#include <QPixmap>
-#include <vector>
-
 #include "GraphicGameBoard.h"
 #include "GraphicCard.h"
 #include "GraphicStartPack.h"
@@ -13,20 +6,25 @@
 #include "GraphicWorkPack.h"
 #include "Globals.h"
 
+#include <QtWidgets>
+#include <QMouseEvent>
+#include <QMimeData>
+#include <QDebug>
+#include <QPixmap>
+#include <vector>
+
 using std::vector;
 
 GraphicGameBoard::GraphicGameBoard(QWidget *parent) : QFrame(parent)
 {
-    this->game = new Game();
-    setAcceptDrops(true);
     this->setAttribute(Qt::WA_DeleteOnClose);
+    setAcceptDrops(true);
+
+    this->game = new Game();
 }
 
 void GraphicGameBoard::drawGameBoard()
 {
-    // Vykreslit: stack -> getTopCard(), getTopCard() - 1;
-    // TargetPacks: null => [], !null => getTopCard()....private int value; value+1, CardType
-    // WorkPacks vector hidden, work...hidenn 3x drawBackCard(), [[[], for(work) [ [ [], WorkPack isWin() 4x Packy full == WIN;
     drawStartPack();
     drawWorkPacks();
     drawTargetPacks();
@@ -35,7 +33,7 @@ void GraphicGameBoard::drawGameBoard()
 
 void GraphicGameBoard::drawStartPack()
 {
-    StartPack *startPack = new GraphicStartPack(this, game->getStartPack());
+    GraphicStartPack *startPack = new GraphicStartPack(this, game->getStartPack());
 }
 
 void GraphicGameBoard::drawTargetPacks()
@@ -44,10 +42,7 @@ void GraphicGameBoard::drawTargetPacks()
     int y = 5;
 
     for (int i = 0; i < 4; ++i) {
-        GraphicTargetPack *targetPack = new GraphicTargetPack(this, x, y);
-
-//        targetPacks.push_back(targetPack);
-
+        GraphicTargetPack *targetPack = new GraphicTargetPack(this, game->getTargetPack(i), x, y);
         x += 90;
     }
 }
@@ -58,39 +53,9 @@ void GraphicGameBoard::drawWorkPacks()
     int y = 130;
 
     for (int i = 0; i < 7; ++i) {
-        GraphicWorkPack *workPack = new GraphicWorkPack(this, game->getWorkPack(i), i, x, y);
-
-//        workPacks.push_back(workPack);
-
+        GraphicWorkPack *workPack = new GraphicWorkPack(this, game->getWorkPack(i), x, y);
         x += 90;
     }
-}
-
-void GraphicGameBoard::popCards(GraphicCard *card)
-{
-    hand.clear();
-    hand.push_back(card);
-
-    DeckType deckType = card->getDeckType();
-
-//    if(deckType == DeckType::Start){
-//        startPack->cards.erase(startPack->cards.begin() + startPack->getTopIndex());
-////        startPack->decrementTop();
-//    } else if (deckType == DeckType::Work) {
-//        workPacks.at(card->getDeckIndex())->gCards.pop_back();
-//    }
-}
-
-void GraphicGameBoard::pushCards(Card *bottomCard)
-{
-    DeckType deckType = bottomCard->getDeckType();
-
-//    if(deckType == DeckType::Start){
-//        startPack->cards.insert(startPack->cards.begin() + startPack->getTopIndex(), hand.at(0));
-//    } else if(deckType == DeckType::Target) {
-//        if (bottomCard->getValue() == (hand.at(0)->getValue() - 1) && bottomCard->getType() == hand.at(0)->getType())
-//            qDebug() << "SUCCES";
-//    }
 }
 
 void GraphicGameBoard::reloadCards()
@@ -107,21 +72,53 @@ void GraphicGameBoard::reloadCards()
     }
 }
 
+void GraphicGameBoard::flipStartPack(GraphicCard *clickedCard)
+{
+    game->flipCard(clickedCard->card);
+    clickedCard->raise();
+    clickedCard->move(110,5);
+    clickedCard->updateCard();
+}
+
+void GraphicGameBoard::reloadStartPack()
+{
+    QList<QLabel*> items = findChildren<QLabel*>();
+
+    /* Backward loop */
+    for (int i = items.size(); i --> 0 ;)
+    {
+        GraphicCard *card = dynamic_cast<GraphicCard*>(items.at(i));
+        if(card && card->card->getDeckType() == DeckType::Start) {
+            card->card->setFaceUp(false);
+            card->raise();
+            card->move(20, 5);
+            card->updateCard();
+        }
+    }
+}
+
+
+/* -------------------------------------------------------------------------------------*/
+/*                                  MOUSE EVENTS                                        */
+/* -------------------------------------------------------------------------------------*/
+
+
 void GraphicGameBoard::dropEvent(QDropEvent *event)
 {
     /* ---------------------------- CUSTOM ACTIONS ------------------------------------ */
-    int x = 0;
-    int y = 0;
     GraphicTargetPack *targetPack = dynamic_cast<GraphicTargetPack*>(childAt(event->pos()));
     GraphicCard *bottomCard = dynamic_cast<GraphicCard*>(childAt(event->pos()));
+
+    int x = 0;
+    int y = 0;
 
     if(targetPack) {
         x = targetPack->getX();
         y = targetPack->getY();
-//    } else if (bottomCard->getDeckType() == DeckType::Target) {
-//        qDebug() << "Dropping on target Pkac";
-//        x = targetPacks.at(bottomCard->getDeckIndex())->getX();
-//        y = targetPacks.at(bottomCard->getDeckIndex())->getY();
+        //    } else if (bottomCard->getDeckType() == DeckType::Target) {
+        //        qDebug() << "Dropping on target Pkac";
+        //        x = targetPacks.at(bottomCard->getDeckIndex())->getX();
+        //        y = targetPacks.at(bottomCard->getDeckIndex())->getY();
     } else if (bottomCard) {
         qDebug() << "Drop na kartu";
     } else {
@@ -138,16 +135,14 @@ void GraphicGameBoard::dropEvent(QDropEvent *event)
         QPoint offset;
         dataStream >> pixmap >> offset;
 
-        GraphicCard *newCard = new GraphicCard(hand.at(0), this);
+        GraphicCard *newCard = new GraphicCard(this, game->getHand().at(0));
         newCard->setPixmap(pixmap);
         newCard->move(x, y);
         newCard->show();
         newCard->setAttribute(Qt::WA_DeleteOnClose);
 
         /* ---------------------------- CUSTOM ACTIONS ------------------------------------ */
-//        if(targetPack) {
-//            targetPack->putCard(newCard);
-//        }
+
 
         /*--------------------------------------------------------------------------------*/
         if (event->source() == this) {
@@ -165,18 +160,36 @@ void GraphicGameBoard::dropEvent(QDropEvent *event)
 void GraphicGameBoard::mousePressEvent(QMouseEvent *event)
 {
     /* ---------------------------- CUSTOM ACTIONS ------------------------------------ */
-    GraphicCard *child = dynamic_cast<GraphicCard*>(childAt(event->pos()));
+    GraphicCard *clickedCard = dynamic_cast<GraphicCard*>(childAt(event->pos()));
+    GraphicStartPack *startPack = dynamic_cast<GraphicStartPack*>(childAt(event->pos()));
 
-    if(!child || !child->getFaceUp())
+    if(!clickedCard && !startPack)
         return;
+
+    if (clickedCard) {
+        if(clickedCard->card->getDeckType() == DeckType::Start && !clickedCard->card->getFaceUp())
+        {
+            this->flipStartPack(clickedCard);
+            return;
+        } else if (clickedCard->card->getDeckType() == DeckType::Work && !clickedCard->card->getFaceUp()) {
+            game->flipCard(clickedCard->card);
+            clickedCard->updateCard();
+            return;
+        }
+    } else if(startPack) {
+        reloadStartPack();
+        return;
+    } else {
+        return;
+    }
 
     /*--------------------------------------------------------------------------------*/
 
-    QPixmap pixmap = *child->pixmap();
+    QPixmap pixmap = *clickedCard->pixmap();
 
     QByteArray itemData;
     QDataStream dataStream(&itemData, QIODevice::WriteOnly);
-    dataStream << pixmap << QPoint(event->pos() - child->pos());
+    dataStream << pixmap << QPoint(event->pos() - clickedCard->pos());
 
     QMimeData *mimeData = new QMimeData;
     mimeData->setData("application/x-dnditemdata", itemData);
@@ -184,23 +197,23 @@ void GraphicGameBoard::mousePressEvent(QMouseEvent *event)
     QDrag *drag = new QDrag(this);
     drag->setMimeData(mimeData);
     drag->setPixmap(pixmap);
-    drag->setHotSpot(event->pos() - child->pos());
+    drag->setHotSpot(event->pos() - clickedCard->pos());
 
-    child->hide();
+    clickedCard->hide();
 
     /* ---------------------------- CUSTOM ACTIONS ------------------------------------ */
 
-    popCards(child);
+    game->popCards(clickedCard->card);
 
     /*--------------------------------------------------------------------------------*/
 
     if (drag->exec(Qt::CopyAction | Qt::MoveAction, Qt::CopyAction) == Qt::MoveAction) {
-        child->close();
+        clickedCard->close();
         reloadCards();
     } else {
-        pushCards(child); // PUSH THE CARD BACK TO THE ORIGINAL PACK, IF IT'S NOT DROPPED ANYWHERE VALID
-        child->show();
-        child->setPixmap(pixmap);
+        game->pushCards(clickedCard->card); // PUSH THE CARD BACK TO THE ORIGINAL PACK, IF IT'S NOT DROPPED ANYWHERE VALID
+        clickedCard->show();
+        clickedCard->setPixmap(pixmap);
     }
 }
 

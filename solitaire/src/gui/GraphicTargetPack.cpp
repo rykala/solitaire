@@ -1,20 +1,11 @@
 #include "GraphicTargetPack.h"
-#include "Card.h"
 #include "TargetPack.h"
-#include "GraphicCard.h"
-#include "GraphicGameBoard.h"
 
-#include <QLabel>
-#include <vector>
-#include <QDropEvent>
-#include <QMimeData>
-#include <QDragEnterEvent>
-#include <QMouseEvent>
-
-using std::vector;
-
-GraphicTargetPack::GraphicTargetPack(QWidget *parent, int x, int y) : QLabel(parent), TargetPack()
+GraphicTargetPack::GraphicTargetPack(QWidget *parent, TargetPack *targetPack, int x, int y) : QLabel(parent)
 {
+    this->setAttribute(Qt::WA_DeleteOnClose);
+
+    this->targetPack = targetPack;
     this->x = x;
     this->y = y;
 
@@ -22,8 +13,3 @@ GraphicTargetPack::GraphicTargetPack(QWidget *parent, int x, int y) : QLabel(par
     this->setFixedSize(67, 100);
     this->move(this->x, this->y);
 }
-
-//void GraphicTargetPack::putCard(GraphicCard *card)
-//{
-//    graphicCards.push_back(card);
-//}
