@@ -19,8 +19,8 @@ int WorkPack::numOfHiddenCards() {
 }
 
 void WorkPack::flipHidden() {
-    if (hiddenIndex == cards.size()) {
+    if (hiddenIndex != 0 && hiddenIndex == (int)cards.size()) {
         hiddenIndex--;
-        cards.at(hiddenIndex)->flipCard();
+        cards.at(hiddenIndex)->setFaceUp(true);
     }
 }

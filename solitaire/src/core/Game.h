@@ -20,7 +20,7 @@ public:
     void flipCard(Card *card);
 
     void popCards(Card *card);
-    void pushCards(Card *bottomCard);
+    void pushCards(DeckType decktype, int deckIndex = 0);
 
     /* GETTERS */
     StartPack *getStartPack() {return startPack;}

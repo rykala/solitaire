@@ -115,12 +115,16 @@ void GraphicGameBoard::dropEvent(QDropEvent *event)
     if(targetPack) {
         x = targetPack->getX();
         y = targetPack->getY();
-        //    } else if (bottomCard->getDeckType() == DeckType::Target) {
-        //        qDebug() << "Dropping on target Pkac";
-        //        x = targetPacks.at(bottomCard->getDeckIndex())->getX();
-        //        y = targetPacks.at(bottomCard->getDeckIndex())->getY();
-    } else if (bottomCard) {
-        qDebug() << "Drop na kartu";
+
+//        if(game->hand.at(0).)
+//        targetPack->cards.push_back(game->hand.at(0));
+
+//    } else if (bottomCard->card->getDeckType() == DeckType::Target) {
+//        qDebug() << "Dropping on target Pkac";
+//        x = targetPack->at(bottomCard->card->getDeckIndex())->getX();
+//        y = targetPack->at(bottomCard->card->getDeckIndex())->getY();
+//    } else if (bottomCard) {
+//        qDebug() << "Drop na kartu";
     } else {
         return;
     }
@@ -209,9 +213,9 @@ void GraphicGameBoard::mousePressEvent(QMouseEvent *event)
 
     if (drag->exec(Qt::CopyAction | Qt::MoveAction, Qt::CopyAction) == Qt::MoveAction) {
         clickedCard->close();
-        reloadCards();
+        reloadCards(); //If card is moved from workPack, flips top hidden card.
     } else {
-        game->pushCards(clickedCard->card); // PUSH THE CARD BACK TO THE ORIGINAL PACK, IF IT'S NOT DROPPED ANYWHERE VALID
+        game->pushCards(clickedCard->card->getDeckType()); // PUSH THE CARD BACK TO THE ORIGINAL PACK, IF IT'S NOT DROPPED ANYWHERE VALID
         clickedCard->show();
         clickedCard->setPixmap(pixmap);
     }

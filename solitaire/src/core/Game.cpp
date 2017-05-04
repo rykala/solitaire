@@ -82,29 +82,27 @@ void Game::popCards(Card *card)
     if(deckType == DeckType::Start){
         startPack->cards.erase(startPack->cards.begin() + startPack->getTopIndex());
         startPack->decrementTop();
-        qDebug() << "StartPack -> Ruka";
-    }/* else if (deckType == DeckType::Work) {
-         workPacks.at(card->getDeckIndex())->gCards.pop_back();
-    }*/
+
+        qDebug("StartPack -> Ruka");
+    } else if (deckType == DeckType::Work) {
+        WorkPack *workPack = workPacks.at(card->getDeckIndex());
+        workPack->cards.pop_back();
+
+        qDebug("WorkPack -> Ruka");
+    }
 }
 
-void Game::pushCards(Card *bottomCard)
+void Game::pushCards(DeckType deckType, int deckIndex)
 {
-    DeckType deckType = bottomCard->getDeckType();
 
     if(deckType == DeckType::Start){
         startPack->cards.insert(startPack->cards.begin() + startPack->getTopIndex(), hand.at(0));
         qDebug() << "StartPack <- Ruka";
+    }else if(deckType == DeckType::Target) {
+//        if (bottomCard->getValue() == (hand.at(0)->getValue() - 1) && bottomCard->getType() == hand.at(0)->getType()) {
+//            qDebug() << "TargetPack <- Ruka";
+//        }
     }
-
-//    DeckType deckType = bottomCard->getDeckType();
-
-//    if(deckType == DeckType::Start){
-//        startPack->cards.insert(startPack->cards.begin() + startPack->getTopIndex(), hand.at(0));
-//    } else if(deckType == DeckType::Target) {
-//        if (bottomCard->getValue() == (hand.at(0)->getValue() - 1) && bottomCard->getType() == hand.at(0)->getType())
-//            qDebug() << "SUCCES";
-//    }
 }
 
 
