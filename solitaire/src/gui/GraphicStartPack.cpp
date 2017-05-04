@@ -11,11 +11,11 @@
 
 using std::vector;
 
-GraphicStartPack::GraphicStartPack(QWidget *parent, vector<Card> m_cards) : QLabel(parent), StartPack(m_cards)
+GraphicStartPack::GraphicStartPack(QWidget *parent, vector<Card*> m_cards) : QLabel(parent), StartPack(m_cards)
 {
     for (auto &card : m_cards) // access by reference to avoid copying
      {
-         GraphicCard *m_card = new GraphicCard(&card, parent);
+         GraphicCard *m_card = new GraphicCard(card, parent);
          m_card->drawCard(20,5);
 
          m_card->stackUnder(this);

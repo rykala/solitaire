@@ -15,8 +15,6 @@ using std::vector;
 
 GraphicTargetPack::GraphicTargetPack(QWidget *parent, int x, int y) : QLabel(parent), TargetPack()
 {
-    //    setAttribute(Qt::WA_TransparentForMouseEvents);
-
     this->x = x;
     this->y = y;
 
@@ -25,7 +23,7 @@ GraphicTargetPack::GraphicTargetPack(QWidget *parent, int x, int y) : QLabel(par
     this->move(this->x, this->y);
 }
 
-void GraphicTargetPack::putCard(GraphicCard *card)
-{
-    graphicCards.push_back(card);
-}
+//void GraphicTargetPack::putCard(GraphicCard *card)
+//{
+//    graphicCards.push_back(card);
+//}

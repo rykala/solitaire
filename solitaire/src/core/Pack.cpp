@@ -3,7 +3,7 @@
 
 using std::vector;
 
-Card Pack::getCard(int index) {
+Card *Pack::getCard(int index) {
     return cards.at(index);
 }
 
@@ -15,8 +15,8 @@ int Pack::numOfCards() {
     return i;
 }
 
-vector<Card> Pack::getCards(int index)
+vector<Card*> Pack::getCards(int index)
 {
-    vector<Card> tmp(this->cards.begin() + index, this->cards.end());
+    vector<Card*> tmp(this->cards.begin() + index, this->cards.end());
     return tmp;
 }

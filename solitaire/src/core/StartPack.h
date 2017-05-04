@@ -8,8 +8,8 @@ class StartPack : public Pack
 {
 public:
     StartPack();
-    StartPack(vector<Card> cards);
-    bool getTopCard(Card &topCard); // otoci kartu a vrati ji, zvyssi top
+    StartPack(vector<Card*> cards);
+//    bool getTopCard(Card &topCard); // otoci kartu a vrati ji, zvyssi top
     int flipCard();
     int getTopIndex();
     void decrementTop();

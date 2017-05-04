@@ -20,7 +20,7 @@ GraphicCard::GraphicCard(QWidget *parent) : QLabel(parent) {}
 
 GraphicCard::GraphicCard(Card *card, QWidget *parent, bool face) : QLabel(parent), Card(card->getValue(), card->getType()) {
         this->setAttribute(Qt::WA_DeleteOnClose);
-        this->faceUp = face;
+        this->setFaceUp(face);
         this->setDeckType(card->getDeckType());
         this->setDeckIndex(card->getDeckIndex());
 }
@@ -29,7 +29,7 @@ GraphicCard::~GraphicCard(){}
 
 void GraphicCard::drawCard(int x, int y)
 {
-    if(this->faceUp) {
+    if(this->getFaceUp()) {
         stringstream ss;
         ss << ":/" << this->getType() << "/" << this->getValue();
         setPixmap(QPixmap(ss.str().data()).scaled(70, 105, Qt::KeepAspectRatio));
@@ -43,17 +43,11 @@ void GraphicCard::drawCard(int x, int y)
 
 void GraphicCard::updateCard()
 {
-    if(this->faceUp) {
+    if(this->getFaceUp()) {
         stringstream ss;
         ss << ":/" << this->getType() << "/" << this->getValue();
         setPixmap(QPixmap(ss.str().data()).scaled(70, 105, Qt::KeepAspectRatio));
     } else {
         setPixmap(QPixmap(":/back/2").scaled(70, 105, Qt::KeepAspectRatio));
     }
-}
-
-void GraphicCard::flipCard()
-{
-    faceUp = true;
-    updateCard();
 }

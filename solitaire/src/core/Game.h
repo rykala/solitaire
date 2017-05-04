@@ -19,19 +19,20 @@ public:
     void History();
     void Undo();
     bool isStartPackEmpty();
-    vector<Card> stackBufferCards();
-    vector<Card> getStartPack();
-    vector<Card> getWorkPack(int index);
+    vector<Card*> stackBufferCards();
+    vector<Card*> getStartPack();
+    vector<Card*> getWorkPack(int index);
     int num() {return workPacks.size();}
-    vector<Card> hand;
-    void popCards(Card card);
-    void pushCards(Card bottomCard);
+    vector<Card*> hand;
+//    void popCards(Card *card);
+//    void pushCards(Card *bottomCard);
 
+    void flipCards();
 protected:
     Deck deck;
-    vector<TargetPack> targetPacks;
-    vector<WorkPack> workPacks;
-    StartPack startPack;
+    vector<TargetPack*> targetPacks;
+    vector<WorkPack*> workPacks;
+    StartPack *startPack;
 };
 
 #endif // GAME_H

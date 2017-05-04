@@ -8,7 +8,7 @@ Deck::Deck() {
     for(int value = 1; value < 14; value++){
         for(int type = 1; type < 5; type++){
             CardType tmp = static_cast<CardType>(type);
-            Card card(value,tmp);
+            Card *card = new Card(value,tmp);
             this->cards.push_back(card);
         }
     }
@@ -17,6 +17,6 @@ Deck::Deck() {
 }
 
 
-Card Deck::getCard() {
-    return cards.at(4);
-}
+//Card Deck::getCard() {
+//    return &(cards.at(4));
+//}

@@ -9,10 +9,16 @@ using std::to_string;
 
 Card::Card(){}
 
-Card::Card(int value, CardType type)
+Card::Card(int value, CardType type, bool faceUp)
 {
     this->value = value;
     this->type = type;
+    this->faceUp = faceUp;
+}
+
+void Card::flipCard()
+{
+    faceUp = true;
 }
 
 CardColor Card::getColor() {
@@ -29,8 +35,6 @@ int Card::getValue() {
 
 string Card::getName() {
     string tmp = "";
-
-
 
     if (type == Spade) {
         if (value == 1) {

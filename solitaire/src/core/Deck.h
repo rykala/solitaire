@@ -9,12 +9,10 @@ using std::vector;
 
 class Deck
 {
-    private:
-
     public:
-        vector<Card> cards;
+        vector<Card*> cards;
         Deck();
-        Card getCard();
+//        Card getCard();
 };
 
 #endif // DECK_H

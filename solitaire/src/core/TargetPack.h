@@ -10,7 +10,7 @@ class TargetPack : public Pack
 public:
     TargetPack();
     Card TakeCard();
-    bool putCards(vector<Card> cards);
+//    bool putCards(vector<Card*> cards);
     vector<Card> popCard();
 
 private:

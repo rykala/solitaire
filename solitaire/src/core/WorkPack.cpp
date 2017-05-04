@@ -8,7 +8,7 @@ using std::string;
 using std::to_string;
 using std::next;
 
-WorkPack::WorkPack(vector<Card> cards, int hiddenIndex)
+WorkPack::WorkPack(vector<Card*> cards, int hiddenIndex)
 {
     this->cards.insert(this->cards.end(), cards.begin(), cards.end());
     this->hiddenIndex = hiddenIndex;
@@ -18,16 +18,9 @@ int WorkPack::numOfHiddenCards() {
     return hiddenIndex;
 }
 
-void WorkPack::flipCard() {
-//    if (hidden.size() == 0 || cards.size() > 0) {
-//        throw 1;
-//    }
-
-//    Card card;
-
-//    auto it = next(hidden.begin(), 1);
-
-//    move(hidden.begin(), it, back_inserter(cards));
-
-//    hidden.erase(hidden.begin(), it);
+void WorkPack::flipHidden() {
+    if (hiddenIndex == cards.size()) {
+        hiddenIndex--;
+        cards.at(hiddenIndex)->flipCard();
+    }
 }

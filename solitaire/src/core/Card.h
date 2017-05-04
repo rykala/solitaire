@@ -10,15 +10,27 @@ class Card
 {
 public:
     Card();
-    Card(int value, CardType type); //constructor
-    int getValue();
-    CardType getType();
-    CardColor getColor();
+    Card(int value, CardType type, bool faceUp = true); //constructor
+
+    /* METHODS */
+    void flipCard();
     string getName();
-    void setDeckType(DeckType deck) {this->deck = deck;}
+
+    /* GETTERS *//* SETTERS */
+    int getValue();
+
+    CardType getType();
+
+    CardColor getColor();
+
     DeckType getDeckType() {return this->deck;}
-    void setDeckIndex(int index) {this->deckIndex = index;}
+    void setDeckType(DeckType deck) {this->deck = deck;}
+
     int getDeckIndex() {return this->deckIndex;}
+    void setDeckIndex(int index) {this->deckIndex = index;}
+
+    bool getFaceUp() {return this->faceUp;}
+    void setFaceUp(bool value) {this->faceUp = value;}
 
 private:
     int value;
@@ -26,7 +38,7 @@ private:
     CardColor color;
     DeckType deck;
     int deckIndex;
-
+    bool faceUp;
 };
 
 #endif // CARD_H

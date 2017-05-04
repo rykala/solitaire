@@ -6,8 +6,8 @@
 class WorkPack: public Pack
 {
 public:
-    WorkPack(vector<Card> cards, int hiddenIndex);
-    void flipCard();
+    WorkPack(vector<Card*> cards, int hiddenIndex);
+    void flipHidden();
     vector<Card> putCard();
     vector<Card> takeCards(int index);
     int numOfHiddenCards();

@@ -26,9 +26,9 @@ public:
 protected:
     /* GAME PACKS */
     vector<GraphicCard*> hand;
-    vector<GraphicTargetPack*> targetPacks;
-    vector<GraphicWorkPack*> workPacks;
-    GraphicStartPack *startPack;
+//    vector<GraphicTargetPack*> targetPacks;
+//    vector<GraphicWorkPack*> workPacks;
+//    GraphicStartPack *startPack;
 
     /* MOUSE EVENTS */
     void dropEvent(QDropEvent *event) override;

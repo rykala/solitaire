@@ -35,7 +35,7 @@ void GraphicGameBoard::drawGameBoard()
 
 void GraphicGameBoard::drawStartPack()
 {
-    startPack = new GraphicStartPack(this, game->getStartPack());
+    StartPack *startPack = new GraphicStartPack(this, game->getStartPack());
 }
 
 void GraphicGameBoard::drawTargetPacks()
@@ -46,7 +46,7 @@ void GraphicGameBoard::drawTargetPacks()
     for (int i = 0; i < 4; ++i) {
         GraphicTargetPack *targetPack = new GraphicTargetPack(this, x, y);
 
-        targetPacks.push_back(targetPack);
+//        targetPacks.push_back(targetPack);
 
         x += 90;
     }
@@ -60,7 +60,7 @@ void GraphicGameBoard::drawWorkPacks()
     for (int i = 0; i < 7; ++i) {
         GraphicWorkPack *workPack = new GraphicWorkPack(this, game->getWorkPack(i), i, x, y);
 
-        workPacks.push_back(workPack);
+//        workPacks.push_back(workPack);
 
         x += 90;
     }
@@ -73,30 +73,31 @@ void GraphicGameBoard::popCards(GraphicCard *card)
 
     DeckType deckType = card->getDeckType();
 
-    if(deckType == DeckType::Start){
-        startPack->cards.erase(startPack->cards.begin() + startPack->getTopIndex());
-//        startPack->decrementTop();
-    } else if (deckType == DeckType::Work) {
-        workPacks.at(card->getDeckIndex())->gCards.pop_back();
-    }
+//    if(deckType == DeckType::Start){
+//        startPack->cards.erase(startPack->cards.begin() + startPack->getTopIndex());
+////        startPack->decrementTop();
+//    } else if (deckType == DeckType::Work) {
+//        workPacks.at(card->getDeckIndex())->gCards.pop_back();
+//    }
 }
 
 void GraphicGameBoard::pushCards(Card *bottomCard)
 {
     DeckType deckType = bottomCard->getDeckType();
 
-    if(deckType == DeckType::Start){
-        startPack->cards.insert(startPack->cards.begin() + startPack->getTopIndex(), hand.at(0));
-    }
+//    if(deckType == DeckType::Start){
+//        startPack->cards.insert(startPack->cards.begin() + startPack->getTopIndex(), hand.at(0));
+//    } else if(deckType == DeckType::Target) {
+//        if (bottomCard->getValue() == (hand.at(0)->getValue() - 1) && bottomCard->getType() == hand.at(0)->getType())
+//            qDebug() << "SUCCES";
+//    }
 }
 
 void GraphicGameBoard::reloadCards()
 {
-    QList<QLabel*> items = findChildren<QLabel*>();
+    game->flipCards();
 
-    for(auto &pack: workPacks) {
-        pack->flipHidden();
-    }
+    QList<QLabel*> items = findChildren<QLabel*>();
 
     for(auto &item : items) {
         GraphicCard *card = dynamic_cast<GraphicCard*>(item);
@@ -112,10 +113,17 @@ void GraphicGameBoard::dropEvent(QDropEvent *event)
     int x = 0;
     int y = 0;
     GraphicTargetPack *targetPack = dynamic_cast<GraphicTargetPack*>(childAt(event->pos()));
+    GraphicCard *bottomCard = dynamic_cast<GraphicCard*>(childAt(event->pos()));
 
     if(targetPack) {
         x = targetPack->getX();
         y = targetPack->getY();
+//    } else if (bottomCard->getDeckType() == DeckType::Target) {
+//        qDebug() << "Dropping on target Pkac";
+//        x = targetPacks.at(bottomCard->getDeckIndex())->getX();
+//        y = targetPacks.at(bottomCard->getDeckIndex())->getY();
+    } else if (bottomCard) {
+        qDebug() << "Drop na kartu";
     } else {
         return;
     }
@@ -159,7 +167,7 @@ void GraphicGameBoard::mousePressEvent(QMouseEvent *event)
     /* ---------------------------- CUSTOM ACTIONS ------------------------------------ */
     GraphicCard *child = dynamic_cast<GraphicCard*>(childAt(event->pos()));
 
-    if(!child || !child->faceUp)
+    if(!child || !child->getFaceUp())
         return;
 
     /*--------------------------------------------------------------------------------*/

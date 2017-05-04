@@ -13,7 +13,7 @@ using std::vector;
 class GraphicStartPack : public QLabel, public StartPack
 {    
 public:
-    GraphicStartPack(QWidget *parent, vector<Card> m_cards);
+    GraphicStartPack(QWidget *parent, vector<Card*> m_cards);
     void flipCard();
     vector <GraphicCard*> cards;
 
