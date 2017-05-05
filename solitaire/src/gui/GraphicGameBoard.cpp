@@ -53,7 +53,7 @@ void GraphicGameBoard::drawWorkPacks()
     int y = 130;
 
     for (int i = 0; i < 7; ++i) {
-        GraphicWorkPack *workPack = new GraphicWorkPack(this, game->getWorkPack(i), x, y);
+        GraphicWorkPack *workPack = new GraphicWorkPack(this, game->getWorkPack(i), x, y, i);
         x += 90;
     }
 }
@@ -121,6 +121,11 @@ void GraphicGameBoard::dropEvent(QDropEvent *event)
         y = targetPack->getY();
         deckType = DeckType::Target;
         deckIndex = targetPack->getIndex();
+    } else if (workPack) {
+        x = workPack->getX();
+        y = workPack->getY();
+        deckType = DeckType::Work;
+        deckIndex = workPack->getIndex();
     } else if (bottomCard) {
         deckType = bottomCard->card->getDeckType();
         deckIndex = bottomCard->card->getDeckIndex();

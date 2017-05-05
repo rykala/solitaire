@@ -22,7 +22,7 @@ public:
     void popCards(Card *card);
     bool pushCards(DeckType decktype, int deckIndex = 0);
     void pushCardsBack();
-    bool isValidMove();
+    bool isValidMove(DeckType deckType, int deckIndex = 0);
 
     /* GETTERS */
     StartPack *getStartPack() {return startPack;}

@@ -2,13 +2,14 @@
 #include "WorkPack.h"
 #include "GraphicCard.h"
 
-GraphicWorkPack::GraphicWorkPack(QWidget *parent, WorkPack *workPack, int x, int y) : QLabel(parent)
+GraphicWorkPack::GraphicWorkPack(QWidget *parent, WorkPack *workPack, int x, int y, int index) : QLabel(parent)
 {
     this->setAttribute(Qt::WA_DeleteOnClose);
 
     this->workPack = workPack;
     this->x = x;
     this->y = y;
+    this->index = index;
 
     this->setStyleSheet("border-radius: 3px; border: 1.5px solid green");
     this->setFixedSize(70, 105);
