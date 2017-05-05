@@ -34,6 +34,7 @@ private:
     void drawWorkPacks();
     void drawStartPack();
     void drawTargetPacks();
+    void reDrawPacks(GraphicCard *card);
 };
 
 #endif // GRAPHICGAMEBOARD_H

@@ -47,6 +47,26 @@ void GraphicGameBoard::drawTargetPacks()
     }
 }
 
+void GraphicGameBoard::reDrawPacks(GraphicCard *card)
+{
+    if(card->card->getDeckType() == DeckType::Work){
+        QList<QLabel*> items = findChildren<QLabel*>();
+
+        for(auto &item : items) {
+            GraphicWorkPack *pack = dynamic_cast<GraphicWorkPack*>(item);
+            GraphicCard *card = dynamic_cast<GraphicCard*>(item);
+            if (card && card->card->getDeckType() == DeckType::Work){
+                card->close();
+            }
+            if(pack) {
+                pack->close();
+            }
+        }
+
+        drawWorkPacks();
+    }
+}
+
 void GraphicGameBoard::drawWorkPacks()
 {
     int x = 20;
@@ -55,6 +75,7 @@ void GraphicGameBoard::drawWorkPacks()
     for (int i = 0; i < 7; ++i) {
         GraphicWorkPack *workPack = new GraphicWorkPack(this, game->getWorkPack(i), x, y, i);
         x += 90;
+        workPack->show();
     }
 }
 
@@ -158,11 +179,13 @@ void GraphicGameBoard::dropEvent(QDropEvent *event)
         QPoint offset;
         dataStream >> pixmap >> offset;
 
+
         GraphicCard *newCard = new GraphicCard(this, game->getHand().at(0));
-        newCard->setPixmap(pixmap);
+        //            newCard->setPixmap(pixmap);
         newCard->drawCard(x,y);
         newCard->raise();
         newCard->show();
+
 
         /* ---------------------------- CUSTOM ACTIONS ------------------------------------ */
 
@@ -219,6 +242,14 @@ void GraphicGameBoard::mousePressEvent(QMouseEvent *event)
     QMimeData *mimeData = new QMimeData;
     mimeData->setData("application/x-dnditemdata", itemData);
 
+    QPixmap mypix(":/back/2");
+
+    //    QPixmap comboPixmap(75, 100);
+    //    QPainter painter(&comboPixmap);
+    //    painter.drawPixmap(0, 0, pixmap);
+    //    painter.drawPixmap(pixmap.width(), 10, mypix);
+
+
     QDrag *drag = new QDrag(this);
     drag->setMimeData(mimeData);
     drag->setPixmap(pixmap);
@@ -230,16 +261,31 @@ void GraphicGameBoard::mousePressEvent(QMouseEvent *event)
 
     game->popCards(clickedCard->card);
 
+    if(clickedCard->card->getDeckType() == DeckType::Work) {
+        QList<QLabel*> items = findChildren<QLabel*>();
+
+        for(auto &item : items) {
+            GraphicCard *card = dynamic_cast<GraphicCard*>(item);
+            if(card && card->card->getFaceUp() && card->card->getDeckType() == clickedCard->card->getDeckType() &&
+                    card->card->getDeckIndex() == clickedCard->card->getDeckIndex() &&
+                    card->card->getValue() < clickedCard->card->getValue()) {
+                card->close();
+            }
+        }
+    }
+
     /*--------------------------------------------------------------------------------*/
 
     if (drag->exec(Qt::CopyAction | Qt::MoveAction, Qt::CopyAction) == Qt::MoveAction) {
         clickedCard->close();
+        reDrawPacks(clickedCard);
         reloadCards(); //If card is moved from workPack, flips top hidden card.
     } else {
         // PUSH THE CARD BACK TO THE ORIGINAL PACK, IF IT'S NOT DROPPED ANYWHERE VALID
         game->pushCardsBack();
         clickedCard->show();
         clickedCard->setPixmap(pixmap);
+        reDrawPacks(clickedCard);
     }
 }
 

@@ -3,6 +3,7 @@
 #include "Globals.h"
 
 #include <QDebug>
+#include <algorithm>    // std::reverse
 
 Game::Game()
 {
@@ -69,20 +70,28 @@ void Game::flipCards() {
 void Game::popCards(Card *card)
 {
     hand.clear();
-    hand.push_back(card);
 
     DeckType deckType = card->getDeckType();
 
     if(deckType == DeckType::Start){
+        hand.push_back(card);
         startPack->cards.erase(startPack->cards.begin() + startPack->getTopIndex());
         startPack->decrementTop();
         qDebug("StartPack -> Ruka");
     } else if (deckType == DeckType::Work) {
         WorkPack *workPack = workPacks.at(card->getDeckIndex());
-        workPack->cards.pop_back();
+        Card *tmp;
+        do {
+            hand.push_back(workPack->cards.back());
+            //            tmp = workPack->cards.back();
+            workPack->cards.pop_back();
+        } while (workPack->cards.size() > 0 && hand.back()->getName() != card->getName());
+
+        std::reverse(hand.begin(), hand.end());
 
         qDebug("WorkPack -> Ruka");
     } else if (deckType == DeckType::Target) {
+        hand.push_back(card);
         TargetPack *targetPack = targetPacks.at(card->getDeckIndex());
         targetPack->cards.pop_back();
 
@@ -102,9 +111,11 @@ bool Game::pushCards(DeckType deckType, int deckIndex)
         hand.at(0)->setDeckIndex(deckIndex);
         qDebug() << "TargetPack <- Ruka";
     } else if(deckType == DeckType::Work) {
-        workPacks.at(deckIndex)->cards.push_back(hand.at(0));
-        hand.at(0)->setDeckType(deckType);
-        hand.at(0)->setDeckIndex(deckIndex);
+        for (auto &card : hand) {
+            card->setDeckType(deckType);
+            card->setDeckIndex(deckIndex);
+            workPacks.at(deckIndex)->cards.push_back(card);
+        }
         qDebug() << "WorkPack <- Ruka";
     }
 
@@ -141,9 +152,12 @@ bool Game::isValidMove(DeckType deckType, int deckIndex)
                 // If the card put on empty target is not ACE
                 return false;
             }
-        } else if(targetPacks.at(deckIndex)->cards.back()->getValue() != (hand.at(0)->getValue() - 1) &&
-                  targetPacks.at(deckIndex)->cards.back()->getType() != hand.at(0)->getType()) {
-            // If target is not empty, card has to be same color and value+1
+        } else if(targetPacks.at(deckIndex)->cards.back()->getValue() == (hand.at(0)->getValue() - 1)) {
+            if(targetPacks.at(deckIndex)->cards.back()->getType() != hand.at(0)->getType()) {
+                // If target is not empty, card has to be same color and value+1
+                return false;
+            }
+        } else {
             return false;
         }
     } else if(deckType == DeckType::Work) {
@@ -152,17 +166,20 @@ bool Game::isValidMove(DeckType deckType, int deckIndex)
             if(hand.at(0)->getValue() != 13){
                 return false;
             }
-        } else if(workPacks.at(deckIndex)->cards.back()->getValue() != (hand.at(0)->getValue() + 1)) {
+        } else if(workPacks.at(deckIndex)->cards.back()->getValue() == (hand.at(0)->getValue() + 1)) {
             // If workpack not empty card needs to be lower value-1
-            if(!((workPacks.at(deckIndex)->cards.back()->getType() == CardType::Club ||
-                  workPacks.at(deckIndex)->cards.back()->getType() == CardType::Spade) &&
-                 (hand.at(0)->getType() == CardType::Club || hand.at(0)->getType() == CardType::Spade)) ||
-                    !((workPacks.at(deckIndex)->cards.back()->getType() == CardType::Heart ||
-                       workPacks.at(deckIndex)->cards.back()->getType() == CardType::Diamond) &&
-                      (hand.at(0)->getType() == CardType::Heart || hand.at(0)->getType() == CardType::Diamond))) {
+            if((workPacks.at(deckIndex)->cards.back()->getType() == CardType::Club ||
+                workPacks.at(deckIndex)->cards.back()->getType() == CardType::Spade) &&
+                    (hand.at(0)->getType() == CardType::Club || hand.at(0)->getType() == CardType::Spade)) {
+                return false;
+            } else if ((workPacks.at(deckIndex)->cards.back()->getType() == CardType::Heart ||
+                        workPacks.at(deckIndex)->cards.back()->getType() == CardType::Diamond) &&
+                       (hand.at(0)->getType() == CardType::Heart || hand.at(0)->getType() == CardType::Diamond)) {
                 // Color has to be different
                 return false;
             }
+        } else {
+            return false;
         }
     }
 

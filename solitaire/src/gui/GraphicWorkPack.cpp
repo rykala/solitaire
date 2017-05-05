@@ -22,5 +22,7 @@ GraphicWorkPack::GraphicWorkPack(QWidget *parent, WorkPack *workPack, int x, int
         m_card->drawCard(x, tmp_y);
 
         tmp_y += (m_card->card->getFaceUp() ? 15 : 5);
+        m_card->raise();
+        m_card->show();
     }
 }
