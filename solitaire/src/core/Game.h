@@ -36,6 +36,12 @@ protected:
     vector<WorkPack*> workPacks;
     StartPack *startPack;
     vector<Card*> hand;
+
+    void saveTurn(vector<Card*> hand);
+    void undoTurn();
+    vector< vector<Card*> > historyHand;
+    vector<DeckType> historyDeckType;
+    vector<int> historyDeckIndex;
 };
 
 #endif // GAME_H

@@ -52,7 +52,6 @@ void Game::newGame()
     }
 
     startPack = new StartPack(startCards);
-    //    startPack = helpPack;
 }
 
 int Game::flipStartCard()
@@ -80,10 +79,9 @@ void Game::popCards(Card *card)
         qDebug("StartPack -> Ruka");
     } else if (deckType == DeckType::Work) {
         WorkPack *workPack = workPacks.at(card->getDeckIndex());
-        Card *tmp;
+
         do {
             hand.push_back(workPack->cards.back());
-            //            tmp = workPack->cards.back();
             workPack->cards.pop_back();
         } while (workPack->cards.size() > 0 && hand.back()->getName() != card->getName());
 
@@ -119,6 +117,7 @@ bool Game::pushCards(DeckType deckType, int deckIndex)
         qDebug() << "WorkPack <- Ruka";
     }
 
+    saveTurn(hand);
     return true;
 }
 
@@ -186,4 +185,44 @@ bool Game::isValidMove(DeckType deckType, int deckIndex)
     return true;
 }
 
+void Game::saveTurn(vector<Card*> hand)
+{
+    if (historyHand.size() > 5) {
+        historyHand.erase(historyHand.begin());
+        historyDeckType.erase(historyDeckType.begin());
+        historyDeckIndex.erase(historyDeckIndex.begin());
+    }
 
+    historyHand.push_back(hand);
+    historyDeckType.push_back(hand.at(0)->getDeckType());
+    historyDeckIndex.push_back(hand.at(0)->getDeckIndex());
+}
+
+void Game::undoTurn()
+{
+    if(historyHand.size() == 0) {
+        return;
+    }
+
+//    for(int i = 0; i < (int)historyHand.back().size(); i++) {
+//        DeckType deckType = historyDeckType.back();
+//        int index = historyDeckIndex.back();
+
+//        if(deckType == DeckType::Start){
+//            startPack->incrementTop();
+//            startPack->cards.insert(startPack->cards.begin() + startPack->getTopIndex(), hand.back().at(i));
+//            qDebug() << "StartPack <- Ruka";
+//        } else if(deckType == DeckType::Target) {
+//            targetPacks.at(index)->cards.push_back(hand.back().at(i));
+//            qDebug() << "TargetPack <- Ruka";
+//        }
+//        else if(deckType == DeckType::Work) {
+//            workPacks.at(index)->cards.push_back(hand.back().at(i));
+//            qDebug() << "WorkPack <- Ruka";
+//        }
+//    }
+
+    historyHand.pop_back();
+    historyDeckType.pop_back();
+    historyDeckIndex.pop_back();
+}

@@ -26,36 +26,55 @@
      <height>20</height>
     </rect>
    </property>
-  </widget>
-  <widget class="QToolBar" name="mainToolBar">
-   <property name="font">
-    <font>
-     <weight>50</weight>
-     <bold>false</bold>
-     <kerning>true</kerning>
-    </font>
-   </property>
-   <property name="movable">
-    <bool>false</bool>
-   </property>
-   <property name="floatable">
-    <bool>false</bool>
-   </property>
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-   <addaction name="actionGame1"/>
-   <addaction name="actionGame2"/>
-   <addaction name="actionGame3"/>
-   <addaction name="actionGame4"/>
-   <addaction name="separator"/>
-   <addaction name="actionClose1"/>
-   <addaction name="actionClose2"/>
-   <addaction name="actionClose3"/>
-   <addaction name="actionClose4"/>
+   <widget class="QMenu" name="menuGame1">
+    <property name="title">
+     <string>Game1</string>
+    </property>
+    <addaction name="actionGame1"/>
+    <addaction name="actionHint1"/>
+    <addaction name="actionUndo1"/>
+    <addaction name="actionSave_Game1"/>
+    <addaction name="actionLoad_game1"/>
+    <addaction name="actionClose1"/>
+   </widget>
+   <widget class="QMenu" name="menuGame2">
+    <property name="title">
+     <string>Game2</string>
+    </property>
+    <addaction name="actionGame2"/>
+    <addaction name="actionHint2"/>
+    <addaction name="actionUndo2"/>
+    <addaction name="actionSave_Game2"/>
+    <addaction name="actionLoad_game2"/>
+    <addaction name="actionClose2"/>
+   </widget>
+   <widget class="QMenu" name="menuGame3">
+    <property name="title">
+     <string>Game3</string>
+    </property>
+    <addaction name="actionGame3"/>
+    <addaction name="actionHint3"/>
+    <addaction name="actionUndo3"/>
+    <addaction name="actionSave_Game3"/>
+    <addaction name="actionLoad_game3"/>
+    <addaction name="actionClose3"/>
+   </widget>
+   <widget class="QMenu" name="menuGame4">
+    <property name="title">
+     <string>Game4</string>
+    </property>
+    <addaction name="actionGame4"/>
+    <addaction name="actionHint4"/>
+    <addaction name="actionUndo4"/>
+    <addaction name="actionSave_Game4"/>
+    <addaction name="actionLoad_game4"/>
+    <addaction name="actionClose4"/>
+    <addaction name="separator"/>
+   </widget>
+   <addaction name="menuGame1"/>
+   <addaction name="menuGame2"/>
+   <addaction name="menuGame3"/>
+   <addaction name="menuGame4"/>
   </widget>
   <widget class="QStatusBar" name="statusBar">
    <property name="enabled">
@@ -64,22 +83,22 @@
   </widget>
   <action name="actionGame1">
    <property name="text">
-    <string>Game1</string>
+    <string>New game</string>
    </property>
   </action>
   <action name="actionGame2">
    <property name="text">
-    <string>Game2</string>
+    <string>New game</string>
    </property>
   </action>
   <action name="actionGame3">
    <property name="text">
-    <string>Game3</string>
+    <string>New game</string>
    </property>
   </action>
   <action name="actionGame4">
    <property name="text">
-    <string>Game4</string>
+    <string>New game</string>
    </property>
    <property name="toolTip">
     <string>Game4</string>
@@ -87,17 +106,17 @@
   </action>
   <action name="actionClose1">
    <property name="text">
-    <string>Close1</string>
+    <string>Close game</string>
    </property>
   </action>
   <action name="actionClose2">
    <property name="text">
-    <string>Close2</string>
+    <string>Close game</string>
    </property>
   </action>
   <action name="actionClose3">
    <property name="text">
-    <string>Close3</string>
+    <string>Close game</string>
    </property>
    <property name="toolTip">
     <string>Close3</string>
@@ -105,10 +124,90 @@
   </action>
   <action name="actionClose4">
    <property name="text">
-    <string>Close4</string>
+    <string>Close game</string>
    </property>
    <property name="toolTip">
     <string>Close4</string>
+   </property>
+  </action>
+  <action name="actionSave_Game1">
+   <property name="text">
+    <string>Save game</string>
+   </property>
+  </action>
+  <action name="actionSave_Game2">
+   <property name="text">
+    <string>Save game</string>
+   </property>
+  </action>
+  <action name="actionSave_Game3">
+   <property name="text">
+    <string>Save game</string>
+   </property>
+  </action>
+  <action name="actionSave_Game4">
+   <property name="text">
+    <string>Save game</string>
+   </property>
+  </action>
+  <action name="actionLoad_game1">
+   <property name="text">
+    <string>Load game</string>
+   </property>
+  </action>
+  <action name="actionLoad_game2">
+   <property name="text">
+    <string>Load game</string>
+   </property>
+  </action>
+  <action name="actionLoad_game3">
+   <property name="text">
+    <string>Load game</string>
+   </property>
+  </action>
+  <action name="actionLoad_game4">
+   <property name="text">
+    <string>Load game</string>
+   </property>
+  </action>
+  <action name="actionUndo1">
+   <property name="text">
+    <string>Undo</string>
+   </property>
+  </action>
+  <action name="actionUndo2">
+   <property name="text">
+    <string>Undo</string>
+   </property>
+  </action>
+  <action name="actionUndo3">
+   <property name="text">
+    <string>Undo</string>
+   </property>
+  </action>
+  <action name="actionUndo4">
+   <property name="text">
+    <string>Undo</string>
+   </property>
+  </action>
+  <action name="actionHint1">
+   <property name="text">
+    <string>Hint</string>
+   </property>
+  </action>
+  <action name="actionHint2">
+   <property name="text">
+    <string>Hint</string>
+   </property>
+  </action>
+  <action name="actionHint3">
+   <property name="text">
+    <string>Hint</string>
+   </property>
+  </action>
+  <action name="actionHint4">
+   <property name="text">
+    <string>Hint</string>
    </property>
   </action>
  </widget>

@@ -18,11 +18,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     statusBar()->hide();
 
-    this->setStyleSheet("background-color: #4DBD33;");
-    ui->mainToolBar->setStyleSheet("QToolButton:!hover {background-color:30, 30,30; color:white}"
-                                   "QToolButton:hover {text-decoration: underline; border: 0px; background: none;}"
-                                   "QToolBar {background: rgb(30, 30, 30)}"
-                                   );
+    this->menuBar()->setStyleSheet("QMenuBar {background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,stop:0 lightgray, stop:1 darkgray);}"
+                        "QMenuBar::item {spacing: 15px; padding: 5px 10px;background: transparent;border-radius: 4px;}"
+                        "QMenuBar::item:selected { background: #a8a8a8;}"
+                        "QMenuBar::item:pressed {background: #888888;}");
+//    this->setStyleSheet("background:qlineargradient(x1:0, y1:0, x2:0, y2:1,stop:0 lightgray, stop:1 darkgray)");
+    this->setStyleSheet("background-color: #4DBD33;}");
     this->setFixedSize(650,350);
 
     game1 = new GraphicGameBoard(ui->centralWidget);
