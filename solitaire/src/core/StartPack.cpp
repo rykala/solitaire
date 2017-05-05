@@ -30,11 +30,21 @@ void StartPack::decrementTop()
     top--;
 }
 
-//int StartPack::flipCard() {
-//     if(top > (cards.size() - 1)) {
-//        top = 0;
-//    }
+void StartPack::incrementTop()
+{
+    top++;
+}
 
-//    return top++;
+int StartPack::flipCard() {
+    top++;
 
-//}
+    if(top > (cards.size() - 1)) {
+        top = -1;
+        for(auto card : cards) {
+            card->setFaceUp(false);
+        }
+    } else {
+        cards.at(top)->setFaceUp(true);
+    }
+    return top;
+}

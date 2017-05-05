@@ -25,8 +25,7 @@ protected:
     void dragMoveEvent(QDragMoveEvent *event) override;
 
     /* GRAPHIC GAME LOGIC */
-    void flipStartPack(GraphicCard *clickedCard);
-    void reloadStartPack();
+    void flipStartPack(GraphicCard *clickedCard = NULL);
     void reloadCards();
 
 private:

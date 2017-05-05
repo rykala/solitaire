@@ -18,6 +18,9 @@ GraphicCard::~GraphicCard(){}
 
 void GraphicCard::drawCard(int x, int y)
 {
+    this->x = x;
+    this->y = y;
+
     if(card->getFaceUp()) {
         stringstream ss;
         ss << ":/" << card->getType() << "/" << card->getValue();

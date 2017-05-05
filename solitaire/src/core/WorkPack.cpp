@@ -1,12 +1,10 @@
 #include "WorkPack.h"
 #include "Card.h"
+
 #include <vector>
 #include <string>
 
 using std::vector;
-using std::string;
-using std::to_string;
-using std::next;
 
 WorkPack::WorkPack(vector<Card*> cards, int hiddenIndex)
 {

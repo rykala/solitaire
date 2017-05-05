@@ -17,10 +17,12 @@ public:
     void newGame();
 
     void flipCards();
-    void flipCard(Card *card);
+    int flipStartCard();
 
     void popCards(Card *card);
-    void pushCards(DeckType decktype, int deckIndex = 0);
+    bool pushCards(DeckType decktype, int deckIndex = 0);
+    void pushCardsBack();
+    bool isValidMove();
 
     /* GETTERS */
     StartPack *getStartPack() {return startPack;}

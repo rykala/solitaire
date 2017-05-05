@@ -13,6 +13,7 @@ public:
     int flipCard();
     int getTopIndex();
     void decrementTop();
+    void incrementTop();
 
 protected:
     int top = -1; // Inicializace na null, kdyz zadna karta neni prevracena
