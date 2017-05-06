@@ -20,21 +20,6 @@ StartPack::StartPack(vector<Card*> cards)
 //    return true;
 //}
 
-int StartPack::getTopIndex()
-{
-    return top;
-}
-
-void StartPack::decrementTop()
-{
-    top--;
-}
-
-void StartPack::incrementTop()
-{
-    top++;
-}
-
 int StartPack::flipCard() {
     top++;
 

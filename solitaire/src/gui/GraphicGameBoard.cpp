@@ -31,6 +31,36 @@ void GraphicGameBoard::drawGameBoard()
     this->show();
 }
 
+void GraphicGameBoard::undoTurn()
+{
+    if(!game->undoTurn()) {
+        return;
+    }
+
+    QList<QLabel*> items = findChildren<QLabel*>();
+
+    /* Backward loop */
+    for (auto &item:items)
+    {
+        GraphicCard *card = dynamic_cast<GraphicCard*>(item);
+        GraphicTargetPack *tPack = dynamic_cast<GraphicTargetPack*>(item);
+        GraphicWorkPack *wPack = dynamic_cast<GraphicWorkPack*>(item);
+        GraphicStartPack *sPack = dynamic_cast<GraphicStartPack*>(item);
+
+        if (card) {
+            card->close();
+        } else if (tPack) {
+            tPack->close();
+        } else if (wPack) {
+            wPack->close();
+        } else if (sPack) {
+            sPack->close();
+        }
+    }
+
+    drawGameBoard();
+}
+
 void GraphicGameBoard::drawStartPack()
 {
     GraphicStartPack *startPack = new GraphicStartPack(this, game->getStartPack());
@@ -242,7 +272,7 @@ void GraphicGameBoard::mousePressEvent(QMouseEvent *event)
     QMimeData *mimeData = new QMimeData;
     mimeData->setData("application/x-dnditemdata", itemData);
 
-    QPixmap mypix(":/back/2");
+//    QPixmap mypix(":/back/2");
 
     //    QPixmap comboPixmap(75, 100);
     //    QPainter painter(&comboPixmap);

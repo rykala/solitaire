@@ -16,6 +16,7 @@ class GraphicGameBoard : public QFrame
 public:
     GraphicGameBoard(QWidget *parent = 0);
     void drawGameBoard();
+    void undoTurn();
 
 protected:
     /* MOUSE EVENTS */

@@ -52,6 +52,11 @@ void Game::newGame()
     }
 
     startPack = new StartPack(startCards);
+
+    historyHand.clear();
+    historyDeckType.clear();
+    historyDeckIndex.clear();
+    historyTop.clear();
 }
 
 int Game::flipStartCard()
@@ -61,9 +66,19 @@ int Game::flipStartCard()
 }
 
 void Game::flipCards() {
+    bool flip = false;
+
     for(auto &pack: workPacks) {
-        pack->flipHidden();
+
+        if(!flip) {
+            flip = pack->flipHidden();
+        }
     }
+    if (historyFlip.size() > 5) {
+        historyFlip.erase(historyFlip.begin());
+    }
+
+    historyFlip.push_back(flip);
 }
 
 void Game::popCards(Card *card)
@@ -99,9 +114,13 @@ void Game::popCards(Card *card)
 
 bool Game::pushCards(DeckType deckType, int deckIndex)
 {
-    if(!isValidMove(deckType, deckIndex)){
+
+    if(!isValidMove(hand, deckType, deckIndex)){
         return false;
     }
+
+    DeckType tmpType = hand.at(0)->getDeckType();
+    int tmpIndex = hand.at(0)->getDeckIndex();
 
     if(deckType == DeckType::Target) {
         targetPacks.at(deckIndex)->cards.push_back(hand.at(0));
@@ -117,7 +136,8 @@ bool Game::pushCards(DeckType deckType, int deckIndex)
         qDebug() << "WorkPack <- Ruka";
     }
 
-    saveTurn(hand);
+    saveTurn(hand, tmpType, tmpIndex, startPack->getTopIndex());
+
     return true;
 }
 
@@ -142,17 +162,21 @@ void Game::pushCardsBack()
     }
 }
 
-bool Game::isValidMove(DeckType deckType, int deckIndex)
+bool Game::isValidMove(vector <Card*> cards, DeckType deckType, int deckIndex)
 {
+    Card *card = cards.at(0);
+
     if(deckType == DeckType::Target) {
         if(targetPacks.at(deckIndex)->cards.size() == 0) {
             // If target pack is empty
-            if(hand.at(0)->getValue() != 1) {
+            if(card->getValue() != 1) {
                 // If the card put on empty target is not ACE
                 return false;
             }
-        } else if(targetPacks.at(deckIndex)->cards.back()->getValue() == (hand.at(0)->getValue() - 1)) {
-            if(targetPacks.at(deckIndex)->cards.back()->getType() != hand.at(0)->getType()) {
+        } else if(cards.size() > 1) {
+            return false;
+        } else if(targetPacks.at(deckIndex)->cards.back()->getValue() == (card->getValue() - 1)) {
+            if(targetPacks.at(deckIndex)->cards.back()->getType() != card->getType()) {
                 // If target is not empty, card has to be same color and value+1
                 return false;
             }
@@ -162,18 +186,18 @@ bool Game::isValidMove(DeckType deckType, int deckIndex)
     } else if(deckType == DeckType::Work) {
         if(workPacks.at(deckIndex)->cards.size() == 0) {
             // If work pack is empty
-            if(hand.at(0)->getValue() != 13){
+            if(card->getValue() != 13){
                 return false;
             }
-        } else if(workPacks.at(deckIndex)->cards.back()->getValue() == (hand.at(0)->getValue() + 1)) {
+        } else if(workPacks.at(deckIndex)->cards.back()->getValue() == (card->getValue() + 1)) {
             // If workpack not empty card needs to be lower value-1
             if((workPacks.at(deckIndex)->cards.back()->getType() == CardType::Club ||
                 workPacks.at(deckIndex)->cards.back()->getType() == CardType::Spade) &&
-                    (hand.at(0)->getType() == CardType::Club || hand.at(0)->getType() == CardType::Spade)) {
+                    (card->getType() == CardType::Club || card->getType() == CardType::Spade)) {
                 return false;
             } else if ((workPacks.at(deckIndex)->cards.back()->getType() == CardType::Heart ||
                         workPacks.at(deckIndex)->cards.back()->getType() == CardType::Diamond) &&
-                       (hand.at(0)->getType() == CardType::Heart || hand.at(0)->getType() == CardType::Diamond)) {
+                       (card->getType() == CardType::Heart || card->getType() == CardType::Diamond)) {
                 // Color has to be different
                 return false;
             }
@@ -185,44 +209,86 @@ bool Game::isValidMove(DeckType deckType, int deckIndex)
     return true;
 }
 
-void Game::saveTurn(vector<Card*> hand)
+std::string Game::getHint()
+{
+//    string hint;
+
+//    for(auto worPack : workPacks) {
+//        workPacks->cards.back();
+//        for(auto targetPack : targetPacks) {
+
+//        }
+//    }
+}
+
+void Game::saveTurn(vector<Card*> hand, DeckType deckType, int deckIndex, int topIndex)
 {
     if (historyHand.size() > 5) {
         historyHand.erase(historyHand.begin());
         historyDeckType.erase(historyDeckType.begin());
         historyDeckIndex.erase(historyDeckIndex.begin());
+        historyTop.erase(historyTop.begin());
     }
 
     historyHand.push_back(hand);
-    historyDeckType.push_back(hand.at(0)->getDeckType());
-    historyDeckIndex.push_back(hand.at(0)->getDeckIndex());
+    historyDeckType.push_back(deckType);
+    historyDeckIndex.push_back(deckIndex);
+    historyTop.push_back(topIndex);
 }
 
-void Game::undoTurn()
+bool Game::undoTurn()
 {
     if(historyHand.size() == 0) {
-        return;
+        return false;
     }
 
-//    for(int i = 0; i < (int)historyHand.back().size(); i++) {
-//        DeckType deckType = historyDeckType.back();
-//        int index = historyDeckIndex.back();
+    DeckType deckType = historyDeckType.back();
+    if(historyFlip.back() && deckType == DeckType::Work) {
+        workPacks.at(historyDeckIndex.back())->cards.back()->setFaceUp(!historyFlip.back());
+        workPacks.at(historyDeckIndex.back())->incrementHiddenIndex();
+    }
 
-//        if(deckType == DeckType::Start){
-//            startPack->incrementTop();
-//            startPack->cards.insert(startPack->cards.begin() + startPack->getTopIndex(), hand.back().at(i));
-//            qDebug() << "StartPack <- Ruka";
-//        } else if(deckType == DeckType::Target) {
-//            targetPacks.at(index)->cards.push_back(hand.back().at(i));
-//            qDebug() << "TargetPack <- Ruka";
-//        }
-//        else if(deckType == DeckType::Work) {
-//            workPacks.at(index)->cards.push_back(hand.back().at(i));
-//            qDebug() << "WorkPack <- Ruka";
-//        }
-//    }
+    for(int i = 0; i < (int)historyHand.back().size(); i++) {
+        DeckType deckType = historyDeckType.back();
+        int index = historyDeckIndex.back();
+
+        // Remove card from old pack
+        if(historyHand.back().at(i)->getDeckType() == DeckType::Target) {
+            targetPacks.at(historyHand.back().at(i)->getDeckIndex())->cards.pop_back();
+        } else if(historyHand.back().at(i)->getDeckType() == DeckType::Work) {
+            workPacks.at(historyHand.back().at(i)->getDeckIndex())->cards.pop_back();
+        }
+
+        // Move card to new location (undo)
+        if(deckType == DeckType::Start){
+            // if we are moving card back to the start pack we need to increase top, cuz the top in history
+            // is one less, because it was saved after the pop of the card, therefore top one less
+            startPack->cards.insert(startPack->cards.begin() + (++historyTop.back()), historyHand.back().at(i));
+            qDebug() << "Historie: StartPack <- Ruka";
+        } else if(deckType == DeckType::Target) {
+            targetPacks.at(index)->cards.push_back(historyHand.back().at(i));
+            qDebug() << "Historie: TargetPack <- Ruka";
+        } else if(deckType == DeckType::Work) {
+            workPacks.at(index)->cards.push_back(historyHand.back().at(i));
+            qDebug() << "Historie: WorkPack <- Ruka";
+        }
+
+        historyHand.back().at(i)->setDeckType(deckType);
+        historyHand.back().at(i)->setDeckIndex(index);
+    }
+
+    for(int i = 0; i < startPack->cards.size(); i++) {
+        bool face = (i <= historyTop.back());
+        startPack->cards.at(i)->setFaceUp(face);
+    }
+
+    startPack->setTopIndex(historyTop.back());
 
     historyHand.pop_back();
     historyDeckType.pop_back();
     historyDeckIndex.pop_back();
+    historyTop.pop_back();
+    historyFlip.pop_back();
+
+    return true;
 }

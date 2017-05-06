@@ -34,6 +34,8 @@ private slots:
     void on_actionClose3_triggered();
     void on_actionClose4_triggered();
 
+    void on_actionUndo1_triggered();
+
 private:
     Ui::MainWindow *ui;
 };

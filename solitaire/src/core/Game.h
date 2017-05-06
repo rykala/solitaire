@@ -6,7 +6,11 @@
 #include "Card.h"
 #include "TargetPack.h"
 #include "StartPack.h"
+
 #include <vector>
+#include <string>
+
+using std::string;
 
 class Game
 {
@@ -15,6 +19,7 @@ public:
 
     /* METHODS */
     void newGame();
+    bool undoTurn();
 
     void flipCards();
     int flipStartCard();
@@ -22,7 +27,8 @@ public:
     void popCards(Card *card);
     bool pushCards(DeckType decktype, int deckIndex = 0);
     void pushCardsBack();
-    bool isValidMove(DeckType deckType, int deckIndex = 0);
+    bool isValidMove(vector <Card*> cards, DeckType deckType, int deckIndex = 0);
+    string getHint();
 
     /* GETTERS */
     StartPack *getStartPack() {return startPack;}
@@ -37,11 +43,12 @@ protected:
     StartPack *startPack;
     vector<Card*> hand;
 
-    void saveTurn(vector<Card*> hand);
-    void undoTurn();
+    void saveTurn(vector<Card*> hand, DeckType deckType, int deckIndex, int topIndex);
     vector< vector<Card*> > historyHand;
     vector<DeckType> historyDeckType;
     vector<int> historyDeckIndex;
+    vector<int> historyTop;
+    vector<bool> historyFlip;
 };
 
 #endif // GAME_H

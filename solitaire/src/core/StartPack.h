@@ -11,9 +11,12 @@ public:
     StartPack(vector<Card*> cards);
 //    bool getTopCard(Card &topCard); // otoci kartu a vrati ji, zvyssi top
     int flipCard();
-    int getTopIndex();
-    void decrementTop();
-    void incrementTop();
+
+    void decrementTop() {top--;}
+    void incrementTop() {top++;}
+
+    int getTopIndex() {return top;}
+    void setTopIndex(int top) {this->top = top;}
 
 protected:
     int top = -1; // Inicializace na null, kdyz zadna karta neni prevracena

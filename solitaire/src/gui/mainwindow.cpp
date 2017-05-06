@@ -178,3 +178,8 @@ void MainWindow::closeCheck()
     }
 }
 
+
+void MainWindow::on_actionUndo1_triggered()
+{
+    game1->undoTurn();
+}
