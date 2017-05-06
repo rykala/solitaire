@@ -219,6 +219,10 @@ string Game::getHint()
 
     // WorkPacks to TargetPacks
     for(int i = 0; i < workPacks.size(); i++) {
+        if(workPacks.at(i)->cards.size() < 1) {
+            continue;
+        }
+
         tmpHand.push_back(workPacks.at(i)->cards.back());
         for(int j = 0; j < targetPacks.size(); j++) {
             if(isValidMove(tmpHand, DeckType::Target, j)) {
@@ -235,6 +239,10 @@ string Game::getHint()
 
     // WorkPacks to WorkPack
     for(int i = 0; i < workPacks.size(); i++) {
+        if(workPacks.at(i)->cards.size() < 1) {
+            continue;
+        }
+
         tmpHand.push_back(workPacks.at(i)->cards.at(workPacks.at(i)->getHiddenIndex()));
         for(int j = 0; j < workPacks.size(); j++) {
             //skip comparing the same pack

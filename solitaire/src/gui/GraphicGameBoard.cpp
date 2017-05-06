@@ -70,7 +70,7 @@ void GraphicGameBoard::hint()
         hintLabel = new QLabel(this);
         hintLabel->setText(QString::fromStdString(hint));
         hintLabel->setStyleSheet("font-size: 14px; background-color: rgba(255,255,255, 90%);"
-                                 "color: green; border: 1px solid green; border-left:0;border-top:0;"
+                                 "color: green; border: 1px solid white; border-left:0;border-top:0;"
                                  "padding: 10px; padding-bottom:0px;");
         hintLabel->show();
     }

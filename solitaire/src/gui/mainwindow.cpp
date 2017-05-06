@@ -19,11 +19,11 @@ MainWindow::MainWindow(QWidget *parent) :
     statusBar()->hide();
 
     this->menuBar()->setStyleSheet("QMenuBar {background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,stop:0 lightgray, stop:1 darkgray);}"
-                        "QMenuBar::item {spacing: 15px; padding: 5px 10px;background: transparent;border-radius: 4px;}"
-                        "QMenuBar::item:selected { background: #a8a8a8;}"
-                        "QMenuBar::item:pressed {background: #888888;}");
-//    this->setStyleSheet("background:qlineargradient(x1:0, y1:0, x2:0, y2:1,stop:0 lightgray, stop:1 darkgray)");
-    this->setStyleSheet("background-color: #4DBD33;}");
+                                   "QMenuBar::item {spacing: 15px; padding: 5px 10px;background: transparent;border-radius: 4px;}"
+                                   "QMenuBar::item:selected { background: #a8a8a8;}"
+                                   "QMenuBar::item:pressed {background: #888888;}");
+    //    this->setStyleSheet("background:qlineargradient(x1:0, y1:0, x2:0, y2:1,stop:0 lightgray, stop:1 darkgray)");
+    this->setStyleSheet("background-color: #4DBD33;");
     this->setFixedSize(650,350);
 
     game1 = new GraphicGameBoard(ui->centralWidget);
@@ -42,7 +42,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionGame1_triggered()
 {
-    on_actionClose1_triggered();
+//    on_actionClose1_triggered();
 
     game1 = new GraphicGameBoard(ui->centralWidget);
     game1->setObjectName(QStringLiteral("game1"));
@@ -59,7 +59,7 @@ void MainWindow::on_actionGame1_triggered()
 void MainWindow::on_actionGame2_triggered()
 {
     anotherGame();
-    on_actionClose2_triggered();
+//    on_actionClose2_triggered();
 
     game2 = new GraphicGameBoard(ui->centralWidget);
     game2->setObjectName(QStringLiteral("game2"));
@@ -71,7 +71,7 @@ void MainWindow::on_actionGame2_triggered()
 void MainWindow::on_actionGame3_triggered()
 {
     anotherGame();
-    on_actionClose3_triggered();
+//    on_actionClose3_triggered();
 
     game3 = new GraphicGameBoard(ui->centralWidget);
     game3->setObjectName(QStringLiteral("game3"));
@@ -83,7 +83,7 @@ void MainWindow::on_actionGame3_triggered()
 void MainWindow::on_actionGame4_triggered()
 {
     anotherGame();
-    on_actionClose4_triggered();
+//    on_actionClose4_triggered();
 
     game4 = new GraphicGameBoard(ui->centralWidget);
     game4->setObjectName(QStringLiteral("game4"));
@@ -105,7 +105,7 @@ void MainWindow::on_actionClose1_triggered()
 {
     if(game1){
         game1->close();
-        game1 = nullptr;
+        game1 = NULL;
         closeCheck();
     }
 }
@@ -114,7 +114,7 @@ void MainWindow::on_actionClose2_triggered()
 {
     if(game2){
         game2->close();
-        game2 = nullptr;
+        game2 = NULL;
         closeCheck();
     }
 }
@@ -123,7 +123,7 @@ void MainWindow::on_actionClose3_triggered()
 {
     if(game3){
         game3->close();
-        game3 = nullptr;
+        game3 = NULL;
         closeCheck();
     }
 }
@@ -132,7 +132,7 @@ void MainWindow::on_actionClose4_triggered()
 {
     if(game4){
         game4->close();
-        game4 = nullptr;
+        game4 = NULL;
         closeCheck();
     }
 }
@@ -181,10 +181,56 @@ void MainWindow::closeCheck()
 
 void MainWindow::on_actionUndo1_triggered()
 {
-    game1->undoTurn();
+    if(game1) {
+        game1->undoTurn();
+    }
+}
+
+void MainWindow::on_actionUndo2_triggered()
+{
+    if(game2) {
+        game2->undoTurn();
+    }
+}
+
+void MainWindow::on_actionUndo3_triggered()
+{
+    if(game3) {
+        game3->undoTurn();
+    }
+}
+
+void MainWindow::on_actionUndo4_triggered()
+{
+    if(game4) {
+        game4->undoTurn();
+    }
 }
 
 void MainWindow::on_actionHint1_triggered()
 {
-    game1->hint();
+    if(game1){
+        game1->hint();
+    }
+}
+
+void MainWindow::on_actionHint2_triggered()
+{
+    if(game2) {
+        game2->hint();
+    }
+}
+
+void MainWindow::on_actionHint3_triggered()
+{
+    if(game3) {
+        game3->hint();
+    }
+}
+
+void MainWindow::on_actionHint4_triggered()
+{
+    if(game4) {
+        game4->hint();
+    }
 }

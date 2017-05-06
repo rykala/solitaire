@@ -38,6 +38,18 @@ private slots:
 
     void on_actionHint1_triggered();
 
+    void on_actionUndo2_triggered();
+
+    void on_actionUndo3_triggered();
+
+    void on_actionUndo4_triggered();
+
+    void on_actionHint2_triggered();
+
+    void on_actionHint3_triggered();
+
+    void on_actionHint4_triggered();
+
 private:
     Ui::MainWindow *ui;
 };
