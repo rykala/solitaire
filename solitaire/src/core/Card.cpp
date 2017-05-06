@@ -35,8 +35,9 @@ int Card::getValue() {
 
 string Card::getName() {
     string tmp = "";
-
-    if (type == Club) {
+    if (!faceUp) {
+        tmp += "🂠";
+    } else if (type == Club) {
         if (value == 1) {
             tmp += "🃑"; }
         else if (value == 2) {

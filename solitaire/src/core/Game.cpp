@@ -64,7 +64,6 @@ void Game::newGame()
 
 int Game::flipStartCard()
 {
-    qDebug() << "Flipping card";
     return startPack->flipCard();
 }
 

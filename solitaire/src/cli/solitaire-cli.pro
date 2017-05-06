@@ -5,7 +5,10 @@
 #-------------------------------------------------
 BASEDIR = $$PWD/../../
 
-QT       += core gui
+QT += core gui
+
+#CONFIG += console
+#CONFIG -= app_bundle
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -24,5 +27,7 @@ INCLUDEPATH += $${BASEDIR}/src/core
 
 SOURCES += ../core/*.cpp\
            cli-main.cpp\
+    CliGameBoard.cpp
 
 HEADERS  += ../core/*.h\
+    CliGameBoard.h

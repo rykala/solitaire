@@ -37,6 +37,7 @@ public:
     WorkPack *getWorkPack(int i) {return workPacks.at(i);}
     TargetPack *getTargetPack(int i) {return targetPacks.at(i);}
     vector<Card*> getHand() {return hand;}
+    vector<WorkPack*> getWorkPacks() {return workPacks;}
 
 protected:
     Deck deck;
