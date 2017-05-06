@@ -38,6 +38,8 @@ private:
     void drawStartPack();
     void drawTargetPacks();
     void reDrawPacks(GraphicCard *card);
+
+    void gameWon();
 };
 
 #endif // GRAPHICGAMEBOARD_H

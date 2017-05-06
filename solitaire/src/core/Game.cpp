@@ -287,7 +287,24 @@ string Game::getHint()
         tmpHand.clear();
     }
 
+    if(hint == "") {
+        hint += "No turn possible, try getting another card from start pack!\n";
+    }
+
     return hint;
+}
+
+bool Game::isWin()
+{
+    int i = 0;
+
+    for(auto targetPack : targetPacks) {
+        if (targetPack->cards.size() == 13) {
+            i++;
+        }
+    }
+
+    return (i == 4);
 }
 
 void Game::saveTurn(vector<Card*> hand, DeckType deckType, int deckIndex, int topIndex)

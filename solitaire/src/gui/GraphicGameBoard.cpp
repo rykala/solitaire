@@ -112,6 +112,19 @@ void GraphicGameBoard::reDrawPacks(GraphicCard *card)
     }
 }
 
+void GraphicGameBoard::gameWon()
+{
+    if(game->isWin()) {
+        QLabel *win = new QLabel(this);
+        win->setText(QString("YOU WON!!!"));
+        win->setFixedSize(650, 350);
+        win->setStyleSheet("font-size: 50px; background-color: rgba(255,255,255, 90%);font-weight: bold;"
+                            "color: green; width:650px; height:350px;");
+        win->setAlignment(Qt::AlignCenter);
+        win->show();
+    }
+}
+
 void GraphicGameBoard::drawWorkPacks()
 {
     int x = 20;
@@ -329,6 +342,7 @@ void GraphicGameBoard::mousePressEvent(QMouseEvent *event)
         clickedCard->close();
         reDrawPacks(clickedCard);
         reloadCards(); //If card is moved from workPack, flips top hidden card.
+        gameWon();
     } else {
         // PUSH THE CARD BACK TO THE ORIGINAL PACK, IF IT'S NOT DROPPED ANYWHERE VALID
         game->pushCardsBack();

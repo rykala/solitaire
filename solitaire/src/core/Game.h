@@ -30,6 +30,8 @@ public:
     bool isValidMove(vector <Card*> cards, DeckType deckType, int deckIndex = 0);
     string getHint();
 
+    bool isWin();
+
     /* GETTERS */
     StartPack *getStartPack() {return startPack;}
     WorkPack *getWorkPack(int i) {return workPacks.at(i);}
