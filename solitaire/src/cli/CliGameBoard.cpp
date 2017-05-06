@@ -75,7 +75,6 @@ void CliGameBoard::moveCards()
 {
     string column;
     string index;
-    int row;
     string columnTo;
     bool isInputInvalid = false;
 
@@ -120,8 +119,8 @@ void CliGameBoard::moveCards()
             int workPackSize = game->getWorkPack(workColumn)->cards.size();
 
             if (workRow >= 0 && workRow < workPackSize) {
-                if (game->getWorkPack(workColumn)->cards.size() > workRow) {
-                    if(game->getWorkPack(workColumn)->cards.at(workRow)->getFaceUp()) {
+                if ((int)game->getWorkPack(workColumn)->cards.size() > workRow) {
+                    if((int)game->getWorkPack(workColumn)->cards.at(workRow)->getFaceUp()) {
                         game->popCards(game->getWorkPack(workColumn)->cards.at(workRow));
                     } else {
                         cout << "I cannot pick up that card!" << endl;
@@ -162,7 +161,7 @@ void CliGameBoard::moveCards()
             getline(cin, index);
             transform(index.begin(), index.end(), index.begin(), ::tolower);
 
-            if (column == "x") {
+            if (index == "x") {
                 game->pushCardsBack();
                 return;
             }
