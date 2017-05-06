@@ -23,7 +23,7 @@ StartPack::StartPack(vector<Card*> cards)
 int StartPack::flipCard() {
     top++;
 
-    if(top > (cards.size() - 1)) {
+    if(top > (int)(cards.size() - 1)) {
         top = -1;
         for(auto card : cards) {
             card->setFaceUp(false);

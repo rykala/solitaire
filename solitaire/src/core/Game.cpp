@@ -218,13 +218,13 @@ string Game::getHint()
     vector <Card*> tmpHand;
 
     // WorkPacks to TargetPacks
-    for(int i = 0; i < workPacks.size(); i++) {
+    for(int i = 0; i < (int)workPacks.size(); i++) {
         if(workPacks.at(i)->cards.size() < 1) {
             continue;
         }
 
         tmpHand.push_back(workPacks.at(i)->cards.back());
-        for(int j = 0; j < targetPacks.size(); j++) {
+        for(int j = 0; j < (int)targetPacks.size(); j++) {
             if(isValidMove(tmpHand, DeckType::Target, j)) {
                 hint += tmpHand.at(0)->getName();
                 hint += " from work pack(";
@@ -238,13 +238,13 @@ string Game::getHint()
     }
 
     // WorkPacks to WorkPack
-    for(int i = 0; i < workPacks.size(); i++) {
+    for(int i = 0; i < (int)workPacks.size(); i++) {
         if(workPacks.at(i)->cards.size() < 1) {
             continue;
         }
 
         tmpHand.push_back(workPacks.at(i)->cards.at(workPacks.at(i)->getHiddenIndex()));
-        for(int j = 0; j < workPacks.size(); j++) {
+        for(int j = 0; j < (int)workPacks.size(); j++) {
             //skip comparing the same pack
             if (i == j) {
                 continue;
@@ -266,7 +266,7 @@ string Game::getHint()
     if(startPack->getTopIndex() != -1) {
         tmpHand.push_back(startPack->cards.at(startPack->getTopIndex()));
 
-        for(int i = 0; i < targetPacks.size(); i++) {
+        for(int i = 0; i < (int)targetPacks.size(); i++) {
             if(isValidMove(tmpHand, DeckType::Target, i)) {
                 hint += tmpHand.at(0)->getName();
                 hint += " from start pack to target pack(";
@@ -275,7 +275,7 @@ string Game::getHint()
             }
         }
 
-        for(int i = 0; i < workPacks.size(); i++) {
+        for(int i = 0; i < (int)workPacks.size(); i++) {
             if(isValidMove(tmpHand, DeckType::Work, i)) {
                 hint += tmpHand.at(0)->getName();
                 hint += " from start pack to work pack(";
@@ -363,7 +363,7 @@ bool Game::undoTurn()
         historyHand.back().at(i)->setDeckIndex(index);
     }
 
-    for(int i = 0; i < startPack->cards.size(); i++) {
+    for(int i = 0; i < (int)startPack->cards.size(); i++) {
         bool face = (i <= historyTop.back());
         startPack->cards.at(i)->setFaceUp(face);
     }

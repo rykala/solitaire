@@ -79,6 +79,7 @@ void GraphicGameBoard::hint()
 void GraphicGameBoard::drawStartPack()
 {
     GraphicStartPack *startPack = new GraphicStartPack(this, game->getStartPack());
+    startPack->show();
 }
 
 void GraphicGameBoard::drawTargetPacks()
@@ -88,6 +89,7 @@ void GraphicGameBoard::drawTargetPacks()
 
     for (int i = 0; i < 4; ++i) {
         GraphicTargetPack *targetPack = new GraphicTargetPack(this, game->getTargetPack(i), x, y, i);
+        targetPack->show();
         x += 90;
     }
 }
