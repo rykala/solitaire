@@ -36,9 +36,9 @@ int Card::getValue() {
 string Card::getName() {
     string tmp = "";
 
-    if (type == Spade) {
+    if (type == Club) {
         if (value == 1) {
-            tmp += "🃎"; }
+            tmp += "🃑"; }
         else if (value == 2) {
             tmp += "🃒";
         } else if (value == 3) {
@@ -92,7 +92,7 @@ string Card::getName() {
         } else if (value == 13) {
             tmp += "🃎";
         }
-    } else if (type == Club) {
+    } else if (type == Spade) {
         if (value == 1) {
             tmp += "🂡"; }
         else if (value == 2) {

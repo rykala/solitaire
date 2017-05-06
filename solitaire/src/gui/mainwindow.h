@@ -36,6 +36,8 @@ private slots:
 
     void on_actionUndo1_triggered();
 
+    void on_actionHint1_triggered();
+
 private:
     Ui::MainWindow *ui;
 };

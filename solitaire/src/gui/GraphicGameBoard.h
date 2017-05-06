@@ -17,6 +17,7 @@ public:
     GraphicGameBoard(QWidget *parent = 0);
     void drawGameBoard();
     void undoTurn();
+    void hint();
 
 protected:
     /* MOUSE EVENTS */
@@ -31,6 +32,7 @@ protected:
 
 private:
     Game *game;
+    QLabel *hintLabel = NULL;
 
     void drawWorkPacks();
     void drawStartPack();

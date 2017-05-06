@@ -12,10 +12,6 @@ WorkPack::WorkPack(vector<Card*> cards, int hiddenIndex)
     this->hiddenIndex = hiddenIndex;
 }
 
-int WorkPack::numOfHiddenCards() {
-    return hiddenIndex;
-}
-
 void WorkPack::incrementHiddenIndex()
 {
     hiddenIndex++;

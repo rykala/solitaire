@@ -8,7 +8,7 @@ class WorkPack: public Pack
 public:
     WorkPack(vector<Card*> cards, int hiddenIndex);
     bool flipHidden();
-    int numOfHiddenCards();
+    int getHiddenIndex() {return hiddenIndex;}
     void incrementHiddenIndex();
 
 protected:

@@ -183,3 +183,8 @@ void MainWindow::on_actionUndo1_triggered()
 {
     game1->undoTurn();
 }
+
+void MainWindow::on_actionHint1_triggered()
+{
+    game1->hint();
+}

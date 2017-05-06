@@ -12,6 +12,8 @@
 #include <QDebug>
 #include <QPixmap>
 #include <vector>
+#include <QString>
+#include <string>
 
 using std::vector;
 
@@ -59,6 +61,19 @@ void GraphicGameBoard::undoTurn()
     }
 
     drawGameBoard();
+}
+
+void GraphicGameBoard::hint()
+{
+    std::string hint = game->getHint();
+    if(hint != "") {
+        hintLabel = new QLabel(this);
+        hintLabel->setText(QString::fromStdString(hint));
+        hintLabel->setStyleSheet("font-size: 14px; background-color: rgba(255,255,255, 90%);"
+                                 "color: green; border: 1px solid green; border-left:0;border-top:0;"
+                                 "padding: 10px; padding-bottom:0px;");
+        hintLabel->show();
+    }
 }
 
 void GraphicGameBoard::drawStartPack()
@@ -236,6 +251,10 @@ void GraphicGameBoard::dropEvent(QDropEvent *event)
 void GraphicGameBoard::mousePressEvent(QMouseEvent *event)
 {
     /* ---------------------------- CUSTOM ACTIONS ------------------------------------ */
+    if(hintLabel) {
+        hintLabel->close();
+    }
+
     GraphicCard *clickedCard = dynamic_cast<GraphicCard*>(childAt(event->pos()));
     GraphicStartPack *startPack = dynamic_cast<GraphicStartPack*>(childAt(event->pos()));
 

@@ -4,6 +4,9 @@
 
 #include <QDebug>
 #include <algorithm>    // std::reverse
+#include <iostream>
+
+using std::string;
 
 Game::Game()
 {
@@ -209,16 +212,74 @@ bool Game::isValidMove(vector <Card*> cards, DeckType deckType, int deckIndex)
     return true;
 }
 
-std::string Game::getHint()
+string Game::getHint()
 {
-//    string hint;
+    string hint = "";
+    vector <Card*> tmpHand;
 
-//    for(auto worPack : workPacks) {
-//        workPacks->cards.back();
-//        for(auto targetPack : targetPacks) {
+    // WorkPacks to TargetPacks
+    for(int i = 0; i < workPacks.size(); i++) {
+        tmpHand.push_back(workPacks.at(i)->cards.back());
+        for(int j = 0; j < targetPacks.size(); j++) {
+            if(isValidMove(tmpHand, DeckType::Target, j)) {
+                hint += tmpHand.at(0)->getName();
+                hint += " from work pack(";
+                hint += std::to_string(i+1);
+                hint += ") to target pack(";
+                hint += std::to_string(j+1);
+                hint += ")\n";
+            }
+        }
+        tmpHand.clear();
+    }
 
-//        }
-//    }
+    // WorkPacks to WorkPack
+    for(int i = 0; i < workPacks.size(); i++) {
+        tmpHand.push_back(workPacks.at(i)->cards.at(workPacks.at(i)->getHiddenIndex()));
+        for(int j = 0; j < workPacks.size(); j++) {
+            //skip comparing the same pack
+            if (i == j) {
+                continue;
+            }
+
+            if(isValidMove(tmpHand, DeckType::Work, j)) {
+                hint += tmpHand.at(0)->getName();
+                hint += " from work pack(";
+                hint += std::to_string(i+1);
+                hint += ") to work pack(";
+                hint += std::to_string(j+1);
+                hint += ")\n";
+            }
+        }
+        tmpHand.clear();
+    }
+
+    //StartPack to Work or TargetPacks
+    if(startPack->getTopIndex() != -1) {
+        tmpHand.push_back(startPack->cards.at(startPack->getTopIndex()));
+
+        for(int i = 0; i < targetPacks.size(); i++) {
+            if(isValidMove(tmpHand, DeckType::Target, i)) {
+                hint += tmpHand.at(0)->getName();
+                hint += " from start pack to target pack(";
+                hint += std::to_string(i+1);
+                hint += ")\n";
+            }
+        }
+
+        for(int i = 0; i < workPacks.size(); i++) {
+            if(isValidMove(tmpHand, DeckType::Work, i)) {
+                hint += tmpHand.at(0)->getName();
+                hint += " from start pack to work pack(";
+                hint += std::to_string(i+1);
+                hint += ")\n";
+            }
+        }
+
+        tmpHand.clear();
+    }
+
+    return hint;
 }
 
 void Game::saveTurn(vector<Card*> hand, DeckType deckType, int deckIndex, int topIndex)
