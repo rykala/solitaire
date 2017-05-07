@@ -15,9 +15,6 @@
 #include <QString>
 #include <string>
 #include <QFileDialog>
-
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/archive/text_oarchive.hpp>
 #include <fstream>
 
 using std::vector;
@@ -79,13 +76,9 @@ void GraphicGameBoard::saveGame()
 
         string file(fileName.toLatin1());
 
-        fileHandler.open(file);
-        std::ofstream fileHandler(file);
-        boost::archive::text_oarchive boostOutputArchieve(fileHandler);
-        boostOutputArchieve << game;
         fileHandler.close();
     } catch (std::ifstream::failure err){
-        std::cerr << "Exception a r c file";
+
     }
 }
 
@@ -102,19 +95,12 @@ void GraphicGameBoard::loadGame()
         try
         {
             fileHandler.open(fileName.toLatin1());
-            boost::archive::text_iarchive boostInputArchieve (fileHandler);
-            //read class
 
-            //        if(!game) {
-            //            game = new Game();
-            //        }
-
-            boostInputArchieve >> game;
             fileHandler.close();
             drawGameBoard();
         }
         catch (std::ifstream::failure err){
-            std::cerr << "Exception a r c file";
+
         }
     }
 }

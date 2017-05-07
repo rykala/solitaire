@@ -10,10 +10,6 @@
 #include <QDebug>
 #include <fstream>
 
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/archive/text_oarchive.hpp>
-
-
 using std::to_string;
 using std::cout;
 using std::endl;
@@ -90,10 +86,8 @@ void CliGameBoard::loadGame()
     std::ifstream fileHandler("examples/one-turn.sol");
     try
     {
-        fileHandler.open;
-        boost::archive::text_iarchive boostInputArchieve (fileHandler);
-        //read class
-        boostInputArchieve >> game;
+//        fileHandler.open;
+
         fileHandler.close();
     }
     catch (std::ifstream::failure err){
@@ -115,12 +109,10 @@ void CliGameBoard::saveGame()
 
 
         fileHandler.open(file);
-        std::ofstream fileHandler(file);
-        boost::archive::text_oarchive boostOutputArchieve(fileHandler);
-        boostOutputArchieve << game;
+
         fileHandler.close();
     } catch (std::ifstream::failure err){
-        std::cerr << "Exception a r c file";
+
     }
 }
 

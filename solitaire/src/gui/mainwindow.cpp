@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setFixedSize(650,450);
 
     game1 = new GraphicGameBoard(ui->centralWidget);
-    game1->setObjectName(QStringLiteral("game1"));
+    game1->setObjectName(QString("game1"));
     game1->setGeometry(QRect(0, 0, this->width(), this->height()));
     game1->setStyleSheet("border: 0;");
     game1->drawGameBoard();
@@ -42,7 +42,7 @@ void MainWindow::on_actionGame1_triggered()
     //    on_actionClose1_triggered();
 
     game1 = new GraphicGameBoard(ui->centralWidget);
-    game1->setObjectName(QStringLiteral("game1"));
+    game1->setObjectName(QString("game1"));
 
     if(game2 || game3 || game4) {
         game1->setGeometry(QRect(0, 0, this->width()*0.5, this->height()*0.5));
@@ -59,7 +59,7 @@ void MainWindow::on_actionGame2_triggered()
     //    on_actionClose2_triggered();
 
     game2 = new GraphicGameBoard(ui->centralWidget);
-    game2->setObjectName(QStringLiteral("game2"));
+    game2->setObjectName(QString("game2"));
     game2->setGeometry(QRect(this->width()*0.5, 0, this->width()*0.5, this->height()*0.5));
     game2->setStyleSheet("border: 0px solid green; border-top: 0; border-right: 0;");
     game2->drawGameBoard();
@@ -71,7 +71,7 @@ void MainWindow::on_actionGame3_triggered()
     //    on_actionClose3_triggered();
 
     game3 = new GraphicGameBoard(ui->centralWidget);
-    game3->setObjectName(QStringLiteral("game3"));
+    game3->setObjectName(QString("game3"));
     game3->setGeometry(QRect(0, this->height()*0.5, this->width()*0.5, this->height()*0.5));
     game3->setStyleSheet("border: 0px solid green; border-top: 0; border-right: 0;");
     game3->drawGameBoard();
@@ -83,7 +83,7 @@ void MainWindow::on_actionGame4_triggered()
     //    on_actionClose4_triggered();
 
     game4 = new GraphicGameBoard(ui->centralWidget);
-    game4->setObjectName(QStringLiteral("game4"));
+    game4->setObjectName(QString("game4"));
     game4->setGeometry(QRect(this->width()*0.5, this->height()*0.5, this->width()*0.5, this->height()*0.5));
     game4->setStyleSheet("border-left: 0px solid green; border-top: 0; border-right: 0;");
     game4->drawGameBoard();
@@ -146,7 +146,7 @@ void MainWindow::closeCheck()
             game2 = NULL;
         }
 
-        game1->setObjectName(QStringLiteral("game1"));
+        game1->setObjectName(QString("game1"));
         game1->setStyleSheet("border: 0;");
         this->setFixedSize(650,450);
         game1->setGeometry(QRect(0, 0, this->width(), this->height()));
@@ -157,7 +157,7 @@ void MainWindow::closeCheck()
             game3 = NULL;
         }
 
-        game1->setObjectName(QStringLiteral("game1"));
+        game1->setObjectName(QString("game1"));
         game1->setStyleSheet("border: 0;");
         this->setFixedSize(650,450);
         game1->setGeometry(QRect(0, 0, this->width(), this->height()));
@@ -168,7 +168,7 @@ void MainWindow::closeCheck()
             game4 = NULL;
         }
 
-        game1->setObjectName(QStringLiteral("game1"));
+        game1->setObjectName(QString("game1"));
         game1->setStyleSheet("border: 0;");
         this->setFixedSize(650,450);
         game1->setGeometry(QRect(0, 0, this->width(), this->height()));

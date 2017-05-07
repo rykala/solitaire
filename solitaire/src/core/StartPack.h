@@ -4,10 +4,6 @@
 #include "Card.h"
 #include "Pack.h"
 
-#include <boost/archive/text_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/serialization/vector.hpp>
-
 class StartPack : public Pack
 {
 public:
@@ -24,16 +20,6 @@ public:
 
 protected:
     int top; // Inicializace na null, kdyz zadna karta neni prevracena
-
-private:
-    friend class boost::serialization::access;
-    template <typename Archive>
-      void serialize(Archive &ar, const unsigned int version)
-      {
-        ar & boost::serialization::base_object<Pack>(*this);
-        ar & cards;
-        ar & top;
-      }
 };
 
 #endif // STARTPACK_H

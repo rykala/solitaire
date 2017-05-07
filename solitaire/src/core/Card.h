@@ -2,8 +2,6 @@
 #define CARD_H
 
 #include "Globals.h"
-#include <boost/archive/text_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
 
 #include <string>
 
@@ -39,18 +37,6 @@ private:
     DeckType deck;
     int deckIndex;
     bool faceUp;
-
-    friend class boost::serialization::access;
-
-    template <typename Archive>
-    void serialize(Archive &ar, const unsigned int version)
-    {
-      ar & value;
-      ar & type;
-      ar & faceUp;
-      ar & deck;
-      ar & deckIndex;
-    }
 
 };
 

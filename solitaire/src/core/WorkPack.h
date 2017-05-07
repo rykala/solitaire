@@ -3,10 +3,6 @@
 
 #include "Pack.h"
 
-#include <boost/archive/text_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/serialization/vector.hpp>
-
 class WorkPack: public Pack
 {
 public:
@@ -18,17 +14,6 @@ public:
 
 protected:
     int hiddenIndex;
-
-private:
-    friend class boost::serialization::access;
-    template <typename Archive>
-    void serialize(Archive &ar, const unsigned int version)
-    {
-        ar & boost::serialization::base_object<Pack>(*this);
-        ar & hiddenIndex;
-    }
-
-
 };
 
 #endif // WORKPACK_H

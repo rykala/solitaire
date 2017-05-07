@@ -23,7 +23,6 @@ CONFIG += c++11
 TEMPLATE = app
 QMAKE_CXXFLAGS += -std=c++0x
 INCLUDEPATH += $${BASEDIR}/src/core
-INCLUDEPATH += $${BASEDIR}/src/boost/
 
 SOURCES +=  ../core/*.cpp\
             main.cpp\
@@ -48,5 +47,3 @@ RESOURCES = resources.qrc \
 
 FORMS += \
     mainwindow.ui
-
-LIBS += -L$${BASEDIR}/src/boost/ -lboost_serialization
