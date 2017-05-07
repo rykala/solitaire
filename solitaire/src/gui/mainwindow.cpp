@@ -39,7 +39,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionGame1_triggered()
 {
-//    on_actionClose1_triggered();
+    //    on_actionClose1_triggered();
 
     game1 = new GraphicGameBoard(ui->centralWidget);
     game1->setObjectName(QStringLiteral("game1"));
@@ -56,7 +56,7 @@ void MainWindow::on_actionGame1_triggered()
 void MainWindow::on_actionGame2_triggered()
 {
     anotherGame();
-//    on_actionClose2_triggered();
+    //    on_actionClose2_triggered();
 
     game2 = new GraphicGameBoard(ui->centralWidget);
     game2->setObjectName(QStringLiteral("game2"));
@@ -68,7 +68,7 @@ void MainWindow::on_actionGame2_triggered()
 void MainWindow::on_actionGame3_triggered()
 {
     anotherGame();
-//    on_actionClose3_triggered();
+    //    on_actionClose3_triggered();
 
     game3 = new GraphicGameBoard(ui->centralWidget);
     game3->setObjectName(QStringLiteral("game3"));
@@ -80,7 +80,7 @@ void MainWindow::on_actionGame3_triggered()
 void MainWindow::on_actionGame4_triggered()
 {
     anotherGame();
-//    on_actionClose4_triggered();
+    //    on_actionClose4_triggered();
 
     game4 = new GraphicGameBoard(ui->centralWidget);
     game4->setObjectName(QStringLiteral("game4"));
@@ -234,40 +234,60 @@ void MainWindow::on_actionHint4_triggered()
 
 void MainWindow::on_actionLoad_game1_triggered()
 {
+    if(!game1) {
+        on_actionGame1_triggered();
+    }
     game1->loadGame();
 }
 
 void MainWindow::on_actionLoad_game2_triggered()
 {
+    if(!game2) {
+        on_actionGame2_triggered();
+    }
     game2->loadGame();
 }
 
 void MainWindow::on_actionLoad_game3_triggered()
 {
+    if(!game3) {
+        on_actionGame3_triggered();
+    }
     game3->loadGame();
 }
 
 void MainWindow::on_actionLoad_game4_triggered()
 {
+    if(!game4) {
+        on_actionGame4_triggered();
+    }
     game4->loadGame();
 }
 
 void MainWindow::on_actionSave_Game1_triggered()
 {
-    game1->saveGame();
+    if(game1){
+        game1->saveGame();
+    }
 }
 
 void MainWindow::on_actionSave_Game2_triggered()
 {
-    game2->saveGame();
+    if(game2){
+        game2->saveGame();
+    }
 }
 
 void MainWindow::on_actionSave_Game3_triggered()
 {
-    game3->saveGame();
+    if(game3){
+        game3->saveGame();
+    }
 }
 
 void MainWindow::on_actionSave_Game4_triggered()
 {
-    game4->saveGame();
+    if(game4) {
+        game4->saveGame();
+    }
 }
