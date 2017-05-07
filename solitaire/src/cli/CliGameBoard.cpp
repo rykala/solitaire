@@ -17,7 +17,12 @@ using std::transform;
 
 CliGameBoard::CliGameBoard()
 {
-    game = new Game();
+    for (int i = 0; i < 4; ++i) {
+        Game *newGame = new Game();
+        games.push_back(newGame);
+    }
+
+    game = games.at(0);
 }
 
 
@@ -31,6 +36,41 @@ void CliGameBoard::startGame() {
 
     cout << "YOU WON!!! :)" << endl;
     exit(1);
+}
+
+int CliGameBoard::gameNumber() {
+    ptrdiff_t pos = find(games.begin(), games.end(), game) - games.begin();
+
+    if(pos >= (int)games.size()) {
+        //old_name_ not found
+    }
+
+    return pos;
+}
+
+void CliGameBoard::switchGames()
+{
+    bool isInputInvalid = false;
+
+    do {
+        isInputInvalid = false;
+        string gameNum;
+
+        cout << "Number of game to switch to (1-4 or press x to cancel): ";
+
+        getline(cin, gameNum);
+        transform(gameNum.begin(), gameNum.end(), gameNum.begin(), ::tolower);
+
+        if(gameNum == "x") {
+            return;
+        } else if (gameNum == "1" || gameNum == "2" || gameNum == "3" || gameNum == "4") {
+            int pos = (int)gameNum[0] - 97;
+            game = games.at(pos);
+        } else {
+            isInputInvalid = true;
+        }
+    } while (isInputInvalid);
+
 }
 
 
@@ -61,11 +101,11 @@ void CliGameBoard::parseTurn() {
         } else if (playerTurn == "m") {
             moveCards();
         } else if (playerTurn == "n") {
-            game = NULL;
-            game = new Game();
-        }
-
-        else {
+            games.at(gameNumber()) = NULL;
+            games.at(gameNumber()) = new Game();
+//        } else if(playerTurn == "w"){
+//            switchGames();
+        } else {
             isInputInvalid = true;
         }
     } while (isInputInvalid);
@@ -195,10 +235,14 @@ void CliGameBoard::moveCards()
 }
 
 string CliGameBoard::generateTurnInfo() {
-    string turnInfo = "S) Give me more cards!\n"
+    string turnInfo = "GAME #";
+    turnInfo +=       to_string(gameNumber() + 1);
+    turnInfo +=       "\n";
+    turnInfo +=       "S) Give me more cards!\n"
                       "M) Move cards!\n"
                       "U) Woops! Take me one turn back!\n"
                       "H) I need help!\n"
+                      "W) Switch to another game!\n"
                       "N) Give me new cards!\n"
                       "E) Get me out of here!\n";
 

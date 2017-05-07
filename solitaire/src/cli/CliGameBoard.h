@@ -13,12 +13,16 @@ public:
 private:
     Game *game;
 
+    vector<Game*> games;
+
     string generateTurnInfo();
     string generateGameBoard();
     int getBiggestWorkPack(vector<WorkPack*> packs);
     void parseTurn();
     void flipCards();
     void moveCards();
+    int gameNumber();
+    void switchGames();
 };
 
 #endif // CLIGAMEBOARD_H
