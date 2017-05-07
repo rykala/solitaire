@@ -7,6 +7,9 @@
 #include "TargetPack.h"
 #include "StartPack.h"
 
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/serialization/vector.hpp>
 #include <vector>
 #include <string>
 
@@ -16,6 +19,12 @@ class Game
 {
 public:
     Game();
+    Game(vector <WorkPack*> workPacks, vector<TargetPack*> targetPacks, StartPack *startPack,
+         vector< vector<Card*> > historyHand,
+         vector<DeckType> historyDeckType,
+         vector<int> historyDeckIndex,
+         vector<int> historyTop,
+         vector<bool> historyFlip);
 
     /* METHODS */
     void newGame();
@@ -52,6 +61,21 @@ protected:
     vector<int> historyDeckIndex;
     vector<int> historyTop;
     vector<bool> historyFlip;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version)
+    {
+        ar & targetPacks;
+        ar & workPacks;
+        ar & startPack;
+        ar & historyHand;
+        ar & historyDeckType;
+        ar & historyDeckIndex;
+        ar & historyTop;
+        ar & historyFlip;
+    }
 };
 
 #endif // GAME_H

@@ -15,8 +15,3 @@ Deck::Deck() {
 
     random_shuffle(cards.begin(), cards.end());
 }
-
-
-//Card Deck::getCard() {
-//    return &(cards.at(4));
-//}

@@ -8,11 +8,6 @@ enum CardType{
     Spade
 };
 
-enum CardColor{
-    Red = 1,
-    Black
-};
-
 enum DeckType {
     Start = 1,
     Work,

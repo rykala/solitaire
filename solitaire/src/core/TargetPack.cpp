@@ -10,6 +10,11 @@ TargetPack::TargetPack()
 
 }
 
+TargetPack::TargetPack(vector<Card *> cards)
+{
+    this->cards = cards;
+}
+
 //bool TargetPack::putCards(vector<Card*> cards)
 //{
 //    if(cards.size() != 1) {

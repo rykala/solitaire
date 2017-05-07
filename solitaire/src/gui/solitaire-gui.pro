@@ -3,7 +3,6 @@
 # Project created by QtCreator 2017-04-22T12:39:47
 #
 #-------------------------------------------------
-
 BASEDIR = $$PWD/../../
 
 QT += core gui
@@ -22,6 +21,7 @@ MOC_DIR = $${BASEDIR}/src/target
 TEMPLATE = app
 QMAKE_CXXFLAGS += -std=c++0x
 INCLUDEPATH += $${BASEDIR}/src/core
+INCLUDEPATH += /usr/include/boost/
 
 SOURCES +=  ../core/*.cpp\
             main.cpp\
@@ -46,3 +46,5 @@ RESOURCES = resources.qrc \
 
 FORMS += \
     mainwindow.ui
+
+LIBS += -L/usr/include/boost -lboost_serialization

@@ -5,20 +5,11 @@ StartPack::StartPack() {
 
 }
 
-StartPack::StartPack(vector<Card*> cards)
+StartPack::StartPack(vector<Card*> cards, int top)
 {
     this->cards = cards;
+    this->top = top;
 }
-
-//bool StartPack::getTopCard(Card &topCard) {
-//    if (top == -1) {
-//        return false;
-//    }
-
-//    topCard = cards->at(top);
-
-//    return true;
-//}
 
 int StartPack::flipCard() {
     top++;

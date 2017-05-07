@@ -6,10 +6,10 @@
 
 using std::vector;
 
-WorkPack::WorkPack(vector<Card*> cards, int hiddenIndex)
+WorkPack::WorkPack(vector<Card*> cards, int index)
 {
     this->cards.insert(this->cards.end(), cards.begin(), cards.end());
-    this->hiddenIndex = hiddenIndex;
+    this->hiddenIndex = index;
 }
 
 void WorkPack::incrementHiddenIndex()

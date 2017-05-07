@@ -21,10 +21,6 @@ void Card::flipCard()
     faceUp = true;
 }
 
-CardColor Card::getColor() {
-    return color;
-}
-
 CardType Card::getType() {
     return type;
 }

@@ -13,6 +13,31 @@ Game::Game()
     this->newGame();
 }
 
+Game::Game(vector <WorkPack*> workPacks, vector<TargetPack*> targetPacks, StartPack *startPack,
+           vector< vector<Card*> > historyHand,
+           vector<DeckType> historyDeckType,
+           vector<int> historyDeckIndex,
+           vector<int> historyTop,
+           vector<bool> historyFlip)
+{
+    this->startPack = NULL;
+    for (auto targetPack: this->targetPacks) {
+        targetPack = NULL;
+    }
+    for (auto workPack: this->workPacks) {
+        workPack = NULL;
+    }
+
+    this->workPacks = workPacks;
+    this->targetPacks = targetPacks;
+    this->startPack = startPack;
+    this->historyHand = historyHand;
+    this->historyDeckType = historyDeckType;
+    this->historyDeckIndex = historyDeckIndex;
+    this->historyTop = historyTop;
+    this->historyFlip = historyFlip;
+}
+
 void Game::newGame()
 {
     for (int i = 0; i < 7; ++i) {

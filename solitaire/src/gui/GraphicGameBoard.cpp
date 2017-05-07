@@ -15,6 +15,18 @@
 #include <QString>
 #include <string>
 
+#include <boost/archive/tmpdir.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/serialization/base_object.hpp>
+#include <boost/serialization/utility.hpp>
+#include <boost/serialization/list.hpp>
+#include <boost/serialization/assume_abstract.hpp>
+#include <iomanip>
+#include <iostream>
+#include <fstream>
+#include <string>
+
 using std::vector;
 
 GraphicGameBoard::GraphicGameBoard(QWidget *parent) : QFrame(parent)
@@ -27,18 +39,6 @@ GraphicGameBoard::GraphicGameBoard(QWidget *parent) : QFrame(parent)
 
 void GraphicGameBoard::drawGameBoard()
 {
-    drawStartPack();
-    drawWorkPacks();
-    drawTargetPacks();
-    this->show();
-}
-
-void GraphicGameBoard::undoTurn()
-{
-    if(!game->undoTurn()) {
-        return;
-    }
-
     QList<QLabel*> items = findChildren<QLabel*>();
 
     /* Backward loop */
@@ -60,6 +60,18 @@ void GraphicGameBoard::undoTurn()
         }
     }
 
+    drawStartPack();
+    drawWorkPacks();
+    drawTargetPacks();
+    this->show();
+}
+
+void GraphicGameBoard::undoTurn()
+{
+    if(!game->undoTurn()) {
+        return;
+    }
+
     drawGameBoard();
 }
 
@@ -73,6 +85,35 @@ void GraphicGameBoard::hint()
                                  "color: green; border: 1px solid white; border-left:0;border-top:0;"
                                  "padding: 10px; padding-bottom:0px;");
         hintLabel->show();
+    }
+}
+
+void GraphicGameBoard::saveGame()
+{
+    std::ofstream fileHandler("filename.sol");
+    boost::archive::text_oarchive boostOutputArchieve(fileHandler);
+    boostOutputArchieve << game;
+}
+
+void GraphicGameBoard::loadGame()
+{
+    std::ifstream fileHandler;
+    try
+    {
+        fileHandler.open("filename.sol");
+        boost::archive::text_iarchive boostInputArchieve (fileHandler);
+        //read class
+
+//        if(!game) {
+//            game = new Game();
+//        }
+
+        boostInputArchieve >> game;
+        fileHandler.close();
+        drawGameBoard();
+    }
+    catch (std::ifstream::failure err){
+            std::cerr << "Exception a r c file";
     }
 }
 
@@ -118,8 +159,8 @@ void GraphicGameBoard::gameWon()
 {
     if(game->isWin()) {
         QLabel *win = new QLabel(this);
-        win->setText(QString("YOU WON!!! :)"));
-        win->setFixedSize(650, 350);
+        win->setText(QString("YOU WIN!!! :)"));
+        win->setFixedSize(650, 450);
         win->setStyleSheet("font-size: 50px; background-color: rgba(255,255,255, 90%);font-weight: bold;"
                             "color: green; width:650px; height:350px;");
         win->setAlignment(Qt::AlignCenter);
@@ -306,14 +347,6 @@ void GraphicGameBoard::mousePressEvent(QMouseEvent *event)
     QMimeData *mimeData = new QMimeData;
     mimeData->setData("application/x-dnditemdata", itemData);
 
-//    QPixmap mypix(":/back/2");
-
-    //    QPixmap comboPixmap(75, 100);
-    //    QPainter painter(&comboPixmap);
-    //    painter.drawPixmap(0, 0, pixmap);
-    //    painter.drawPixmap(pixmap.width(), 10, mypix);
-
-
     QDrag *drag = new QDrag(this);
     drag->setMimeData(mimeData);
     drag->setPixmap(pixmap);
@@ -381,5 +414,7 @@ void GraphicGameBoard::dragMoveEvent(QDragMoveEvent *event)
         event->ignore();
     }
 }
+
+
 
 

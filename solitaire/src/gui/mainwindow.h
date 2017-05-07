@@ -1,9 +1,21 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "GraphicGameBoard.h"
+
 #include <QMainWindow>
 
-#include "GraphicGameBoard.h"
+#include <boost/archive/tmpdir.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/serialization/base_object.hpp>
+#include <boost/serialization/utility.hpp>
+#include <boost/serialization/list.hpp>
+#include <boost/serialization/assume_abstract.hpp>
+#include <iomanip>
+#include <iostream>
+#include <fstream>
+#include <string>
 
 namespace Ui {
 class MainWindow;
@@ -49,6 +61,10 @@ private slots:
     void on_actionHint3_triggered();
 
     void on_actionHint4_triggered();
+
+    void on_actionSave_Game1_triggered();
+
+    void on_actionLoad_game1_triggered();
 
 private:
     Ui::MainWindow *ui;

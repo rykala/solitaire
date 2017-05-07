@@ -2,6 +2,9 @@
 #define CARD_H
 
 #include "Globals.h"
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
+
 #include <string>
 
 using std::string;
@@ -21,8 +24,6 @@ public:
 
     CardType getType();
 
-    CardColor getColor();
-
     DeckType getDeckType() {return this->deck;}
     void setDeckType(DeckType deck) {this->deck = deck;}
 
@@ -35,10 +36,22 @@ public:
 private:
     int value;
     CardType type;
-    CardColor color;
     DeckType deck;
     int deckIndex;
     bool faceUp;
+
+    friend class boost::serialization::access;
+
+    template <typename Archive>
+    void serialize(Archive &ar, const unsigned int version)
+    {
+      ar & value;
+      ar & type;
+      ar & faceUp;
+      ar & deck;
+      ar & deckIndex;
+    }
+
 };
 
 #endif // CARD_H

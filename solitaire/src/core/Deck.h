@@ -12,7 +12,6 @@ class Deck
     public:
         vector<Card*> cards;
         Deck();
-//        Card getCard();
 };
 
 #endif // DECK_H

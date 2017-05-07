@@ -18,6 +18,8 @@ public:
     void drawGameBoard();
     void undoTurn();
     void hint();
+    void saveGame();
+    void loadGame();
 
 protected:
     /* MOUSE EVENTS */

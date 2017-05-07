@@ -22,9 +22,8 @@ MainWindow::MainWindow(QWidget *parent) :
                                    "QMenuBar::item {spacing: 15px; padding: 5px 10px;background: transparent;border-radius: 4px;}"
                                    "QMenuBar::item:selected { background: #a8a8a8;}"
                                    "QMenuBar::item:pressed {background: #888888;}");
-    //    this->setStyleSheet("background:qlineargradient(x1:0, y1:0, x2:0, y2:1,stop:0 lightgray, stop:1 darkgray)");
     this->setStyleSheet("background-color: #4DBD33;");
-    this->setFixedSize(650,350);
+    this->setFixedSize(650,450);
 
     game1 = new GraphicGameBoard(ui->centralWidget);
     game1->setObjectName(QStringLiteral("game1"));
@@ -94,7 +93,7 @@ void MainWindow::on_actionGame4_triggered()
 
 void MainWindow::anotherGame()
 {
-    this->setFixedSize(1300,700);
+    this->setFixedSize(1300,900);
     if(game1){
         game1->setGeometry(QRect(0, 0, this->width()*0.5, this->height()*0.5));
         game1->setStyleSheet("border: 0px solid green; border-top: 0; border-left: 0; border-right: 0");
@@ -233,4 +232,14 @@ void MainWindow::on_actionHint4_triggered()
     if(game4) {
         game4->hint();
     }
+}
+
+void MainWindow::on_actionSave_Game1_triggered()
+{
+    game1->saveGame();
+}
+
+void MainWindow::on_actionLoad_game1_triggered()
+{
+    game1->loadGame();
 }
