@@ -2,11 +2,23 @@
 #include "WorkPack.h"
 #include "StartPack.h"
 #include "TargetPack.h"
+#include "Game.h"
 
 #include <string>
 #include <iostream>
 #include <algorithm>
 #include <QDebug>
+
+#include <boost/archive/tmpdir.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/serialization/base_object.hpp>
+#include <boost/serialization/utility.hpp>
+#include <boost/serialization/list.hpp>
+#include <boost/serialization/assume_abstract.hpp>
+#include <iomanip>
+#include <iostream>
+#include <fstream>
 
 
 using std::to_string;
@@ -74,6 +86,28 @@ void CliGameBoard::switchGames()
 
 }
 
+void CliGameBoard::loadGame()
+{
+//    string fileName;
+
+//    cout << "Enter file path: ";
+
+//    getline(cin, fileName);
+
+    std::ifstream fileHandler;
+    try
+    {
+        fileHandler.open("test");
+        boost::archive::text_iarchive boostInputArchieve (fileHandler);
+        //read class
+        boostInputArchieve >> game;
+        fileHandler.close();
+    }
+    catch (std::ifstream::failure err){
+            std::cerr << "Exception a r c file";
+    }
+
+}
 
 void CliGameBoard::parseTurn() {
     bool isInputInvalid = false;
@@ -108,6 +142,10 @@ void CliGameBoard::parseTurn() {
             game = games.at(i);
         } else if(playerTurn == "w"){
             switchGames();
+        } else if(playerTurn == "l") {
+            loadGame();
+        } else if (playerTurn == "v") {
+//            saveGame();
         } else {
             isInputInvalid = true;
         }
@@ -247,6 +285,8 @@ string CliGameBoard::generateTurnInfo() {
                       "H) I need help!\n"
                       "W) Switch to another game!\n"
                       "N) Give me new cards!\n"
+                      "L) Load game\n"
+                      "S) Save game\n"
                       "E) Get me out of here!\n";
 
     return turnInfo;

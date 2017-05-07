@@ -137,7 +137,7 @@ void MainWindow::on_actionClose4_triggered()
 void MainWindow::closeCheck()
 {
     if(game1 && !game2 && !game3 && !game4){
-        this->setFixedSize(650,350);
+        this->setFixedSize(650,450);
         game1->setGeometry(QRect(0, 0, this->width(), this->height()));
     } else if (!game1 && game2 && !game3 && !game4) {
         game1 = game2;
@@ -148,7 +148,7 @@ void MainWindow::closeCheck()
 
         game1->setObjectName(QStringLiteral("game1"));
         game1->setStyleSheet("border: 0;");
-        this->setFixedSize(650,350);
+        this->setFixedSize(650,450);
         game1->setGeometry(QRect(0, 0, this->width(), this->height()));
     } else if (!game1 && !game2 && game3 && !game4) {
         game1 = game3;
@@ -159,7 +159,7 @@ void MainWindow::closeCheck()
 
         game1->setObjectName(QStringLiteral("game1"));
         game1->setStyleSheet("border: 0;");
-        this->setFixedSize(650,350);
+        this->setFixedSize(650,450);
         game1->setGeometry(QRect(0, 0, this->width(), this->height()));
     } else if(!game1 && !game2 && !game3 && game4) {
         game1 = game4;
@@ -170,7 +170,7 @@ void MainWindow::closeCheck()
 
         game1->setObjectName(QStringLiteral("game1"));
         game1->setStyleSheet("border: 0;");
-        this->setFixedSize(650,350);
+        this->setFixedSize(650,450);
         game1->setGeometry(QRect(0, 0, this->width(), this->height()));
     }
 }

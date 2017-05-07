@@ -23,6 +23,7 @@ private:
     void moveCards();
     int gameNumber();
     void switchGames();
+    void loadGame();
 };
 
 #endif // CLIGAMEBOARD_H

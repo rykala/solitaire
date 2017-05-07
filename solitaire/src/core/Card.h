@@ -19,7 +19,7 @@ public:
     void flipCard();
     string getName();
 
-    /* GETTERS *//* SETTERS */
+    /* GETTERS SETTERS */
     int getValue();
 
     CardType getType();

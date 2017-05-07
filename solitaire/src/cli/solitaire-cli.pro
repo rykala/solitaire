@@ -5,7 +5,7 @@
 #-------------------------------------------------
 BASEDIR = $$PWD/../../
 
-QT += core gui
+QT += core
 
 #CONFIG += console
 #CONFIG -= app_bundle
@@ -24,6 +24,7 @@ MOC_DIR = $${BASEDIR}/src/target
 TEMPLATE = app
 QMAKE_CXXFLAGS += -std=c++0x
 INCLUDEPATH += $${BASEDIR}/src/core
+INCLUDEPATH += /usr/include/boost/
 
 SOURCES += ../core/*.cpp\
            cli-main.cpp\
@@ -31,3 +32,5 @@ SOURCES += ../core/*.cpp\
 
 HEADERS  += ../core/*.h\
     CliGameBoard.h
+
+LIBS += -L/usr/include/boost -lboost_serialization

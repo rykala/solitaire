@@ -18,10 +18,12 @@ DESTDIR = $${BASEDIR}
 OBJECTS_DIR = $${BASEDIR}/src/target
 MOC_DIR = $${BASEDIR}/src/target
 
+CONFIG += c++11
+
 TEMPLATE = app
 QMAKE_CXXFLAGS += -std=c++0x
 INCLUDEPATH += $${BASEDIR}/src/core
-INCLUDEPATH += /usr/include/boost/
+INCLUDEPATH += /../boost/
 
 SOURCES +=  ../core/*.cpp\
             main.cpp\
@@ -47,4 +49,4 @@ RESOURCES = resources.qrc \
 FORMS += \
     mainwindow.ui
 
-LIBS += -L/usr/include/boost -lboost_serialization
+LIBS += -L/../boost/ -lboost_serialization
