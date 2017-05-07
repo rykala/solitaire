@@ -14,6 +14,7 @@
 #include <vector>
 #include <QString>
 #include <string>
+#include <QFileDialog>
 
 #include <boost/archive/tmpdir.hpp>
 #include <boost/archive/text_iarchive.hpp>
@@ -26,6 +27,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <regex>
 
 using std::vector;
 
@@ -90,30 +92,53 @@ void GraphicGameBoard::hint()
 
 void GraphicGameBoard::saveGame()
 {
-    std::ofstream fileHandler("filename.sol");
-    boost::archive::text_oarchive boostOutputArchieve(fileHandler);
-    boostOutputArchieve << game;
+    QString fileName = QFileDialog::getSaveFileName(this,
+                                                    tr("Save game"), "",
+                                                    tr("Solitaire file (*.sol)"));
+    std::ifstream fileHandler;
+    try {
+        if (!fileName.endsWith(".sol"))
+            fileName += ".sol";
+
+        string file(fileName.toLatin1());
+
+        fileHandler.open(file);
+        std::ofstream fileHandler(file);
+        boost::archive::text_oarchive boostOutputArchieve(fileHandler);
+        boostOutputArchieve << game;
+        fileHandler.close();
+    } catch (std::ifstream::failure err){
+        std::cerr << "Exception a r c file";
+    }
 }
+
 
 void GraphicGameBoard::loadGame()
 {
-    std::ifstream fileHandler;
-    try
-    {
-        fileHandler.open("filename.sol");
-        boost::archive::text_iarchive boostInputArchieve (fileHandler);
-        //read class
+    QString fileName = QFileDialog::getOpenFileName(this,
+                                                    tr("Load game"), "",
+                                                    tr("Solitaire file (*.sol)"));
+    if (fileName.isEmpty())
+        return;
+    else {
+        std::ifstream fileHandler;
+        try
+        {
+            fileHandler.open(fileName.toLatin1());
+            boost::archive::text_iarchive boostInputArchieve (fileHandler);
+            //read class
 
-//        if(!game) {
-//            game = new Game();
-//        }
+            //        if(!game) {
+            //            game = new Game();
+            //        }
 
-        boostInputArchieve >> game;
-        fileHandler.close();
-        drawGameBoard();
-    }
-    catch (std::ifstream::failure err){
+            boostInputArchieve >> game;
+            fileHandler.close();
+            drawGameBoard();
+        }
+        catch (std::ifstream::failure err){
             std::cerr << "Exception a r c file";
+        }
     }
 }
 
@@ -162,7 +187,7 @@ void GraphicGameBoard::gameWon()
         win->setText(QString("YOU WIN!!! :)"));
         win->setFixedSize(650, 450);
         win->setStyleSheet("font-size: 50px; background-color: rgba(255,255,255, 90%);font-weight: bold;"
-                            "color: green; width:650px; height:350px;");
+                           "color: green; width:650px; height:350px;");
         win->setAlignment(Qt::AlignCenter);
         win->show();
     }

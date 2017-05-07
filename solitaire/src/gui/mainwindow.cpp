@@ -37,8 +37,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
-
 void MainWindow::on_actionGame1_triggered()
 {
 //    on_actionClose1_triggered();
@@ -234,12 +232,42 @@ void MainWindow::on_actionHint4_triggered()
     }
 }
 
+void MainWindow::on_actionLoad_game1_triggered()
+{
+    game1->loadGame();
+}
+
+void MainWindow::on_actionLoad_game2_triggered()
+{
+    game2->loadGame();
+}
+
+void MainWindow::on_actionLoad_game3_triggered()
+{
+    game3->loadGame();
+}
+
+void MainWindow::on_actionLoad_game4_triggered()
+{
+    game4->loadGame();
+}
+
 void MainWindow::on_actionSave_Game1_triggered()
 {
     game1->saveGame();
 }
 
-void MainWindow::on_actionLoad_game1_triggered()
+void MainWindow::on_actionSave_Game2_triggered()
 {
-    game1->loadGame();
+    game2->saveGame();
+}
+
+void MainWindow::on_actionSave_Game3_triggered()
+{
+    game3->saveGame();
+}
+
+void MainWindow::on_actionSave_Game4_triggered()
+{
+    game4->saveGame();
 }

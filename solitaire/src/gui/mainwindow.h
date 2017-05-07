@@ -66,6 +66,18 @@ private slots:
 
     void on_actionLoad_game1_triggered();
 
+    void on_actionLoad_game2_triggered();
+
+    void on_actionLoad_game3_triggered();
+
+    void on_actionLoad_game4_triggered();
+
+    void on_actionSave_Game2_triggered();
+
+    void on_actionSave_Game3_triggered();
+
+    void on_actionSave_Game4_triggered();
+
 private:
     Ui::MainWindow *ui;
 };

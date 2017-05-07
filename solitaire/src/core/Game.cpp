@@ -21,10 +21,10 @@ Game::Game(vector <WorkPack*> workPacks, vector<TargetPack*> targetPacks, StartP
            vector<bool> historyFlip)
 {
     this->startPack = NULL;
-    for (auto targetPack: this->targetPacks) {
+    for (auto &targetPack: this->targetPacks) {
         targetPack = NULL;
     }
-    for (auto workPack: this->workPacks) {
+    for (auto &workPack: this->workPacks) {
         workPack = NULL;
     }
 
