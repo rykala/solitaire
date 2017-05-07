@@ -13,7 +13,7 @@ public:
     void incrementHiddenIndex();
 
 protected:
-    int hiddenIndex;
+    int hiddenIndex = 0;
 };
 
 #endif // WORKPACK_H

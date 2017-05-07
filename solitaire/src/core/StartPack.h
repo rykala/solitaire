@@ -8,7 +8,7 @@ class StartPack : public Pack
 {
 public:
     StartPack();
-    StartPack(vector<Card *> cards, int top = -1);
+    StartPack(vector<Card *> cards);
 
     int flipCard();
 
@@ -19,7 +19,7 @@ public:
     void setTopIndex(int top) {this->top = top;}
 
 protected:
-    int top; // Inicializace na null, kdyz zadna karta neni prevracena
+    int top = -1; // Inicializace na null, kdyz zadna karta neni prevracena
 };
 
 #endif // STARTPACK_H

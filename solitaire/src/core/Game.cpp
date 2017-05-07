@@ -5,20 +5,21 @@
 #include <QDebug>
 #include <algorithm>    // std::reverse
 #include <iostream>
+#include <fstream>
+#include <sstream>
 
 using std::string;
+using std::cout;
+using std::endl;
+using std::ifstream;
+using std::getline;
 
 Game::Game()
 {
     this->newGame();
 }
 
-Game::Game(vector <WorkPack*> workPacks, vector<TargetPack*> targetPacks, StartPack *startPack,
-           vector< vector<Card*> > historyHand,
-           vector<DeckType> historyDeckType,
-           vector<int> historyDeckIndex,
-           vector<int> historyTop,
-           vector<bool> historyFlip)
+Game::Game(vector <WorkPack*> workPacks, vector<TargetPack*> targetPacks, StartPack *startPack)
 {
     this->startPack = NULL;
     for (auto &targetPack: this->targetPacks) {
@@ -31,11 +32,6 @@ Game::Game(vector <WorkPack*> workPacks, vector<TargetPack*> targetPacks, StartP
     this->workPacks = workPacks;
     this->targetPacks = targetPacks;
     this->startPack = startPack;
-    this->historyHand = historyHand;
-    this->historyDeckType = historyDeckType;
-    this->historyDeckIndex = historyDeckIndex;
-    this->historyTop = historyTop;
-    this->historyFlip = historyFlip;
 }
 
 void Game::newGame()
@@ -402,3 +398,99 @@ bool Game::undoTurn()
 
     return true;
 }
+
+bool Game::saveGame()
+{
+    std::ofstream out;
+
+    try {
+        out.open("test");
+    } catch(const std::exception &e) {
+        //            error = e.what();
+                    return false;
+    }
+
+    for(auto card: startPack->cards) {
+        out << card->getValue() << " " << card->getType() << " " << card->getDeckType()
+            << " " << card->getDeckIndex() << " " << card->getFaceUp() << endl;
+    }
+
+    for(auto targetPack: targetPacks) {
+        for(auto card : targetPack->cards) {
+            out << card->getValue() << " " << card->getType() << " " << card->getDeckType()
+                << " " << card->getDeckIndex() << " " << card->getFaceUp() << endl;
+        }
+    }
+
+    for(auto workPack: workPacks) {
+        for(auto card : workPack->cards) {
+            out << card->getValue() << " " << card->getType() << " " << card->getDeckType()
+                << " " << card->getDeckIndex() << " " << card->getFaceUp() << endl;
+        }
+    }
+
+    out.close();
+
+            return true;
+}
+
+bool Game::loadGame()
+{
+    ifstream in;
+    string input;
+    int value, cardType, deckType, deckIndex;
+    bool faceUp;
+
+    vector<Card*> startPack;
+    vector<WorkPack*> workPacks;
+    vector<TargetPack*> targetPacks;
+
+    for(int i = 0; i < 7; i++) {
+        WorkPack *workPack = new WorkPack();
+        workPacks.push_back(workPack);
+    }
+
+    for(int i = 0; i < 4; i++) {
+        TargetPack *targetPack = new TargetPack();
+        targetPacks.push_back(targetPack);
+    }
+
+    in.open("test");
+
+    while(getline(in, input)) {
+
+        std::istringstream is(input);
+        is >> value >> cardType >> deckType >> deckIndex >> faceUp;
+        auto deck = static_cast<DeckType>(deckType);
+        auto type = static_cast<CardType>(cardType);
+
+        Card *card = new Card(value, type, faceUp);
+        card->setDeckIndex(deckIndex);
+        card->setDeckType(deck);
+
+        if(deck == DeckType::Start) {
+            startPack.push_back(card);
+        } else if(deck == DeckType::Work) {
+            workPacks.at(deckIndex)->cards.push_back(card);
+            if (!card->getFaceUp()) {
+                workPacks.at(deckIndex)->incrementHiddenIndex();
+            }
+        } else if(deck == DeckType::Target) {
+            targetPacks.at(deckIndex)->cards.push_back(card);
+        }
+    }
+
+    this->startPack = NULL;
+    this->startPack = new StartPack(startPack);
+
+    this->workPacks.clear();
+    this->workPacks = workPacks;
+
+    this->targetPacks.clear();
+    this->targetPacks = targetPacks;
+
+    in.close();
+
+    return true;
+}
+

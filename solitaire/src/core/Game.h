@@ -16,16 +16,13 @@ class Game
 {
 public:
     Game();
-    Game(vector <WorkPack*> workPacks, vector<TargetPack*> targetPacks, StartPack *startPack,
-         vector< vector<Card*> > historyHand,
-         vector<DeckType> historyDeckType,
-         vector<int> historyDeckIndex,
-         vector<int> historyTop,
-         vector<bool> historyFlip);
+    Game(vector <WorkPack*> workPacks, vector<TargetPack*> targetPacks, StartPack *startPack);
 
     /* METHODS */
     void newGame();
     bool undoTurn();
+    bool saveGame();
+    bool loadGame();
 
     void flipCards();
     int flipStartCard();
@@ -58,7 +55,6 @@ protected:
     vector<int> historyDeckIndex;
     vector<int> historyTop;
     vector<bool> historyFlip;
-    void saveGame();
 };
 
 #endif // GAME_H

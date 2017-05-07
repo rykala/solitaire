@@ -5,10 +5,18 @@ StartPack::StartPack() {
 
 }
 
-StartPack::StartPack(vector<Card*> cards, int top)
+StartPack::StartPack(vector<Card*> cards)
 {
+    int tmpTop = -1;
     this->cards = cards;
-    this->top = top;
+
+    for(auto &card : cards) {
+        if(card->getFaceUp()) {
+            tmpTop++;
+        }
+    }
+
+    this->top = tmpTop;
 }
 
 int StartPack::flipCard() {
