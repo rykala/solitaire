@@ -64,7 +64,8 @@ void CliGameBoard::switchGames()
         if(gameNum == "x") {
             return;
         } else if (gameNum == "1" || gameNum == "2" || gameNum == "3" || gameNum == "4") {
-            int pos = (int)gameNum[0] - 97;
+            int pos = (int)gameNum[0] - 49;
+            qDebug() << pos;
             game = games.at(pos);
         } else {
             isInputInvalid = true;
@@ -101,10 +102,12 @@ void CliGameBoard::parseTurn() {
         } else if (playerTurn == "m") {
             moveCards();
         } else if (playerTurn == "n") {
-            games.at(gameNumber()) = NULL;
-            games.at(gameNumber()) = new Game();
-//        } else if(playerTurn == "w"){
-//            switchGames();
+            int i = gameNumber();
+            delete game;
+            games.at(i) = new Game();
+            game = games.at(i);
+        } else if(playerTurn == "w"){
+            switchGames();
         } else {
             isInputInvalid = true;
         }
