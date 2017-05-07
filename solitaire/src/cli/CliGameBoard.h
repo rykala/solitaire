@@ -24,6 +24,7 @@ private:
     int gameNumber();
     void switchGames();
     void loadGame();
+    void saveGame();
 };
 
 #endif // CLIGAMEBOARD_H

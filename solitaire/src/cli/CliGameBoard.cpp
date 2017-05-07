@@ -8,17 +8,10 @@
 #include <iostream>
 #include <algorithm>
 #include <QDebug>
+#include <fstream>
 
-#include <boost/archive/tmpdir.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
-#include <boost/serialization/base_object.hpp>
-#include <boost/serialization/utility.hpp>
-#include <boost/serialization/list.hpp>
-#include <boost/serialization/assume_abstract.hpp>
-#include <iomanip>
-#include <iostream>
-#include <fstream>
 
 
 using std::to_string;
@@ -88,16 +81,16 @@ void CliGameBoard::switchGames()
 
 void CliGameBoard::loadGame()
 {
-//    string fileName;
+    string fileName;
 
-//    cout << "Enter file path: ";
+    cout << "Enter file path: ";
 
-//    getline(cin, fileName);
+    getline(cin, fileName);
 
-    std::ifstream fileHandler;
+    std::ifstream fileHandler("examples/one-turn.sol");
     try
     {
-        fileHandler.open("test");
+        fileHandler.open;
         boost::archive::text_iarchive boostInputArchieve (fileHandler);
         //read class
         boostInputArchieve >> game;
@@ -107,6 +100,28 @@ void CliGameBoard::loadGame()
             std::cerr << "Exception a r c file";
     }
 
+}
+
+void CliGameBoard::saveGame()
+{
+        string file;
+        cout << "Enter file path: ";
+        getline(cin, file);
+
+    std::ifstream fileHandler;
+    try {
+//        if (!fileName.endsWith(".sol"))
+//            fileName += ".sol";
+
+
+        fileHandler.open(file);
+        std::ofstream fileHandler(file);
+        boost::archive::text_oarchive boostOutputArchieve(fileHandler);
+        boostOutputArchieve << game;
+        fileHandler.close();
+    } catch (std::ifstream::failure err){
+        std::cerr << "Exception a r c file";
+    }
 }
 
 void CliGameBoard::parseTurn() {
@@ -145,7 +160,7 @@ void CliGameBoard::parseTurn() {
         } else if(playerTurn == "l") {
             loadGame();
         } else if (playerTurn == "v") {
-//            saveGame();
+            saveGame();
         } else {
             isInputInvalid = true;
         }
@@ -286,7 +301,7 @@ string CliGameBoard::generateTurnInfo() {
                       "W) Switch to another game!\n"
                       "N) Give me new cards!\n"
                       "L) Load game\n"
-                      "S) Save game\n"
+                      "V) Save game\n"
                       "E) Get me out of here!\n";
 
     return turnInfo;
