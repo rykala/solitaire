@@ -1,14 +1,18 @@
 #ifndef TARGETPACK_H
 #define TARGETPACK_H
 
-#include "Pack.h"
 #include "Card.h"
+
+#include <vector>
+
+using std::vector;
 
 class TargetPack
 {
 public:
+
     TargetPack();
-    TargetPack(vector <Card*> cards);
+    TargetPack(vector<Card*> cards);
     ~TargetPack();
 
     vector<Card*> cards;

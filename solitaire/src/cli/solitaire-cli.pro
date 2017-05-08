@@ -22,6 +22,7 @@ OBJECTS_DIR = $${BASEDIR}/src/target
 MOC_DIR = $${BASEDIR}/src/target
 
 TEMPLATE = app
+DEFINES += QT_NO_DEBUG_OUTPUT
 QMAKE_CXXFLAGS += -std=c++0x
 INCLUDEPATH += $${BASEDIR}/src/core
 

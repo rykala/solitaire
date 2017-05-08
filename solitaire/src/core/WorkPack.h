@@ -1,7 +1,11 @@
 #ifndef WORKPACK_H
 #define WORKPACK_H
 
-#include "Pack.h"
+#include "Card.h"
+
+#include <vector>
+
+using std::vector;
 
 class WorkPack
 {

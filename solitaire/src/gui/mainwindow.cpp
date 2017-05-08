@@ -140,6 +140,7 @@ void MainWindow::closeCheck()
         this->setFixedSize(650,450);
         game1->setGeometry(QRect(0, 0, this->width(), this->height()));
     } else if (!game1 && game2 && !game3 && !game4) {
+        game1->close();
         game1 = game2;
 
         if(game2){
@@ -151,6 +152,7 @@ void MainWindow::closeCheck()
         this->setFixedSize(650,450);
         game1->setGeometry(QRect(0, 0, this->width(), this->height()));
     } else if (!game1 && !game2 && game3 && !game4) {
+        game1->close();
         game1 = game3;
 
         if(game3){
@@ -162,6 +164,7 @@ void MainWindow::closeCheck()
         this->setFixedSize(650,450);
         game1->setGeometry(QRect(0, 0, this->width(), this->height()));
     } else if(!game1 && !game2 && !game3 && game4) {
+        game1->close();
         game1 = game4;
 
         if(game4){

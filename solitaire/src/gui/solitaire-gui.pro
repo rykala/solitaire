@@ -19,6 +19,7 @@ OBJECTS_DIR = $${BASEDIR}/src/target
 MOC_DIR = $${BASEDIR}/src/target
 
 CONFIG += c++11
+DEFINES += QT_NO_DEBUG_OUTPUT
 
 TEMPLATE = app
 QMAKE_CXXFLAGS += -std=c++0x

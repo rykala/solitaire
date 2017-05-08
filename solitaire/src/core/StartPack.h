@@ -2,13 +2,16 @@
 #define STARTPACK_H
 
 #include "Card.h"
-#include "Pack.h"
+
+#include <vector>
+
+using std::vector;
 
 class StartPack
 {
 public:
     StartPack();
-    StartPack(vector<Card *> cards);
+    StartPack(vector<Card*> cards);
     ~StartPack();
 
     vector<Card*> cards;

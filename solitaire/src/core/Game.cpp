@@ -3,7 +3,7 @@
 #include "Globals.h"
 
 #include <QDebug>
-#include <algorithm>    // std::reverse
+#include <algorithm>
 #include <iostream>
 #include <fstream>
 #include <sstream>

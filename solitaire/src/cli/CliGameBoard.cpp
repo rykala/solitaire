@@ -35,8 +35,7 @@ void CliGameBoard::startGame() {
         game->flipCards();
     }
 
-    cout << "YOU WON!!! :)" << endl;
-    exit(1);
+    cout << endl << "YOU WON!!! :)" << endl << endl;
 }
 
 int CliGameBoard::gameNumber() {
