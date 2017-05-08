@@ -7,11 +7,6 @@ BASEDIR = $$PWD/../..
 
 QT += core
 
-#CONFIG += console
-#CONFIG -= app_bundle
-
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-
 # Target file name
 TARGET = hra2017-cli
 # Specifies where to put the target file.
