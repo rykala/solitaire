@@ -28,14 +28,13 @@ CliGameBoard::CliGameBoard()
 
 
 void CliGameBoard::startGame() {
-    while(!game->isWin()) {
+    while(true) {
         cout << generateGameBoard() << endl;
         cout << generateTurnInfo() << endl;
         parseTurn();
         game->flipCards();
     }
 
-    cout << endl << "YOU WON!!! :)" << endl << endl;
 }
 
 int CliGameBoard::gameNumber() {
@@ -264,18 +263,29 @@ void CliGameBoard::moveCards()
 }
 
 string CliGameBoard::generateTurnInfo() {
-    string turnInfo = "GAME #";
-    turnInfo +=       to_string(gameNumber() + 1);
-    turnInfo +=       "\n";
-    turnInfo +=       "S) Give me more cards!\n"
-                      "M) Move cards!\n"
-                      "U) Woops! Take me one turn back!\n"
-                      "H) I need help!\n"
-                      "W) Switch to another game!\n"
-                      "N) Give me new cards!\n"
-                      "L) Load game\n"
-                      "V) Save game\n"
-                      "E) Get me out of here!\n";
+    string turnInfo = "";
+
+    if(game->isWin()) {
+        turnInfo += "\n             YOU WIN!!! :)\n";
+        turnInfo += "\n_______________________________________\n\n";
+    }
+
+    turnInfo += "GAME #";
+    turnInfo += to_string(gameNumber() + 1);
+    turnInfo += "\n";
+
+    if (!game->isWin()) {
+        turnInfo += "S) Give me more cards!\n"
+                    "M) Move cards!\n"
+                    "U) Woops! Take me one turn back!\n"
+                    "H) I need help!\n";
+    }
+
+    turnInfo += "W) Switch to another game!\n"
+                "N) Give me new cards!\n"
+                "L) Load game\n"
+                "V) Save game\n"
+                "E) Get me out of here!\n";
 
     return turnInfo;
 }
@@ -286,8 +296,9 @@ string CliGameBoard::generateGameBoard() {
 
     board += "_______________________________________\n\n";
     board += "       S:          a:    b:    c:    d:\n";
-    board += !startPack->cards.back()->getFaceUp() ? " 🂠     ": " ◻     ";
-    board += startPack->cards.at(0)->getFaceUp() ? startPack->cards.at(startPack->getTopIndex())->getName() : "◻";
+    board += (startPack->cards.size() > 0 && !startPack->cards.back()->getFaceUp()) ? " 🂠     ": " ◻     ";
+    board += (startPack->cards.size() > 0 && startPack->cards.at(0)->getFaceUp()) ?
+                startPack->cards.at(startPack->getTopIndex())->getName() : " ";
     board += "           ";
 
     for (int i = 0; i < 4; ++i) {
