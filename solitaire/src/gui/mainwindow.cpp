@@ -39,8 +39,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionGame1_triggered()
 {
-    //    on_actionClose1_triggered();
-
     game1 = new GraphicGameBoard(ui->centralWidget);
     game1->setObjectName(QString("game1"));
 
@@ -56,7 +54,6 @@ void MainWindow::on_actionGame1_triggered()
 void MainWindow::on_actionGame2_triggered()
 {
     anotherGame();
-    //    on_actionClose2_triggered();
 
     game2 = new GraphicGameBoard(ui->centralWidget);
     game2->setObjectName(QString("game2"));
@@ -68,7 +65,6 @@ void MainWindow::on_actionGame2_triggered()
 void MainWindow::on_actionGame3_triggered()
 {
     anotherGame();
-    //    on_actionClose3_triggered();
 
     game3 = new GraphicGameBoard(ui->centralWidget);
     game3->setObjectName(QString("game3"));
@@ -80,7 +76,6 @@ void MainWindow::on_actionGame3_triggered()
 void MainWindow::on_actionGame4_triggered()
 {
     anotherGame();
-    //    on_actionClose4_triggered();
 
     game4 = new GraphicGameBoard(ui->centralWidget);
     game4->setObjectName(QString("game4"));
