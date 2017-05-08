@@ -7,6 +7,7 @@ class CliGameBoard
 {
 public:
     CliGameBoard();
+    ~CliGameBoard();
 
     void startGame();
 
@@ -18,7 +19,7 @@ private:
     string generateTurnInfo();
     string generateGameBoard();
     int getBiggestWorkPack(vector<WorkPack*> packs);
-    void parseTurn();
+    bool parseTurn();
     void flipCards();
     void moveCards();
     int gameNumber();

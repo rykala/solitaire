@@ -26,12 +26,21 @@ CliGameBoard::CliGameBoard()
     game = games.at(0);
 }
 
+CliGameBoard::~CliGameBoard()
+{
+    for (auto game : games) {
+        delete game;
+    }
+}
+
 
 void CliGameBoard::startGame() {
     while(true) {
         cout << generateGameBoard() << endl;
         cout << generateTurnInfo() << endl;
-        parseTurn();
+        if(!parseTurn()) {
+            return;
+        }
         game->flipCards();
     }
 
@@ -96,7 +105,7 @@ void CliGameBoard::saveGame()
     game->saveGame(file);
 }
 
-void CliGameBoard::parseTurn() {
+bool CliGameBoard::parseTurn() {
     bool isInputInvalid = false;
 
     do {
@@ -109,7 +118,7 @@ void CliGameBoard::parseTurn() {
         transform(playerTurn.begin(), playerTurn.end(), playerTurn.begin(), ::tolower);
 
         if(playerTurn == "e") {
-            exit(1);
+            return false;
         } else if(playerTurn =="s") {
             game->flipStartCard();
         } else if(playerTurn == "h") {
@@ -137,6 +146,8 @@ void CliGameBoard::parseTurn() {
             isInputInvalid = true;
         }
     } while (isInputInvalid);
+
+    return true;
 }
 
 void CliGameBoard::moveCards()
