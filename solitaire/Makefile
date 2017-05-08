@@ -25,9 +25,16 @@ clean: clean-gui clean-cli
 	rm -fr src/target/
 	rm -f xrykal00-xpolak33.zip
 
-
 clean-gui:
 	cd src/gui && qmake -makefile && make clean && rm Makefile
 
 clean-cli:
 	cd src/cli && qmake -makefile && make clean && rm Makefile
+
+run: run-gui run-cli
+
+run-gui:
+	./hra2017 &
+
+run-cli:
+	./hra2017-cli
