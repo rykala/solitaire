@@ -16,7 +16,7 @@ gui:
 cli:
 	cd src/cli && qmake -makefile && make
 
-zip: clean
+pack: clean
 	zip -r xrykal00-xpolak33.zip ./
 
 clean: clean-gui clean-cli
