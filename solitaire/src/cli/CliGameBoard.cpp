@@ -83,7 +83,9 @@ void CliGameBoard::loadGame()
 
     getline(cin, fileName);
 
-    game->loadGame(fileName);
+    if (!game->loadGame(fileName)) {
+        cout << "Could not load file!" << endl;
+    }
 
 }
 

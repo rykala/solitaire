@@ -17,6 +17,7 @@ class Game
 public:
     Game();
     Game(vector <WorkPack*> workPacks, vector<TargetPack*> targetPacks, StartPack *startPack);
+    ~Game();
 
     /* METHODS */
     void newGame();

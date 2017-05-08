@@ -19,6 +19,13 @@ StartPack::StartPack(vector<Card*> cards)
     this->top = tmpTop;
 }
 
+StartPack::~StartPack()
+{
+    for (auto card : cards) {
+        delete card;
+    }
+}
+
 int StartPack::flipCard() {
     top++;
 

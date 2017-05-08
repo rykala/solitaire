@@ -4,11 +4,14 @@
 #include "Pack.h"
 #include "Card.h"
 
-class TargetPack : public Pack
+class TargetPack
 {
 public:
     TargetPack();
     TargetPack(vector <Card*> cards);
+    ~TargetPack();
+
+    vector<Card*> cards;
 };
 
 #endif // TARGETPACK_H

@@ -14,3 +14,10 @@ TargetPack::TargetPack(vector<Card *> cards)
 {
     this->cards = cards;
 }
+
+TargetPack::~TargetPack()
+{
+    for (auto card : cards) {
+        delete card;
+    }
+}

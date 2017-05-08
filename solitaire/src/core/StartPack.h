@@ -4,11 +4,14 @@
 #include "Card.h"
 #include "Pack.h"
 
-class StartPack : public Pack
+class StartPack
 {
 public:
     StartPack();
     StartPack(vector<Card *> cards);
+    ~StartPack();
+
+    vector<Card*> cards;
 
     int flipCard();
 

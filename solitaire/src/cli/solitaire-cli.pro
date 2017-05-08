@@ -3,7 +3,7 @@
 # Project created by QtCreator 2017-04-19T21:47:57
 #
 #-------------------------------------------------
-BASEDIR = $$PWD/../../
+BASEDIR = $$PWD/../..
 
 QT += core
 
@@ -24,7 +24,6 @@ MOC_DIR = $${BASEDIR}/src/target
 TEMPLATE = app
 QMAKE_CXXFLAGS += -std=c++0x
 INCLUDEPATH += $${BASEDIR}/src/core
-INCLUDEPATH += $${BASEDIR}/src/boost/
 
 SOURCES += ../core/*.cpp\
            cli-main.cpp\
@@ -32,5 +31,3 @@ SOURCES += ../core/*.cpp\
 
 HEADERS  += ../core/*.h\
     CliGameBoard.h
-
-LIBS += -L$${BASEDIR}/src/boost -lboost_serialization

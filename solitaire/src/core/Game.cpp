@@ -34,6 +34,19 @@ Game::Game(vector <WorkPack*> workPacks, vector<TargetPack*> targetPacks, StartP
     this->startPack = startPack;
 }
 
+Game::~Game()
+{
+    delete startPack;
+
+    for (auto targetPack : targetPacks) {
+        delete targetPack;
+    }
+
+    for (auto workPack: workPacks) {
+        delete workPack;
+    }
+}
+
 void Game::newGame()
 {
     for (int i = 0; i < 7; ++i) {
@@ -406,7 +419,6 @@ bool Game::saveGame(string filename)
     try {
         out.open(filename);
     } catch(const std::exception &e) {
-        //            error = e.what();
         return false;
     }
 
@@ -441,6 +453,12 @@ bool Game::loadGame(const string &filename)
     int value, cardType, deckType, deckIndex;
     bool faceUp;
 
+    in.open(filename.data());
+
+    if(!in.good()) {
+        return false;
+    }
+
     vector<Card*> startPack;
     vector<WorkPack*> workPacks;
     vector<TargetPack*> targetPacks;
@@ -454,8 +472,6 @@ bool Game::loadGame(const string &filename)
         TargetPack *targetPack = new TargetPack();
         targetPacks.push_back(targetPack);
     }
-
-    in.open(filename.data());
 
     while(getline(in, input)) {
 
@@ -481,15 +497,15 @@ bool Game::loadGame(const string &filename)
     }
 
 
-        this->startPack = NULL;
-        StartPack *helpPack = new StartPack(startPack);
-        this->startPack = helpPack;
+    this->startPack = NULL;
+    StartPack *helpPack = new StartPack(startPack);
+    this->startPack = helpPack;
 
-        this->workPacks.clear();
-        this->workPacks = workPacks;
+    this->workPacks.clear();
+    this->workPacks = workPacks;
 
-        this->targetPacks.clear();
-        this->targetPacks = targetPacks;
+    this->targetPacks.clear();
+    this->targetPacks = targetPacks;
 
 
     in.close();

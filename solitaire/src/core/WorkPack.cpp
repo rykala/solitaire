@@ -12,6 +12,13 @@ WorkPack::WorkPack(vector<Card*> cards, int index)
     this->hiddenIndex = index;
 }
 
+WorkPack::~WorkPack()
+{
+    for (auto card : cards) {
+        delete card;
+    }
+}
+
 void WorkPack::incrementHiddenIndex()
 {
     hiddenIndex++;

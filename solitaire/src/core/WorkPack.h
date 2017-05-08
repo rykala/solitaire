@@ -3,11 +3,15 @@
 
 #include "Pack.h"
 
-class WorkPack: public Pack
+class WorkPack
 {
 public:
     WorkPack() {}
     WorkPack(vector<Card*> cards, int index);
+    ~WorkPack();
+
+    vector<Card*> cards;
+
     bool flipHidden();
     int getHiddenIndex() {return hiddenIndex;}
     void incrementHiddenIndex();
