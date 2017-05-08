@@ -21,8 +21,8 @@ public:
     /* METHODS */
     void newGame();
     bool undoTurn();
-    bool saveGame();
-    bool loadGame();
+    bool saveGame(string filename);
+    bool loadGame(const string &filename);
 
     void flipCards();
     int flipStartCard();

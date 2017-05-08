@@ -399,15 +399,15 @@ bool Game::undoTurn()
     return true;
 }
 
-bool Game::saveGame()
+bool Game::saveGame(string filename)
 {
     std::ofstream out;
 
     try {
-        out.open("test");
+        out.open(filename);
     } catch(const std::exception &e) {
         //            error = e.what();
-                    return false;
+        return false;
     }
 
     for(auto card: startPack->cards) {
@@ -431,10 +431,10 @@ bool Game::saveGame()
 
     out.close();
 
-            return true;
+    return true;
 }
 
-bool Game::loadGame()
+bool Game::loadGame(const string &filename)
 {
     ifstream in;
     string input;
@@ -455,7 +455,7 @@ bool Game::loadGame()
         targetPacks.push_back(targetPack);
     }
 
-    in.open("test");
+    in.open(filename.data());
 
     while(getline(in, input)) {
 
@@ -480,14 +480,17 @@ bool Game::loadGame()
         }
     }
 
-    this->startPack = NULL;
-    this->startPack = new StartPack(startPack);
 
-    this->workPacks.clear();
-    this->workPacks = workPacks;
+        this->startPack = NULL;
+        StartPack *helpPack = new StartPack(startPack);
+        this->startPack = helpPack;
 
-    this->targetPacks.clear();
-    this->targetPacks = targetPacks;
+        this->workPacks.clear();
+        this->workPacks = workPacks;
+
+        this->targetPacks.clear();
+        this->targetPacks = targetPacks;
+
 
     in.close();
 

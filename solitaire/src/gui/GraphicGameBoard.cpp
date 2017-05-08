@@ -66,47 +66,29 @@ void GraphicGameBoard::hint()
 
 void GraphicGameBoard::saveGame()
 {
-//    QString fileName = QFileDialog::getSaveFileName(this,
-//                                                    tr("Save game"), "",
-//                                                    tr("Solitaire file (*.sol)"));
-//    std::ifstream fileHandler;
-//    try {
-//        if (!fileName.endsWith(".sol"))
-//            fileName += ".sol";
+    QString fileName = QFileDialog::getSaveFileName(this,
+                                                    tr("Save game"), "",
+                                                    tr("Solitaire file (*.sol)"));
 
-//        string file(fileName.toLatin1());
+    if (!fileName.endsWith(".sol"))
+        fileName += ".sol";
 
-//        fileHandler.close();
-//    } catch (std::ifstream::failure err){
+    string file(fileName.toLatin1());
 
-//    }
-    game->saveGame();
+    game->saveGame(file);
 }
 
 
 void GraphicGameBoard::loadGame()
 {
-//    QString fileName = QFileDialog::getOpenFileName(this,
-//                                                    tr("Load game"), "",
-//                                                    tr("Solitaire file (*.sol)"));
-//    if (fileName.isEmpty())
-//        return;
-//    else {
-//        std::ifstream fileHandler;
-//        try
-//        {
-//            fileHandler.open(fileName.toLatin1());
+    QString fileName = QFileDialog::getOpenFileName(this,
+                                                    tr("Load game"), "",
+                                                    tr("Solitaire file (*.sol);; All files (*)"));
+    string file(fileName.toLatin1());
 
-//            fileHandler.close();
-//            drawGameBoard();
-//        }
-//        catch (std::ifstream::failure err){
-
-//        }
-//    }
-
-    game->loadGame();
-    drawGameBoard();
+    if(game->loadGame(file)) {
+        drawGameBoard();
+    }
 }
 
 void GraphicGameBoard::drawStartPack()

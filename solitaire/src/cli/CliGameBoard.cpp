@@ -83,37 +83,17 @@ void CliGameBoard::loadGame()
 
     getline(cin, fileName);
 
-    std::ifstream fileHandler("examples/one-turn.sol");
-    try
-    {
-//        fileHandler.open;
-
-        fileHandler.close();
-    }
-    catch (std::ifstream::failure err){
-            std::cerr << "Exception a r c file";
-    }
+    game->loadGame(fileName);
 
 }
 
 void CliGameBoard::saveGame()
 {
-        string file;
-        cout << "Enter file path: ";
-        getline(cin, file);
+    string file;
+    cout << "Enter file path: ";
+    getline(cin, file);
 
-    std::ifstream fileHandler;
-    try {
-//        if (!fileName.endsWith(".sol"))
-//            fileName += ".sol";
-
-
-        fileHandler.open(file);
-
-        fileHandler.close();
-    } catch (std::ifstream::failure err){
-
-    }
+    game->saveGame(file);
 }
 
 void CliGameBoard::parseTurn() {
