@@ -1,3 +1,13 @@
+/**
+ * @file CliGameBoard.cpp
+ * @class CliGameBoard
+ * @brief %rCommand line verison implementation.
+ *
+ * @author Krystof Rykala <xrykal00@stud.fit.vutbr.cz>
+ * @author Martin Polakovic <xpolak33@stud.fit.vutbr.cz>
+ * @date 08.05.2017
+ */
+
 #include "CliGameBoard.h"
 #include "WorkPack.h"
 #include "StartPack.h"
