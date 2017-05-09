@@ -15,6 +15,9 @@ gui:
 	cd src/gui && qmake -makefile && make
 cli:
 	cd src/cli && qmake -makefile && make
+	
+doxygen:
+	doxygen conf/doxygen.conf
 
 pack: clean
 	zip -r xrykal00-xpolak33.zip ./
