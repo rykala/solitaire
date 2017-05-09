@@ -1,3 +1,13 @@
+/**
+ * @file GraphicCard.cpp
+ * @class GraphicCard
+ * @brief %rGraphic card implementation for GUI.
+ *
+ * @author Krystof Rykala <xrykal00@stud.fit.vutbr.cz>
+ * @author Martin Polakovic <xpolak33@stud.fit.vutbr.cz>
+ * @date 08.05.2017
+ */
+
 #include "GraphicCard.h"
 #include "Card.h"
 

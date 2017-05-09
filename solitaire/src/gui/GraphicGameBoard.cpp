@@ -1,3 +1,13 @@
+/**
+ * @file GraphicGameBoard.cpp
+ * @class GraphicGameBoard
+ * @brief %rMovements, tabluae implementation and addons for GUI .
+ *
+ * @author Krystof Rykala <xrykal00@stud.fit.vutbr.cz>
+ * @author Martin Polakovic <xpolak33@stud.fit.vutbr.cz>
+ * @date 08.05.2017
+ */
+
 #include "GraphicGameBoard.h"
 #include "GraphicCard.h"
 #include "GraphicStartPack.h"

@@ -1,3 +1,13 @@
+/**
+ * @file GraphicStartPack.cpp
+ * @class GraphicStartPack
+ * @brief %rStart pack for GUI .
+ *
+ * @author Krystof Rykala <xrykal00@stud.fit.vutbr.cz>
+ * @author Martin Polakovic <xpolak33@stud.fit.vutbr.cz>
+ * @date 08.05.2017
+ */
+
 #include "GraphicStartPack.h"
 #include "GraphicCard.h"
 
