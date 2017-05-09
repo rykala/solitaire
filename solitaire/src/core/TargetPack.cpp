@@ -1,3 +1,13 @@
+/**
+ * @file TargetPack.cpp
+ * @class TargetPack
+ * @brief %rTarget pack class.
+ *
+ * @author Krystof Rykala <xrykal00@stud.fit.vutbr.cz>
+ * @author Martin Polakovic <xpolak33@stud.fit.vutbr.cz>
+ * @date 08.05.2017
+ */
+
 #include "TargetPack.h"
 #include "Card.h"
 

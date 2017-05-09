@@ -1,3 +1,13 @@
+/**
+ * @file Game.cpp
+ * @class Game
+ * @brief %Game logic implementation for GUI and command line version.
+ *
+ * @author Krystof Rykala <xrykal00@stud.fit.vutbr.cz>
+ * @author Martin Polakovic <xpolak33@stud.fit.vutbr.cz>
+ * @date 08.05.2017
+ */
+
 #include "Game.h"
 #include "Card.h"
 #include "Globals.h"

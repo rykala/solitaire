@@ -1,3 +1,13 @@
+/**
+ * @file Deck.h
+ * @class Deck
+ * @brief %Deck implementation.
+ *
+ * @author Krystof Rykala <xrykal00@stud.fit.vutbr.cz>
+ * @author Martin Polakovic <xpolak33@stud.fit.vutbr.cz>
+ * @date 08.05.2017
+ */
+
 #include "Deck.h"
 #include "Globals.h"
 #include <algorithm>

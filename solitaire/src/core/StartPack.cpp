@@ -1,3 +1,13 @@
+/**
+ * @file StartPack.cpp
+ * @class StartPack
+ * @brief %rImplementation of start pack logic.
+ *
+ * @author Krystof Rykala <xrykal00@stud.fit.vutbr.cz>
+ * @author Martin Polakovic <xpolak33@stud.fit.vutbr.cz>
+ * @date 08.05.2017
+ */
+
 #include "StartPack.h"
 #include <vector>
 
